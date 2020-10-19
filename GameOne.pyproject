@@ -1,0 +1,3 @@
+{
+    "files": ["qml/Debug.qml","qml/GameScreen.qml","qml/BattleScreen.qml","main.py","qml/WelcomeScreen.qml","qml/BossBattleScreen.qml","qml/IntroScreen.qml","qml/Screen.qml","qml/main.qml"]
+}
