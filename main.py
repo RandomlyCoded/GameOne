@@ -244,7 +244,7 @@ class MapModel(QAbstractListModel):
                 tiles = [[Tile(r[i:i+2]) for i in range(0, len(r), 2)] for r in tiles]
 
             elif format == 1:
-                pass
+                tiles = [[Tile(c) for c in r] for r in tiles]
 
             self.beginResetModel()
             self.__tiles = tiles
