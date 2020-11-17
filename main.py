@@ -301,7 +301,7 @@ class Backend(QObject):
         super().__init__()
 
         self.__timer = QTimer()
-        self.__timer.setInterval(250)
+        self.__timer.setInterval(100)
         self.__timer.timeout.connect(self.__onTimeout)
 
         self.__player = None
