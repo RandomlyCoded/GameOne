@@ -1,0 +1,13 @@
+w w S G G G H H H M M M
+S w S S G G G G H H M w
+S w w w S G@G@G G G H w
+G S S w S S G@G G S w H
+G G S w w w S G S w S H
+H S G S S w S S w G G G
+M w H G S w w w S G G S
+w H w H w S S w S G S w
+M M H w S G S w w w w w
+L L M H H G G S w w w W
+H M H H G G G S w w W W
+H H H G G G S w w W W W
+1 2 3 4 5 6 7 8 9 0 1 2

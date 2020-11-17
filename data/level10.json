@@ -1,0 +1,11 @@
+{
+    "map": {
+        "format": 1,
+        "filename": "map2.txt"
+    },
+
+    "enemies": [
+        {"x": 12, "y": 12, "maximumEnergy": 25},
+        {"x": 3, "y": 3, "maximumEnergy": 2}
+    ]
+}

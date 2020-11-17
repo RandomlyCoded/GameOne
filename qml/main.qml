@@ -3,12 +3,12 @@ import QtQuick.Window 2.15
 
 Window {
     color: "black"
-    minimumWidth: 800 //1750
-    minimumHeight: 600 // 1000
+    minimumWidth: 1750 //1750 || 800
+    minimumHeight: 1000 // 1000 || 600
     visible: true
-    title: qsTr("Testspiel")
-// Bei nurnutzung der GameScreens "welcome" durch "game" ersetzen
-    property Item currentScreen: game// welcome
+    title: "GameOne"
+// Bei nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen
+    property Item currentScreen: game // welcome
 
     WelcomeScreen {
         id: welcome
@@ -39,17 +39,5 @@ Window {
         height: parent.height
 
         enabled: currentScreen === game
-
-        onBattle: currentScreen = battle
-    }
-
-
-    BattleScreen {
-        id: battle
-
-        width: parent.width
-        height: parent.height
-
-        enabled: currentScreen === battle
     }
 }

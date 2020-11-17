@@ -5,12 +5,14 @@ Screen {
 
     color: "#00ff00"
 
+    // ein Titelbild(vielleich eine Scene aus dem Spiel?
+
     Text {
-        id: hallo
+        id: hello
         color: "#ff0000"
         anchors.centerIn: parent
         font { pixelSize: 50; bold: true }
-        text: "Zum Starten klicken"
+        text: "Press to continue"
     }
 
     MouseArea {

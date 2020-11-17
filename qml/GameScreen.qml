@@ -1,24 +1,14 @@
+import GameOne 1.0
 import QtQuick 2.15
 
+// bitte in den IntroScreen gucken!
+
 Screen {
+    property int levelCount: 11
     signal battle
 
     color: "white"
     focus: true
-
-    Connections {
-        target: backend.player
-
-        function onPositionChanged() {
-            console.info("START");
-            gameTimer.start();
-        }
-
-        function onLivesChanged() {
-            console.info("You have died");
-            gameTimer.stop();
-        }
-    }
 
     Row {
         anchors.fill: parent
@@ -40,17 +30,17 @@ Screen {
 
             gradient: Gradient {
                 GradientStop {
-                    color: "darkgreen"
+                    color: "white"
                     position: 0.00
                 }
 
                 GradientStop {
-                    color: "white"
+                    color: "green"
                     position: 0.50
                 }
 
                 GradientStop {
-                    color: "darkgreen"
+                    color: "yellow"
                     position: 1.00
                 }
             }
@@ -65,44 +55,72 @@ Screen {
                 anchors.centerIn: parent
                 spacing: 0
 
-                columns: backend.columns
-                rows: backend.rows
+                columns: backend && backend.columns || 0
+                rows: backend && backend.rows || 0
 
                 Repeater {
-                    model: gameGrid.columns * gameGrid.rows
+                    model: backend && backend.map || 0
 
                     Rectangle {
                         id: cell
 
-                        readonly property int column: modelData % gameGrid.columns
-                        readonly property int row: modelData / gameGrid.rows
-
                         readonly property var actor: {
-                            return backend.actors.find(actor => actor.isAlive
-                                                       && actor.x === cell.column
-                                                       && actor.y === cell.row);
+                            return backend && backend.actors.find(
+                                        actor => actor.isAlive
+                                        && actor.x === model.column
+                                        && actor.y === model.row);
                         }
 
-                        readonly property string type: actor && actor.type || null
+                        function colorOf(type) {
+                            return {
+                                "Player": "silver",
+                                "Enemy": "red",
+                                "Hill": "brown",
+                                "Mountain": "gray",
+                                "DeepWater": "darkblue",
+                                "Water": "blue",
+                                "Grass": "lawngreen",
+                                "Tree": "darkgreen",
+                                "Sand": "#ffff60",
+                                "Ice": "white",
+                                "Fence": "saddlebrown",
+                                "Lava": "#cd0000",
+                            }[type] || "white";
+                        }
 
-                        color: ({"Player": "lawngreen", "Enemy": "red", "both": "brown"}[type]) || "silver"
+                        color: colorOf(model.type)
+
                         border.color: "black"
                         border.width: 2
 
                         width: 60
                         height: width
 
-                        Text {
+                        Rectangle {
                             anchors.centerIn: parent
-                            color: "black"
-                            font.bold: true
 
-                            text: cell.type || [cell.column, cell.row].join('/')
+                            radius: parent.width/2 - 4
+                            width: 2 * radius
+                            height: 2 * radius
+
+                            color: colorOf(model.item)
+                            visible: !!model.item
+                        }
+
+                        Rectangle {
+                            anchors.centerIn: parent
+
+                            radius: parent.width/2 - 4
+                            width: 2 * radius
+                            height: 2 * radius
+
+                            color: colorOf(actor && actor.type)
+                            visible: !!actor
                         }
 
                         Rectangle {
                             border { width: 1; color: "#000000" }
-                            color: "#80000000"
+                            color: "#800000000"
 
                             anchors.horizontalCenter: parent.horizontalCenter
                             y: 3
@@ -112,6 +130,8 @@ Screen {
                             visible: cell.actor && cell.actor.isAlive || false
 
                             Rectangle {
+                                id: energyBar
+
                                 property real energyLevel: cell.actor ? cell.actor.energy / cell.actor.maximumEnergy : 0
 
                                 x: parent.border.width
@@ -122,8 +142,9 @@ Screen {
                             }
 
                             Text {
-                                color: "white"
+                                color: "black"
                                 font.pixelSize: 8
+                                font.bold: true
                                 anchors.centerIn: parent
                                 text: cell.actor ? "%1 / %2".arg(cell.actor.energy).arg(cell.actor.maximumEnergy) : ""
                             }
@@ -134,28 +155,15 @@ Screen {
         }
     }
 
-    Timer {
-        id: gameTimer
-
-        interval: 250 //(backend.player.x / backend.player.y)
-        repeat: true
-
-        onTriggered: {
-            backend.enemies.forEach(enemy => enemy.act());
-        }
-    }
-
-    Keys.onLeftPressed: backend.player.moveLeft()
-    Keys.onRightPressed: backend.player.moveRight()
-    Keys.onUpPressed: backend.player.moveUp()
-    Keys.onDownPressed: backend.player.moveDown()
+    Keys.onLeftPressed: { backend.player.moveLeft() }
+    Keys.onRightPressed: { backend.player.moveRight() }
+    Keys.onUpPressed: { backend.player.moveUp() }
+    Keys.onDownPressed: { backend.player.moveDown() }
 
     Keys.onSpacePressed: if (!backend.player.isAlive) backend.player.respawn()
-                         else if (backend.player.isAlive/* && backend.enemies.isAlive === false*/) backend.enemies.energy //Feinde wiederbeleben?
-
-//    Keys.onDigit1Pressed: backend.player.attack()
-
-    Keys.onEscapePressed: console.info(backend.player.isAlive, backend.player.lives)
+    Keys.onEscapePressed: console.info("isAlive:", backend.player.isAlive, ";",
+                                       "lives:", backend.player.lives, ";",
+                                       "energy:", backend.player.energy)
 
     Column {
         Text {
@@ -168,18 +176,18 @@ Screen {
             x: 40
             y: 7.5
 
-            text: "lives: %1".arg(backend.player.lives)
+            text: "lives: %1".arg(backend && backend.player.lives || 0)
         }
 
         Text {
             id: info
 
-            color: "#6f6f6f"
+            color: "#afafaf"
             font.pixelSize: 25
 
             y: 40
 
-            text: "Infos:"
+            text: "Information:"
         }
 
         Text {
@@ -190,7 +198,7 @@ Screen {
 
             y: 65
 
-            text: "weiße Rechtecke:"
+            text: "red rectangles:"
         }
 
         Text {
@@ -201,7 +209,7 @@ Screen {
 
             y: 90
 
-            text: "Monster"
+            text: "enemies"
         }
 
         Text {
@@ -212,7 +220,7 @@ Screen {
 
             y: 115
 
-            text: "Kreis:"
+            text: "circle:"
         }
 
         Text {
@@ -223,34 +231,60 @@ Screen {
 
             y: 140
 
-            text: "Bossgegner"
+            text: "boss opponent"
         }
 
         Text {
             id: gameOver2_1
 
-            color: "#6f6f6f"
+            color: "#afafaf"
             font.pixelSize: 25
 
             y: 200
 
-            visible: !backend.player.isAlive
+            visible: backend && !backend.player.isAlive
 
-            text: "Leerstaste drücken,"
+            text: "press space to"
         }
 
         Text {
             id: gameOver2_2
 
-            color: "#6f6f6f"
+            color: "#afafaf"
             font.pixelSize: 25
 
             y: 210
 
-            visible: !backend.player.isAlive
+            visible: backend && !backend.player.isAlive
 
-            text: "um neuzustarten"
+            text: "respawn."
         }
+
+        Repeater {
+            model: levelCount
+
+            Button {
+                text: "Level %1".arg(modelData + 1)
+
+                onActivated: {
+                    if (!backend.load("level%1.json".arg(modelData + 1)))
+                        backend.load("map%1.txt".arg(modelData + 1));
+                }
+            }
+        }
+
+        Button {
+            text: "Respawn"
+            onActivated: backend.player.respawn()
+        }
+
+//        Debug {
+//            value: [backend.map.columns, backend.map.rows]
+//        }
+
+//        Debug {
+//            value: [gameGrid.columns, gameGrid.rows]
+//        }
     }
 
 
@@ -262,19 +296,10 @@ Screen {
         font { pixelSize: 100; bold: true; italic: true }
 
         anchors.centerIn: parent
-        visible: backend.player.lives === 0
+        visible: backend && backend.player.lives === 0
 
         text: "Game Over"
     }
 
-    MouseArea {
-        anchors.fill: parent
-
-        onClicked: {
-            if (!backend.player.isAlive)
-                backend.player.respawn();
-        }
-    }
-
-//Hier geht´s weiter!
+//Continue here!
 }

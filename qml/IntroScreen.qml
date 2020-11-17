@@ -5,20 +5,85 @@ Screen {
 
     color: "skyblue"
 
-    Column {
-        Debug { value: {" " } color: "skyblue" }
-        Debug { value: {"Mit den <b>Pfeiltasten</b> bewegt man sich. Die <b> weißen Rechtecke</b>" } color: "orange" }
-        Debug { value: {"stellen Moster dar, die man besiegen muss. Der <b>Kreis</b> ist der" } color: "orange" }
-        Debug { value: {"Bossgegner. Wenn man kämpft, kann man mit der <b> A-Taste</b> angreifen." } color: "orange" }
-        //Mosters sehen am Ende warscheinlich anders aus...
+    Text {
+        id:info1
+
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 25
+
+        text: "You move with the <b>arrow keys</b>. The <b>red rectangles</b> are enemies."
     }
 
     Text {
-        id: aufforderung_fortfahren
+        id:info2
+
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 30 + 25
+
+        text: "You must attack them with running into them, but you can´t"
+//               The enemies will attack you also.
+/*               The <b>circle</b> is the*/
+    }
+
+    Text {
+        id: info3
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 60 + 25
+
+        text: "move into them. You will stay at your field, but the enemy takes"
+//demage."
+    }
+
+    Text {
+        id: info4
+
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 90 + 25
+
+        text: "demage. The enemies will <b>attack you also</b>. The <b>white rectangle</b>"
+    }
+
+    Text {
+        id: info5
+
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 120 + 25
+
+        text: "is the boss opponent."
+    }
+    Text {
+        id: disapearedLevelsHelp
+
+        color: "orange"
+
+        font { pixelSize: 25; italic: true }
+        x: 30
+        y: 145 + 25
+
+        text: "If you don´t see the level, please play in fullscreen-mode or change the position of the window."
+    }
+
+    Text {
+        id: requestToContinue
 
         anchors.centerIn: parent
 
-        text: "Zum Fortfahren erneut klicken"
+        text: "Press again to continue and starting game"
     }
 
     MouseArea {
