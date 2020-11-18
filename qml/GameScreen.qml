@@ -273,6 +273,15 @@ Screen {
             }
         }
 
+        Repeater {
+            model: 10
+
+            Keys.onDigit%1Pressed.arg(modelData + 1): {
+                if (!backend.load("level%1.json".arg(modelData + 1)))
+                    backend.load("map%1.txt".arg(modelData + 1));
+            }
+        }
+
         Button {
             text: "Respawn"
             onActivated: backend.player.respawn()
