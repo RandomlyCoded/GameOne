@@ -261,6 +261,8 @@ Screen {
         }
 
         Repeater {
+            id: levelButtons
+
             model: levelCount
 
             Button {
@@ -273,17 +275,9 @@ Screen {
             }
         }
 
-        Repeater {
-            model: 10
-
-            Keys.onDigit%1Pressed.arg(modelData + 1): {
-                if (!backend.load("level%1.json".arg(modelData + 1)))
-                    backend.load("map%1.txt".arg(modelData + 1));
-            }
-        }
-
         Button {
             text: "Respawn"
+
             onActivated: backend.player.respawn()
         }
 
@@ -310,5 +304,28 @@ Screen {
         text: "Game Over"
     }
 
+    Keys.onPressed: {
+        if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9) {
+            var level = (event.key - Qt.Key_0 + 9) % 10;
+
+            switch (event.modifiers & (Qt.ShiftModifier | Qt.ControlModifier | Qt.AltModifier)) {
+            case Qt.NoModifier:
+                break;
+            case Qt.ControlModifier:
+                level += 10;
+                break;
+            default:
+                console.info("WAT");
+                return;
+            }
+
+            console.info("level:", level);
+
+            var button = levelButtons.itemAt(level);
+
+            if (button)
+                button.activated();
+        }
+    }
 //Continue here!
 }
