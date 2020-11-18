@@ -1,3 +1,3 @@
 {
-    "files": ["data/map9.txt","data/map8.txt","main.py","qml/Button.qml","data/map7.txt","data/map3.txt","data/map1.txt","data/map5.txt","data/map11.txt","qml/BossBattleScreen.qml","qml/StartScreen.qml","data/map10.txt","qml/GameScreen.qml","qml/IntroScreen.qml","qml/main.qml","data/level1.json","qml/WelcomeScreen.qml","data/map6.txt","qml/Screen.qml","data/map2.txt","data/map4.txt","qml/Debug.qml","data/level10.json"]
+    "files": ["data/level1.json","qml/GameScreen.qml","qml/Button.qml","qml/Screen.qml","data/map3.txt","data/map5.txt","data/map4.txt","qml/main.qml","data/map7.txt","data/map10.txt","main.py","data/map1.txt","qml/IntroScreen.qml","qml/BossBattleScreen.qml","data/map11.txt","qml/WelcomeScreen.qml","data/level10.json","data/map2.txt","qml/Debug.qml","qml/StartScreen.qml","data/map8.txt","data/map9.txt","data/map6.txt","data/level11.json"]
 }
