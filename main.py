@@ -22,8 +22,6 @@ from PySide2.QtQml import (
     qmlRegisterType,
 )
 
-##bitte in den WelcomeScreen gucken!
-
 class Actor(QObject):
     def __init__(self, backend, **kwargs):
         super().__init__()

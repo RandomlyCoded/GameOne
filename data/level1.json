@@ -22,5 +22,7 @@
         "name": "Joe",
         "maximumLifes": 3,
         "maximumEnergy": 5
-    }
+    },
+
+    "mapName": "Baum"
 }

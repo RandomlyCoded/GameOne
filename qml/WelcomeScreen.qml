@@ -5,8 +5,6 @@ Screen {
 
     color: "#00ff00"
 
-    // ein Titelbild(vielleich eine Scene aus dem Spiel?
-
     Text {
         id: hello
         color: "#ff0000"
