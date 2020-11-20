@@ -1,0 +1,17 @@
+1.:
+G G G G S w w S G G G
+G G G S w w S|G G@G G
+G G S w w S G|G@G@G G
+G S w w S G G\G@G@G G
+G W W W W G G G-G-G
+G W W W G G G G G G
+G G G G G G G G G G
+G H H H G G G G G G
+G H M H G G G G G G
+G H H H G G G G G G
+1 2 3 4 5 6 7 8 9 0
+
+Was passiert mit diesen Dateien? Lösungsvorschlag: Leere Felder grell anzeigen und mit hohem Kontrast "ERROR" schreiben
+
+2.:
+Bauen wir vielleicht ein TItelbild ein? es könnte eine (spannende) Spielszene sein...
