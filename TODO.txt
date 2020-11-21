@@ -21,3 +21,9 @@ Großes Level laden
 
 4.:
 Figuren/Bäume+Zäune als Bilder darstellen (erstmal Bilder zeichnen)
+
+5.:
+vielleicht einbauen, dass man nur 10 mal oder so zuschlagen kann und sich dann erholen muss
+
+6.:
+manchmal schlittert man auf Eis... vielleicht mit einer 75%igen Warscheinlichkeit  2 Felder weit laufen, wenn man auf Eis geht

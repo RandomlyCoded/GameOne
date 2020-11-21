@@ -1,0 +1,20 @@
+{
+    "map": {
+        "format": 2,
+        "filename": "map6.txt"
+    },
+
+    "enemies": [
+        {"x": 1, "y": 1, "maximumEnergy": 1},
+        {"x": 9, "y": 11, "maximumEnergy": 50},
+        {"x": 11, "y": 11, "maximumEnergy": 50}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLives": 3,
+        "maximumEnergy": 5
+    }
+}

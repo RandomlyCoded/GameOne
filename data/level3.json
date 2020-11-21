@@ -1,0 +1,26 @@
+{
+    "map": {
+        "format": 2,
+        "filename": "map3.txt"
+    },
+
+    "enemies": [
+        {"x": 1, "y": 0, "maximumEnergy": 1},
+        {"x": 0, "y": 1, "maximumEnergy": 1},
+        {"x": 1, "y": 1, "maximumEnergy": 5},
+        {"x": 2, "y": 0, "maximumEnergy": 10},
+        {"x": 2, "y": 1, "maximumEnergy": 10},
+        {"x": 2, "y": 2, "maximumEnergy": 10},
+        {"x": 0, "y": 2, "maximumEnergy": 10},
+        {"x": 1, "y": 2, "maximumEnergy": 10},
+        {"x": 4, "y": 4, "maximumEnergy": 50}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLives": 3,
+        "maximumEnergy": 5
+    }
+}

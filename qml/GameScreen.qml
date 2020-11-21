@@ -1,4 +1,3 @@
-import GameOne 1.0
 import QtQuick 2.15
 
 // bitte in den IntroScreen gucken!
@@ -44,10 +43,6 @@ Screen {
                     position: 1.00
                 }
             }
-
-//            Debug {
-//                value: [backend]
-//            }
 
             Grid {
                 id: gameGrid
@@ -155,10 +150,10 @@ Screen {
         }
     }
 
-    Keys.onLeftPressed: { backend.player.moveLeft() }
-    Keys.onRightPressed: { backend.player.moveRight() }
-    Keys.onUpPressed: { backend.player.moveUp() }
-    Keys.onDownPressed: { backend.player.moveDown() }
+    Keys.onLeftPressed:     backend.player.moveLeft()
+    Keys.onRightPressed:    backend.player.moveRight()
+    Keys.onUpPressed:       backend.player.moveUp()
+    Keys.onDownPressed:     backend.player.moveDown()
 
     Keys.onSpacePressed: if (!backend.player.isAlive) backend.player.respawn()
     Keys.onEscapePressed: console.info("isAlive:", backend.player.isAlive, ";",
@@ -327,5 +322,4 @@ Screen {
                 button.activated();
         }
     }
-//Continue here!
 }
