@@ -14,4 +14,10 @@ G H H H G G G G G G
 Was passiert mit diesen Dateien? Lösungsvorschlag: Leere Felder grell anzeigen und mit hohem Kontrast "ERROR" schreiben
 
 2.:
-Bauen wir vielleicht ein TItelbild ein? es könnte eine (spannende) Spielszene sein...
+Bauen wir vielleicht ein Titelbild ein? es könnte eine (spannende) Spielszene sein...
+
+3.:
+Großes Level laden
+
+4.:
+Figuren/Bäume+Zäune als Bilder darstellen (erstmal Bilder zeichnen)
