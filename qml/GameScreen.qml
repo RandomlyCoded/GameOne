@@ -12,13 +12,9 @@ Screen {
     Row {
         anchors.fill: parent
 
-        Rectangle {
-            id: sidebar
-
-            color: "black"
-
+        Sidebar {
             height: parent.height
-            width: parent.width - playground.width
+            width: parent.width
         }
 
         Rectangle {
@@ -158,146 +154,12 @@ Screen {
     Keys.onSpacePressed: if (!backend.player.isAlive) backend.player.respawn()
     Keys.onEscapePressed: console.info("isAlive:", backend.player.isAlive, ";",
                                        "lives:", backend.player.lives, ";",
-                                       "energy:", backend.player.energy)
-
-    Column {
-        Text {
-            id: liveText
-
-            color: "red"
-
-            font.pixelSize: 25
-
-            x: 40
-            y: 7.5
-
-            text: "lives: %1".arg(backend && backend.player.lives || 0)
-        }
-
-        Text {
-            id: info
-
-            color: "#afafaf"
-            font.pixelSize: 25
-
-            y: 40
-
-            text: "Information:"
-        }
-
-        Text {
-            id: info1_1
-
-            color: "white"
-            font.pixelSize: 25
-
-            y: 65
-
-            text: "red rectangles:"
-        }
-
-        Text {
-            id: info1_2
-
-            color: "white"
-            font.pixelSize: 25
-
-            y: 90
-
-            text: "enemies"
-        }
-
-        Text {
-            id: info2_1
-
-            color: "white"
-            font.pixelSize: 25
-
-            y: 115
-
-            text: "circle:"
-        }
-
-        Text {
-            id: info2_2
-
-            color: "white"
-            font.pixelSize: 25
-
-            y: 140
-
-            text: "boss opponent"
-        }
-
-        Text {
-            id: gameOver2_1
-
-            color: "#afafaf"
-            font.pixelSize: 25
-
-            y: 200
-
-            visible: backend && !backend.player.isAlive
-
-            text: "press space to"
-        }
-
-        Text {
-            id: gameOver2_2
-
-            color: "#afafaf"
-            font.pixelSize: 25
-
-            y: 210
-
-            visible: backend && !backend.player.isAlive
-
-            text: "respawn."
-        }
-
-        Repeater {
-            id: levelButtons
-
-            model: levelCount
-
-            Button {
-                text: "Level %1".arg(modelData + 1)
-
-                onActivated: {
-                    if (!backend.load("level%1.json".arg(modelData + 1)))
-                        backend.load("map%1.txt".arg(modelData + 1));
-                }
-            }
-        }
-
-        Button {
-            text: "Respawn"
-
-            onActivated: backend.player.respawn()
-        }
-
-//        Debug {
-//            value: [backend.map.columns, backend.map.rows]
-//        }
-
-//        Debug {
-//            value: [gameGrid.columns, gameGrid.rows]
-//        }
-    }
-
-
-    Text {
-        id: game_over
-
-        color: "red"
-
-        font { pixelSize: 100; bold: true; italic: true }
-
-        anchors.centerIn: parent
-        visible: backend && backend.player.lives === 0
-
-        text: "Game Over"
-    }
+                                       "energy:", backend.player.energy,
+                                       "levels:", levelCount,
+                                       "Tests:",
+                                            (parent.height - ((2 * 3) * 25) / 25),
+                                            (parent.height - ((2 * 3) * 35)) / 35,
+                                        )
 
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9) {
