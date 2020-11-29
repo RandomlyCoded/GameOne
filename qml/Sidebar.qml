@@ -7,7 +7,7 @@ Item {
         color: "black"
 
         height: parent.height
-        width: parent.width - playground.width
+        width: parent.width - GameGround.width
 
         Column {
             Text {
