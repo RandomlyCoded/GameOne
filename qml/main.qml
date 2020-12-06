@@ -3,8 +3,8 @@ import QtQuick.Window 2.15
 
 Window {
     color: "black"
-    minimumWidth: 1750 //1750 || 800
-    minimumHeight: 1000 // 1000 || 600
+    width: 1750 //1750 || 800
+    height: 1000 // 1000 || 600
     visible: true
     title: "GameOne"
 // Bei nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen

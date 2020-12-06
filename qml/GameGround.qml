@@ -72,6 +72,8 @@ Item {
                     height: width
 
                     Rectangle {
+                        id: itemCircle
+
                         anchors.centerIn: parent
 
                         radius: parent.width/2 - 4
@@ -83,6 +85,8 @@ Item {
                     }
 
                     Rectangle {
+                        id: actorCircle
+
                         anchors.centerIn: parent
 
                         radius: parent.width/2 - 4

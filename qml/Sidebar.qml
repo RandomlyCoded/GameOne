@@ -136,19 +136,5 @@ Item {
                 onActivated: backend.player.respawn()
             }
         }
-
-
-        Text {
-            id: game_over
-
-            color: "red"
-
-            font { pixelSize: 100; bold: true; italic: true }
-
-            anchors.centerIn: parent
-            visible: backend && backend.player.lives === 0
-
-            text: "Game Over"
-        }
     }
 }

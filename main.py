@@ -282,6 +282,7 @@ class MapModel(QAbstractListModel):
 
     def indexByPoint(self, p):
         return self.index(p.y() * self.__columns + p.x())
+
     def dataByPoint(self, p, role):
         return self.data(self.indexByPoint(p), role)
 

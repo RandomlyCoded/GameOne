@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/GameOne">
+        <file>qml/BossBattleScreen.qml</file>
+        <file>qml/Button.qml</file>
+        <file>qml/Debug.qml</file>
+        <file>qml/GameGround.qml</file>
+        <file>qml/GameScreen.qml</file>
+        <file>qml/IntroScreen.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Screen.qml</file>
+        <file>qml/Sidebar.qml</file>
+        <file>qml/StartScreen.qml</file>
+        <file>qml/WelcomeScreen.qml</file>
+        <file>data/level1.json</file>
+        <file>data/level2.json</file>
+        <file>data/level3.json</file>
+        <file>data/level4.json</file>
+        <file>data/level5.json</file>
+        <file>data/level6.json</file>
+        <file>data/level7.json</file>
+        <file>data/level8.json</file>
+        <file>data/level9.json</file>
+        <file>data/level10.json</file>
+        <file>data/level11.json</file>
+        <file>data/map1.txt</file>
+        <file>data/map2.txt</file>
+        <file>data/map3.txt</file>
+        <file>data/map4.txt</file>
+        <file>data/map5.txt</file>
+        <file>data/map6.txt</file>
+        <file>data/map7.txt</file>
+        <file>data/map8.txt</file>
+        <file>data/map9.txt</file>
+        <file>data/map10.txt</file>
+        <file>data/map11.txt</file>
+        <file>qml/GameOverOverlay.qml</file>
+        <file>qml/Joypad.qml</file>
+    </qresource>
+</RCC>

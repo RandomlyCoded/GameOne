@@ -13,16 +13,39 @@ Screen {
         anchors.fill: parent
 
         Sidebar {
+            width: 200
             height: parent.height
-            width: parent.width
+        }
+
+        Rectangle {
+            height: parent.height
+            width: 10
+            color: "pink"
         }
 
         GameGround {
-            x: parent.width - Sidebar.width
-
+            width: parent.width - x
             height: parent.height
-            width: parent.width
         }
+    }
+
+    GameOverOverlay {
+        anchors.fill: parent
+    }
+
+    Joypad {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 50
+        }
+
+        radius: 100
+
+        onMoveUp: backend.player.moveUp()
+        onMoveDown: backend.player.moveDown()
+        onMoveLeft: backend.player.moveLeft()
+        onMoveRight: backend.player.moveRight()
     }
 
     Keys.onLeftPressed:     backend.player.moveLeft()
