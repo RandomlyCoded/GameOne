@@ -99,6 +99,8 @@ QHash<int, QByteArray> MapModel::roleNames() const
 
 bool MapModel::load(QString fileName, Format format)
 {
+    qCInfo(lcMap, "Loading map from %ls", qUtf16Printable(fileName));
+
     fileName = Backend::dataFileName(std::move(fileName));
 
     QFile file{fileName};
