@@ -1,0 +1,26 @@
+{
+    "levelName": "the abandoned Vilage",
+    "map": {
+        "format": 2,
+        "filename": "map15.txt"
+    },
+
+    "enemies": [
+        {"x": 1, "y": 6, "maximumEnergy": 50},
+        {"x": 2, "y": 6, "maximumEnergy": 75},
+        {"x": 8, "y": 7, "maximumEnergy": 100},
+        {"x": 3, "y": 9, "maximumEnergy": 100},
+        {"x": 14, "y": 7, "maximumEnergy": 100},
+        {"x": 20, "y": 7, "maximumEnergy": 100},
+        {"x": 14, "y": 3, "maximumEnergy": 100},
+        {"x": 14, "y": 8, "maximumEnergy": 100}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLives": 3,
+        "maximumEnergy": 5
+    }
+}

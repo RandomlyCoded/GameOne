@@ -1,0 +1,26 @@
+{
+    "levelName": "to the castle U",
+
+    "map": {
+        "format": 2,
+        "filename": "map17.txt"
+    },
+
+    "enemies": [
+        {"x": 1, "y": 2, "maximumEnergy": 10},
+        {"x": 3, "y": 3, "maximumEnergy": 15}
+    ],
+
+    "chests": [
+        {"x": 3, "y": 2, "item": "arrow", "amount": 2},
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLifes": 3,
+        "maximumEnergy": 5
+    }
+}
+

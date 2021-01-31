@@ -1,0 +1,20 @@
+{
+    "levelName": "Lavalake",
+    "map": {
+        "format": 2,
+        "filename": "map13.txt"
+    },
+
+    "enemies": [
+        {"x": 7, "y": 6, "maximumEnergy": 25},
+        {"x": 3, "y": 3, "maximumEnergy": 2}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLifes": 1,
+        "maximumEnergy": 2
+    }
+}

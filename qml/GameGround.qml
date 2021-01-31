@@ -65,6 +65,15 @@ Item {
                         "Ice": "white",
                         "Fence": "saddlebrown",
                         "Lava": "#cd0000",
+                        "Vulcanrock": "#190202",
+                        "Fire": "#f98d00", // BUGFIX: Gradient einbauen
+                        "House": "#711414",
+                        "Wall": "#8a8a8a",
+                        "Gate": "#6c4a0a",
+                        "Earthhole": "#391504",
+                        "Ladder▼": "#625507",
+                        "Ladder▲": "#625507",
+                        "Underground":"#5f5f5f"
                     }[type] || "white";
                 }
 

@@ -1,0 +1,23 @@
+{
+    "levelName": "Vulcanway",
+    "map": {
+        "format": 2,
+        "filename": "map12.txt"
+    },
+
+    "enemies": [
+        {"x": 3, "y": 5, "maximumEnergy": 24},
+        {"x": 5, "y": 5, "maximumEnergy": 24},
+        {"x": 6, "y": 6, "maximumEnergy": 34},
+        {"x": 3, "y": 8, "maximumEnergy": 10},
+        {"x": 0, "y": 8, "maximumEnergy": 20}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 4,
+        "name": "Player",
+        "maximumLifes": 3,
+        "maximumEnergy": 5
+    }
+}

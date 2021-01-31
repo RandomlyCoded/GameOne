@@ -1,0 +1,28 @@
+{
+    "levelName": "to the castle",
+
+    "map": {
+        "format": 2,
+        "filename": "map16.txt"
+    },
+
+    "enemies": [
+        {"x": 1, "y": 9, "maximumEnergy": 10}
+    ],
+
+    "player": {
+        "x": 0,
+        "y": 0,
+        "name": "Joe",
+        "maximumLifes": 3,
+        "maximumEnergy": 5
+    },
+
+    "otherFields": [
+        {"id": "B", "name": "Baum", "color": "black", "isWalkable": "false"}
+    ],
+
+    "otherItems": [
+        {"id": "B", "name": "Baum", "color": "black", "isWalkable": "false"}
+    ]
+}
