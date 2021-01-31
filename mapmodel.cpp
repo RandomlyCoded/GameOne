@@ -46,8 +46,8 @@ MapModel::Tile::Tile(QByteArray spec)
         {'m',   {"Wall",        false}},
         {'g',   {"Gate",        true}},
         {'e',   {"Earthhole",   true}},
-        {'l',   {"Ladder▼",     true}},
-        {'L',   {"Ladder▲",     true}},
+        {'-',   {"Ladder▼",     true}},
+        {'+',   {"Ladder▲",     true}},
         {'u',   {"Underground", true}},
     };
 

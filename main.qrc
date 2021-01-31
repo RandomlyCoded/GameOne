@@ -50,5 +50,7 @@
         <file>qml/TheGameIsOverScreen.qml</file>
         <file>qml/WelcomeScreen.qml</file>
         <file>qml/main.qml</file>
+        <file>data/level18.json</file>
+        <file>data/map18.txt</file>
     </qresource>
 </RCC>

@@ -1,0 +1,11 @@
+G G G w w w S S S S
+G G w W w S H H H H
+w w W S H H M M M H
+W W S H M M V V V V
+w S H M H V L L L L
+S H M H V L V V V V
+S H M V L V H M H M
+S H M V L V M H H H
+G S H M HeM H S S S
+G G S H M H S G G G
+1 2 3 4 5 6 7 8 9 0

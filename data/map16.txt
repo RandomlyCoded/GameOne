@@ -3,7 +3,7 @@ G G G GmG G H HvH H H HvH HvH
 G G G GgG G H HvH H H HvH HvH
 G G G GgG G H HvH H H HvH HvH
 G G G GmG G H HvH H H HvH HvH
-G G G GmG G H H H H H HvHlHvHl
+G G G GmG G H H H H H HvH-HvH+
 G G G GmG G H HvHvHvH HvH HvH
 G G G GmG G H HvHeHvH HvH HvH
 G G G GmG G H HvH HvH HvH HvH
