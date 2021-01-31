@@ -35,3 +35,6 @@ Feinden eine einstellbare Farbe geben
 
 8.:
 Feinden einstellbare Beweglichkeit geben
+
+9.:
+unsichtbare Truhen die erst sichtbar werden wenn man einen Bestimmten Gegner getötet hat
