@@ -75,6 +75,7 @@ Item {
                         "Ladder▲": "#625507",
                         "Underground": "#5f5f5f",
                         "Chest": "#b29764",
+                        "Bridge": "#895900",
                     }[type] || "white";
                 }
 

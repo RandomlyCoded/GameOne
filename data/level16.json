@@ -7,7 +7,10 @@
     },
 
     "enemies": [
-        {"x": 1, "y": 9, "maximumEnergy": 10}
+        {"x": 1, "y": 9, "maximumEnergy": 25},
+        {"x": 4, "y": 4, "maximumEnergy": 50},
+        {"x": 9, "y": 7, "maximumEnergy": 75},
+        {"x": 8, "y": 10, "maximumEnergy": 100}
     ],
 
     "player": {
