@@ -35,7 +35,7 @@ MapModel::Tile::Tile(QByteArray spec)
         {'L',   {"Lava",        true}},
         {'@',   {"Tree",        false}},
         {'#',   {"Fence",       false}},
-        {'-',   {"Fence",       false}},
+        {'_',   {"Fence",       false}},
         {'|',   {"Fence",       false}},
         {'/',   {"Fence",       false}},
         {'\\',  {"Fence",       false}},

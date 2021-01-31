@@ -2,7 +2,7 @@ G G G G S w w S G G
 G G G S w w S|G G@G
 G G S w w S G|G@G@G
 G S w w S G G\G@G@G
-G W W W W G G G-G-G
+G W W W W G G G_G_G
 G W W W G G G G G G
 G G G G G G G G G G
 G H H H G G G G G G
