@@ -1,5 +1,11 @@
 <RCC>
-    <qresource prefix="/">
-        <file>data/assets/chest.png</file>
+    <qresource prefix="/assets">
+        <file>data/assets/chest.svg</file>
+        <file>data/assets/fenceHorizontal.svg</file>
+        <file>data/assets/fenceLeftBottom.svg</file>
+        <file>data/assets/fenceLeftTop.svg</file>
+        <file>data/assets/fenceRightBottom.svg</file>
+        <file>data/assets/fenceRightTop.svg</file>
+        <file>data/assets/fenceVertical.svg</file>
     </qresource>
 </RCC>
