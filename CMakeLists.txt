@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.0 COMPONENTS Quick)
+find_package(Qt6 6.0 QUIET COMPONENTS Quick)
 
 if (Qt6_FOUND)
     add_library(Qt::Quick ALIAS Qt6::Quick)
