@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtGraphicalEffects 1.12
+// FIMXE: Qt6 import QtGraphicalEffects 1.12
 
 Item {
     id: joypad
@@ -105,9 +105,10 @@ Item {
             }
         }
 
-        visible: false
+        //FIXME: Qt6 visible: false
     }
 
+    /* FIXME: Qt6
     OpacityMask {
         anchors.fill: parent
         source: directionIndicator
@@ -116,6 +117,7 @@ Item {
             visible: false
         }
     }
+    */
 
     Circle {
         id: outerCircle

@@ -177,3 +177,5 @@ void Backend::onTimeout()
 }
 
 } // namespace GameOne
+
+#include "moc_backend.cpp"

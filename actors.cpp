@@ -176,3 +176,5 @@ int Player::attack(Actor *opponent)
 }
 
 } // namespace GameOne
+
+#include "moc_actors.cpp"

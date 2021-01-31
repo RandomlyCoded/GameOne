@@ -1,5 +1,6 @@
+import "." as GameOne
 import QtQuick 2.15
 
-Screen {
+GameOne.Screen {
     signal theGameIsOver
 }

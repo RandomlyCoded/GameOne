@@ -164,3 +164,5 @@ QVariant MapModel::dataByPoint(QPoint point, MapModel::Role role) const
 }
 
 } // namespace GameOne
+
+#include "moc_mapmodel.cpp"

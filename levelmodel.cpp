@@ -85,3 +85,5 @@ void LevelModel::refresh()
 }
 
 } // namespace GameOne
+
+#include "moc_levelmodel.cpp"
