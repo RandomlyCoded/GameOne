@@ -49,6 +49,7 @@ MapModel::Tile::Tile(QByteArray spec)
         {'-',   {"Ladder▼",     true}},
         {'+',   {"Ladder▲",     true}},
         {'u',   {"Underground", true}},
+        {'c',   {"Chest",       true}},
     };
 
     type = types.value(tspec);

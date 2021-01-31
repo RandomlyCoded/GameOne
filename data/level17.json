@@ -11,8 +11,8 @@
         {"x": 3, "y": 3, "maximumEnergy": 15}
     ],
 
-    "chests": [
-        {"x": 3, "y": 2, "item": "arrow", "amount": 2},
+    "items": [
+        {"x": 3, "y": 2, "type": "chest", "item": "arrow", "amount": 2},
     ],
 
     "player": {

@@ -73,7 +73,8 @@ Item {
                         "Earthhole": "#391504",
                         "Ladder▼": "#625507",
                         "Ladder▲": "#625507",
-                        "Underground":"#5f5f5f"
+                        "Underground": "#5f5f5f",
+                        "Chest": "#b29764",
                     }[type] || "white";
                 }
 
