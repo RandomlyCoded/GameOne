@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
@@ -91,8 +91,8 @@
      inkscape:label="fenceRightTop"
      style="display:inline">
     <path
-       style="display:inline;fill:#502d00;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 0,-1.3e-6 H 50 C 66.66667,16.666669 83.33333,33.333329 100,50 v 50 H 80 V 59.999998 L 40,20 H 0 Z"
+       style="display:inline;fill:#502d00;fill-opacity:1;stroke:none;stroke-width:0.132291px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 0,50 h 25 c 8.333335,8.333335 16.666665,16.666665 25,25 v 25 H 40 V 79.999999 L 20,60 H 0 Z"
        id="path835-0"
        sodipodi:nodetypes="ccccccccc" />
   </g>
