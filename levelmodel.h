@@ -7,6 +7,8 @@ namespace GameOne {
 
 class LevelModel : public QAbstractListModel
 {
+    Q_OBJECT
+
 public:
     enum Role {
         LevelNameRole = Qt::DisplayRole,

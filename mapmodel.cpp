@@ -29,7 +29,6 @@ MapModel::Tile::Tile(QByteArray spec)
         {'G',   {"Grass",       true}},
         {'W',   {"DeepWater",   false}},
         {'w',   {"Water",       true}},
-        {'H',   {"Hill",        true}},
         {'M',   {"Mountain",    false}},
         {'S',   {"Sand",        true}},
         {'I',   {"Ice",         true}},
@@ -40,6 +39,16 @@ MapModel::Tile::Tile(QByteArray spec)
         {'|',   {"Fence",       false}},
         {'/',   {"Fence",       false}},
         {'\\',  {"Fence",       false}},
+        {'V',   {"Vulcanrock",  true}},
+        {'f',   {"Fire",        true}},
+        {'H',   {"Hill",        true}},
+        {'v',   {"House",       false}},
+        {'m',   {"Wall",        false}},
+        {'g',   {"Gate",        true}},
+        {'e',   {"Earthhole",   true}},
+        {'l',   {"Ladder▼",     true}},
+        {'L',   {"Ladder▲",     true}},
+        {'u',   {"Underground", true}},
     };
 
     type = types.value(tspec);
@@ -99,6 +108,8 @@ QHash<int, QByteArray> MapModel::roleNames() const
 
 bool MapModel::load(QString fileName, Format format)
 {
+    qCInfo(lcMap, "Loading map from %ls", qUtf16Printable(fileName));
+
     fileName = Backend::dataFileName(std::move(fileName));
 
     QFile file{fileName};
@@ -153,3 +164,5 @@ QVariant MapModel::dataByPoint(QPoint point, MapModel::Role role) const
 }
 
 } // namespace GameOne
+
+#include "moc_mapmodel.cpp"

@@ -1,6 +1,7 @@
+import "." as GameOne
 import QtQuick 2.15
 
-Screen {
+GameOne.Screen {
     signal screenFinished()
 
     color: "#00ff00"

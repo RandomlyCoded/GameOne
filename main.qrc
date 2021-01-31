@@ -3,6 +3,12 @@
         <file>data/level1.json</file>
         <file>data/level10.json</file>
         <file>data/level11.json</file>
+        <file>data/level12.json</file>
+        <file>data/level13.json</file>
+        <file>data/level14.json</file>
+        <file>data/level15.json</file>
+        <file>data/level16.json</file>
+        <file>data/level17.json</file>
         <file>data/level2.json</file>
         <file>data/level3.json</file>
         <file>data/level4.json</file>
@@ -11,9 +17,16 @@
         <file>data/level7.json</file>
         <file>data/level8.json</file>
         <file>data/level9.json</file>
+        <file>data/map.txt</file>
         <file>data/map1.txt</file>
         <file>data/map10.txt</file>
         <file>data/map11.txt</file>
+        <file>data/map12.txt</file>
+        <file>data/map13.txt</file>
+        <file>data/map14.txt</file>
+        <file>data/map15.txt</file>
+        <file>data/map16.txt</file>
+        <file>data/map17.txt</file>
         <file>data/map2.txt</file>
         <file>data/map3.txt</file>
         <file>data/map4.txt</file>

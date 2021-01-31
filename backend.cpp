@@ -64,6 +64,8 @@ QList<Enemy *> Backend::enemies() const
 
 bool Backend::load(QString fileName)
 {
+    qCInfo(lcBackend, "Loading level from %ls", qUtf16Printable(fileName));
+
     m_timer->stop();
 
     fileName = dataFileName(std::move(fileName));
@@ -175,3 +177,5 @@ void Backend::onTimeout()
 }
 
 } // namespace GameOne
+
+#include "moc_backend.cpp"

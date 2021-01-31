@@ -1,8 +1,10 @@
+import "." as GameOne
+
 import QtQuick 2.15
 
 // bitte in den IntroScreen gucken!
 
-Screen {
+GameOne.Screen {
     property int levelCount: 11
     signal bossBattle
 

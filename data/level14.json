@@ -1,11 +1,14 @@
 {
+    "levelName": "Vulcan",
     "map": {
         "format": 2,
-        "filename": "map9.txt"
+        "filename": "map14.txt"
     },
 
     "enemies": [
-        {"x": 1, "y": 1, "maximumEnergy": 50}
+        {"x": 1, "y": 6, "maximumEnergy": 50},
+        {"x": 2, "y": 6, "maximumEnergy": 75},
+        {"x": 3, "y": 7, "maximumEnergy": 100}
     ],
 
     "player": {
