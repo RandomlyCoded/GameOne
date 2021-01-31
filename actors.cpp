@@ -156,19 +156,16 @@ QString Player::type() const
     return "Player";
 }
 
-/*bool Player::canHit(m_hitEnergy) {
-    return m_hitEnergy > 0;
-}*/
-
 bool Player::canAttack(const Actor *opponent) const
 {
-    return dynamic_cast<const Enemy *>(opponent)/* && m_canHit()*/;
+    return dynamic_cast<const Enemy *>(opponent)/* && m_hitEnergy > 0*/;
 }
 
 int Player::attack(Actor *opponent)
 {
     if (canAttack(opponent)) {
         opponent->stealEnergy(1);
+//        m_hitEnergy--;
         return std::rand() % 2; // FIXME: use proper generator from std::random
     }
 
