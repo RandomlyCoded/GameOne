@@ -29,3 +29,9 @@ vielleicht einbauen, dass man nur 10 mal oder so zuschlagen kann und sich dann e
 
 6.:
 manchmal schlittert man auf Eis... vielleicht mit einer 75%igen Warscheinlichkeit  2 Felder weit laufen, wenn man auf Eis geht
+
+7.:
+Feinden eine einstellbare Farbe geben
+
+8.:
+Feinden einstellbare Beweglichkeit geben
