@@ -1,4 +1,6 @@
 #include "backend.h"
+#include "levelmodel.h"
+#include "mapmodel.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -20,7 +22,9 @@ int Application::run()
 {
     QQmlApplicationEngine qml;
 
+    qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
+
     qml.rootContext()->setContextProperty("backend", new Backend{this});
 
     qml.load(QUrl{"qrc:/GameOne/qml/main.qml"});

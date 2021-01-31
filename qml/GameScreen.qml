@@ -4,23 +4,25 @@ import QtQuick 2.15
 
 Screen {
     property int levelCount: 11
-    signal battle
+    signal bossBattle
 
     color: "white"
-    focus: true
 
     Row {
+//        Rectangle {
+//            height: parent.height
+//            width: parent.width / 2
+//            MouseArea {
+//                anchors.fill: parent
+//                onClicked: console.info(["h", "w"], [parent.height, parent.width], [parent.height, parent.width * 0.5])
+//            }
+//        }
+
         anchors.fill: parent
 
         Sidebar {
+            height: parent.height
             width: 200
-            height: parent.height
-        }
-
-        Rectangle {
-            height: parent.height
-            width: 10
-            color: "pink"
         }
 
         GameGround {
@@ -40,6 +42,7 @@ Screen {
             margins: 50
         }
 
+        focus: true
         radius: 100
 
         onMoveUp: backend.player.moveUp()
@@ -48,20 +51,21 @@ Screen {
         onMoveRight: backend.player.moveRight()
     }
 
-    Keys.onLeftPressed:     backend.player.moveLeft()
-    Keys.onRightPressed:    backend.player.moveRight()
-    Keys.onUpPressed:       backend.player.moveUp()
-    Keys.onDownPressed:     backend.player.moveDown()
+    Keys.onSpacePressed: {
+        if (!backend.player.isAlive)
+            backend.respawn();
+    }
 
-    Keys.onSpacePressed: if (!backend.player.isAlive) backend.player.respawn()
-    Keys.onEscapePressed: console.info("isAlive:", backend.player.isAlive, ";",
-                                       "lives:", backend.player.lives, ";",
-                                       "energy:", backend.player.energy,
-                                       "levels:", levelCount,
-                                       "Tests:",
-                                            (parent.height - ((2 * 3) * 25) / 25),
-                                            (parent.height - ((2 * 3) * 35)) / 35,
-                                        )
+    Keys.onEscapePressed: {
+        console.info("isAlive:", backend.player.isAlive, ";",
+                     "lives:", backend.player.lives, ";",
+                     "energy:", backend.player.energy,
+                     "levels:", levelCount,
+                     "Tests:",
+                     (parent.height - ((2 * 3) * 25) / 25),
+                     (parent.height - ((2 * 3) * 35)) / 35,
+                     )
+    }
 
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9) {

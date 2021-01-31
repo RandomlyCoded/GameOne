@@ -4,6 +4,7 @@ Item {
     id: button
 
     property color borderColor: textColor
+    property alias elide: label.elide
     property alias color: background.color
     property alias text: label.text
     property alias textColor: label.color
@@ -22,8 +23,10 @@ Item {
         Text {
             id: label
 
-            anchors.fill: parent
+            anchors.centerIn: parent
             font.pixelSize: 20
+
+            width: Math.min(button.width - 10, implicitWidth)
         }
     }
 

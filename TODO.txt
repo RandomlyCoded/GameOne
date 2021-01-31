@@ -11,7 +11,9 @@ G H M H G G G G G G
 G H H H G G G G G G
 1 2 3 4 5 6 7 8 9 0
 
-Was passiert mit diesen Dateien? Lösungsvorschlag: Leere Felder grell anzeigen und mit hohem Kontrast "ERROR" schreiben
+Was passiert mit diesen Dateien? Lösungsvorschlag: Leere Felder grell anzeigen(lila?) und mit hohem Kontrast(oder in giftgrün)
+"ERROR-undef type """ schreiben, das gleich mit Items; Lösung: Text {id: error; text: "ERROR- undef type '%1'".arg(cell.type); };
+ansonsten habe ich in "level1.json" etwas angelegt, dass man sich eigene Felder definieren kann
 
 2.:
 Bauen wir vielleicht ein Titelbild ein? es könnte eine (spannende) Spielszene sein...

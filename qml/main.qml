@@ -6,8 +6,8 @@ Window {
     width: 1750 //1750 || 800
     height: 1000 // 1000 || 600
     visible: true
-    title: "GameOne"
-// Bei nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen
+    title: "GameOne - %1".arg(backend.levelName)
+    // Bei Nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen
     property Item currentScreen: game // welcome
 
     WelcomeScreen {
@@ -39,5 +39,27 @@ Window {
         height: parent.height
 
         enabled: currentScreen === game
+
+        onBossBattle: currentScreen = bossBattle
+    }
+
+    BossBattleScreen {
+        id: bossBattle
+
+        width: parent.width
+        height: parent.height
+
+        enabled: currentScreen === bossBattle
+
+        onTheGameIsOver: currentScreen = theGameIsOver
+    }
+
+    TheGameIsOverScreen {
+        id: theGameIsOver
+
+        width: parent.width
+        height: parent.height
+
+        enabled: currentScreen === theGameIsOver
     }
 }

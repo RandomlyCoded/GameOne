@@ -1,0 +1,38 @@
+#ifndef GAMEONE_LEVELMODEL_H
+#define GAMEONE_LEVELMODEL_H
+
+#include <QAbstractListModel>
+
+namespace GameOne {
+
+class LevelModel : public QAbstractListModel
+{
+public:
+    enum Role {
+        LevelNameRole = Qt::DisplayRole,
+        FileNameRole = Qt::UserRole + 1,
+    };
+
+    Q_ENUM(Role)
+
+    explicit LevelModel(QObject *parent = {});
+
+    QVariant data(const QModelIndex &index, int role) const override;
+    int rowCount(const QModelIndex &parent) const override;
+    QHash<int, QByteArray> roleNames() const override;
+
+    Q_INVOKABLE void refresh();
+
+private:
+    struct Level {
+        int index;
+        QString name;
+        QString fileName;
+    };
+
+    QList<Level> m_levels;
+};
+
+} // namespace GameOne
+
+#endif // GAMEONE_LEVELMODEL_H

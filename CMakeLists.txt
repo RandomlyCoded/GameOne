@@ -10,13 +10,17 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt5 5.15 REQUIRED COMPONENTS Quick)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
-add_executable(GameOne)
+add_executable(GameOne WIN32)
 target_link_libraries(GameOne PRIVATE Qt5::Quick)
 
 target_sources(
     GameOne PRIVATE
+    actors.cpp actors.h
+    assets.qrc
     backend.cpp backend.h
+    levelmodel.cpp levelmodel.h
     main.cpp main.qrc
+    mapmodel.cpp mapmodel.h
     )
 
 add_custom_target(

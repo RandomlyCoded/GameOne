@@ -1,140 +1,121 @@
+import GameOne 1.0
+
 import QtQuick 2.15
 
-Item {
-    Rectangle {
-        id: sidebar
+//Item {
+Rectangle {
+    id: sidebar
 
-        color: "black"
+    color: "#6f6f6f"
 
-        height: parent.height
-        width: parent.width - GameGround.width
+    height: parent.height
+    width: parent.width - GameGround.width
 
-        Column {
-            Text {
-                id: liveText
+    Column {
+        anchors { fill: parent; margins: 10 }
+        spacing: 10
 
-                color: "red"
+        Text {
+            id: liveText
 
-                font.pixelSize: 25
+            color: "red"
 
-                x: 40
-                y: 7.5
+            font.pixelSize: 25
 
-                text: "lives: %1".arg(backend && backend.player.lives || 0)
-            }
+            x: 40
+            y: 7.5
 
-            Text {
-                id: info
+            text: "lives: %1".arg(backend && backend.player.lives || 0)
+        }
 
-                color: "#afafaf"
-                font.pixelSize: 25
+        Text {
+            id: info
 
-                y: 40
+            color: "#afafaf"
+            font.pixelSize: 25
+            text: "Information:"
+        }
 
-                text: "Information:"
-            }
+        Text {
+            id: info1_1
 
-            Text {
-                id: info1_1
+            color: "white"
+            font.pixelSize: 25
+            text: "red circles:"
+        }
 
-                color: "white"
-                font.pixelSize: 25
+        Text {
+            id: info1_2
 
-                y: 65
+            color: "white"
+            font.pixelSize: 25
+            text: "enemies"
+        }
 
-                text: "red circles:"
-            }
+        Text {
+            id: gameOver2_1
 
-            Text {
-                id: info1_2
+            color: "#afafaf"
+            font.pixelSize: 25
+            visible: backend && !backend.player.isAlive
 
-                color: "white"
-                font.pixelSize: 25
+            text: "press space to"
+        }
 
-                y: 90
+        Text {
+            id: gameOver2_2
 
-                text: "enemies"
-            }
+            color: "#afafaf"
+            font.pixelSize: 25
+            visible: backend && !backend.player.isAlive
 
-            Text {
-                id: info2_1
+            text: "respawn."
+        }
 
-                color: "white"
-                font.pixelSize: 25
+        /*
+        Text {
+            color: "#afafaf"
+            font.pixelSize: 25
+            text: backend.levelFileName
+            width: parent.width
+            wrapMode: Text.Wrap
+        }
 
-                y: 115
+        Text {
+            color: "#afafaf"
+            font.pixelSize: 25
+            text: backend.levelName
+            width: parent.width
+            wrapMode: Text.Wrap
+        }
+        */
 
-                text: "circle:"
-            }
+        Button {
+            text: "Respawn"
 
-            Text {
-                id: info2_2
+            onActivated: backend.respawn()
+        }
 
-                color: "white"
-                font.pixelSize: 25
+        ListView {
+            clip: true
+            width: parent.width
+            height: parent.height - y
 
-                y: 140
+            model: LevelModel {}
 
-                text: "boss opponent"
-            }
+            delegate: Button {
+                property bool isCurrentLevel: model.fileName === backend.levelFileName
 
-            Text {
-                id: gameOver2_1
+                color: isCurrentLevel ? "white" : "transparent"
+                textColor: isCurrentLevel ? "black" : "white"
 
-                color: "#afafaf"
-                font.pixelSize: 25
+                elide: Text.ElideRight
+                width: parent.width
+                text: model.levelName
 
-                y: 200
-
-                visible: backend && !backend.player.isAlive
-
-                text: "press space to"
-            }
-
-            Text {
-                id: gameOver2_2
-
-                color: "#afafaf"
-                font.pixelSize: 25
-
-                y: 210
-
-                visible: backend && !backend.player.isAlive
-
-                text: "respawn."
-            }
-
-
-            Grid {
-                id: levelButtonsGrid
-
-                columns: 7
-                columnSpacing: 5
-                rows: 24
-
-                Repeater {
-                    id: levelButtons
-
-                    model: 500
-
-                    Button {
-                        text: " Level %1".arg(modelData + 1)
-
-                        onActivated: {
-                            if (!backend.load("level%1.json".arg(modelData + 1)))
-                                backend.load("map%1.txt".arg(modelData + 1));
-
-                            console.info (parent.height, parent.width, parent.rows, parent.columns)
-                        }
-                    }
-                }
-            }
-
-            Button {
-                text: "Respawn"
-
-                onActivated: backend.player.respawn()
+                onActivated: backend.load(model.fileName)
             }
         }
+
     }
 }

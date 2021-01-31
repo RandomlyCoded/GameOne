@@ -13,7 +13,7 @@
     "player": {
         "x": 0,
         "y": 0,
-        "name": "Joe",
+        "name": "Player",
         "maximumLifes": 3,
         "maximumEnergy": 5
     }
