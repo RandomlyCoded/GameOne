@@ -1,11 +1,13 @@
 <RCC>
     <qresource prefix="/assets">
-        <file>data/assets/chest.svg</file>
-        <file>data/assets/fenceHorizontal.svg</file>
-        <file>data/assets/fenceLeftBottom.svg</file>
-        <file>data/assets/fenceLeftTop.svg</file>
-        <file>data/assets/fenceRightBottom.svg</file>
-        <file>data/assets/fenceRightTop.svg</file>
-        <file>data/assets/fenceVertical.svg</file>
+        <file>assets/Arrow.svg</file>
+        <file>assets/Bow.svg</file>
+        <file>assets/Chest.svg</file>
+        <file>assets/FenceHorizontal.svg</file>
+        <file>assets/FenceLeftBottom.svg</file>
+        <file>assets/FenceLeftTop.svg</file>
+        <file>assets/FenceRightBottom.svg</file>
+        <file>assets/FenceRightTop.svg</file>
+        <file>assets/FenceVertical.svg</file>
     </qresource>
 </RCC>
