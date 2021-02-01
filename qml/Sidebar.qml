@@ -142,6 +142,12 @@ Rectangle {
                     width: GridView.view.cellWidth
                     height: GridView.view.cellHeight
 
+                    Image {
+                        anchors.fill: parent
+                        source: model.imageSource
+                        sourceSize: Qt.size(width, height)
+                    }
+
                     Column {
                         anchors.centerIn: parent
 

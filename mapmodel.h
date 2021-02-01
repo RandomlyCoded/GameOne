@@ -2,6 +2,7 @@
 #define GAMEONE_MAPMODEL_H
 
 #include <QAbstractListModel>
+#include <QUrl>
 
 namespace GameOne {
 
@@ -18,6 +19,7 @@ public:
         RowRole,
         WalkableRole,
         ItemRole,
+        ImageSourceRole,
     };
 
     Q_ENUM(Role)
@@ -56,10 +58,13 @@ private:
             bool walkable = false;
 
             bool isValid() const { return !name.isEmpty(); }
+            QUrl imageSource() const { return {}; };
         };
 
         explicit Tile(QByteArray spec);
+
         bool isWalkable() const;
+        QUrl imageSource() const;
 
         Type type;
         Type item;

@@ -3,8 +3,13 @@
 namespace GameOne {
 
 InventoryItem::InventoryItem(QString name, QObject *parent)
+    : InventoryItem{std::move(name), {}, parent}
+{}
+
+InventoryItem::InventoryItem(QString name, QUrl imageSource, QObject *parent)
     : QObject{parent}
     , m_name{std::move(name)}
+    , m_imageSource{QUrl{"qrc:/assets/"}.resolved(imageSource)}
 {}
 
 QVariant InventoryModel::data(const QModelIndex &index, int role) const
@@ -21,6 +26,12 @@ QVariant InventoryModel::data(const QModelIndex &index, int role) const
 
         case ItemRole:
             return QVariant::fromValue(slot.item.data());
+
+        case ImageSourceRole:
+            if (slot.item)
+                return slot.item->imageSource();
+
+            break;
 
         case AmountRole:
             return slot.amount;
@@ -43,6 +54,7 @@ QHash<int, QByteArray> InventoryModel::roleNames() const
     return {
         {ItemRole, "item"},
         {ItemNameRole, "itemName"},
+        {ImageSourceRole, "imageSource"},
         {AmountRole, "amount"},
     };
 }

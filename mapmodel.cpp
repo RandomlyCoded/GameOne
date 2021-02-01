@@ -65,6 +65,14 @@ bool MapModel::Tile::isWalkable() const
     return type.walkable;
 }
 
+QUrl MapModel::Tile::imageSource() const
+{
+    if (item.isValid() && item.imageSource().isValid())
+        return item.imageSource();
+
+    return type.imageSource();
+}
+
 QVariant MapModel::data(const QModelIndex &index, int role) const
 {
     if (hasIndex(index.row(), index.column(), index.parent())) {
@@ -83,6 +91,8 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
             return tile.item.name;
         case WalkableRole:
             return tile.isWalkable();
+        case ImageSourceRole:
+            return tile.imageSource();
         }
     }
 
@@ -105,6 +115,7 @@ QHash<int, QByteArray> MapModel::roleNames() const
         {ColumnRole, "column"},
         {RowRole, "row"},
         {WalkableRole, "walkable"},
+        {ImageSourceRole, "imageSource"}
     };
 }
 

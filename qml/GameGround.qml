@@ -87,6 +87,14 @@ Item {
                 width: 60
                 height: width
 
+                Image {
+                    id: itemImage
+
+                    anchors.centerIn: parent
+                    source: model.imageSource || ""
+                    visible: !!model.imageSource
+                }
+
                 Rectangle {
                     id: itemCircle
 
@@ -97,7 +105,7 @@ Item {
                     height: 2 * radius
 
                     color: colorOf(model.item)
-                    visible: !!model.item
+                    visible: !itemImage.visible && model.item || false
                 }
 
                 Rectangle {

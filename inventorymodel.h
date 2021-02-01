@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QPointer>
+#include <QUrl>
 
 namespace GameOne {
 
@@ -10,14 +11,18 @@ class InventoryItem : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name CONSTANT FINAL)
+    Q_PROPERTY(QUrl imageSource READ imageSource CONSTANT FINAL)
 
 public:
     explicit InventoryItem(QString name, QObject *parent = {});
+    explicit InventoryItem(QString name, QUrl imageSource, QObject *parent = {});
 
     auto name() const { return m_name; }
+    auto imageSource() const { return m_imageSource; }
 
 private:
     QString m_name;
+    QUrl m_imageSource;
 };
 
 class InventoryModel : public QAbstractListModel
@@ -28,6 +33,7 @@ public:
     enum Role {
         ItemNameRole = Qt::DisplayRole,
         ItemRole = Qt::UserRole + 1,
+        ImageSourceRole,
         AmountRole,
     };
 

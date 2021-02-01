@@ -187,8 +187,8 @@ QString Backend::dataFileName(QString fileName)
 void Backend::loadItems()
 {
     // TODO: Load from JSON
-    m_items["arrow"] = new InventoryItem{"Arrow", this};
-    m_items["bow"] = new InventoryItem{"Bow", this};
+    m_items["arrow"] = new InventoryItem{"Arrow", QUrl{"Arrow.svg"}, this};
+    m_items["bow"] = new InventoryItem{"Bow", QUrl{"Bow.svg"}, this};
 }
 
 void Backend::onTimeout()
