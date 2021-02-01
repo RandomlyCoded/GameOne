@@ -14,5 +14,7 @@
         <file>assets/Stairsdown.svg</file>
         <file>assets/StairsUp.svg</file>
         <file>assets/Tree.svg</file>
+        <file>assets/BottleLargeEnergydrink.svg</file>
+        <file>assets/BottleLargeEmpty.svg</file>
     </qresource>
 </RCC>
