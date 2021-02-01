@@ -6,6 +6,13 @@ import QtQuick 2.15
 Rectangle {
     id: sidebar
 
+    enum Detail {
+        Inventory,
+        Levels
+    }
+
+    property int currentDetail: Sidebar.Detail.Inventory
+
     color: "#6f6f6f"
 
     height: parent.height
@@ -92,30 +99,90 @@ Rectangle {
 
         Button {
             text: "Respawn"
+            width: parent.width
 
             onActivated: backend.respawn()
         }
 
-        ListView {
-            clip: true
+        Button {
+            text: "Inventory"
+            width: parent.width
+
+            checked: sidebar.currentDetail === Sidebar.Detail.Inventory
+            onActivated: sidebar.currentDetail = Sidebar.Detail.Inventory
+        }
+
+        Button {
+            text: "Levels"
+            width: parent.width
+
+            checked: sidebar.currentDetail === Sidebar.Detail.Levels
+            onActivated: sidebar.currentDetail = Sidebar.Detail.Levels
+        }
+
+        Item {
             width: parent.width
             height: parent.height - y
 
-            model: LevelModel {}
-
-            delegate: Button {
-                property bool isCurrentLevel: model.fileName === backend.levelFileName
-
-                color: isCurrentLevel ? "white" : "transparent"
-                textColor: isCurrentLevel ? "black" : "white"
-
-                elide: Text.ElideRight
+            GridView {
+                clip: true
                 width: parent.width
-                text: model.levelName
+                height: parent.height * opacity
 
-                onActivated: backend.load(model.fileName)
+                model: backend.player.inventory
+
+                opacity: sidebar.currentDetail === Sidebar.Detail.Inventory ? 1 : 0
+                Behavior on opacity { NumberAnimation {} }
+                visible: opacity > 0
+
+                cellWidth: width/3
+                cellHeight: cellWidth
+
+                delegate: Rectangle {
+                    width: GridView.view.cellWidth
+                    height: GridView.view.cellHeight
+
+                    Column {
+                        anchors.centerIn: parent
+
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.itemName
+                        }
+
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.amount
+                        }
+                    }
+                }
+            }
+
+            ListView {
+                clip: true
+                width: parent.width
+                height: parent.height * opacity
+
+                model: LevelModel {}
+
+                opacity: sidebar.currentDetail === Sidebar.Detail.Levels ? 1 : 0
+                Behavior on opacity { NumberAnimation {} }
+                visible: opacity > 0
+
+                delegate: Button {
+                    property bool isCurrentLevel: model.fileName === backend.levelFileName
+
+                    borderColor: "transparent"
+                    color: isCurrentLevel ? "white" : "transparent"
+                    textColor: isCurrentLevel ? "black" : "white"
+
+                    elide: Text.ElideRight
+                    width: parent && parent.width || 0
+                    text: model.levelName
+
+                    onActivated: backend.load(model.fileName)
+                }
             }
         }
-
     }
 }
