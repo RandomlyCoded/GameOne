@@ -14,6 +14,10 @@
     "chests": [
         {"x": 3, "y": 2, "item": "arrow", "amount": 2}
     ],
+    "Bottles": [
+        {"x": 3, "y": 2, "type": "chest", "item": "BottleSmallEnergydrink", "amount": 2},
+        {"x": 3, "y": 2, "type": "chest", "item": "BottleSmallEmpty", "amount": 2},
+    ],
 
     "ladders": [
         {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5},
