@@ -38,3 +38,6 @@ Feinden einstellbare Beweglichkeit geben
 
 9.:
 unsichtbare Truhen die erst sichtbar werden wenn man einen Bestimmten Gegner getötet hat
+
+10.:
+Level explizit freischalten und nur freigeschaltene Level zeigen
