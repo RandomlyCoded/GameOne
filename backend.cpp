@@ -24,8 +24,6 @@ Backend::Backend(QObject *parent)
 
     connect(m_map, &MapModel::columnsChanged, this, &Backend::columnsChanged);
     connect(m_map, &MapModel::rowsChanged, this, &Backend::rowsChanged);
-
-    load("level1.json");
 }
 
 int Backend::columns() const

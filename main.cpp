@@ -25,7 +25,9 @@ int Application::run()
     qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
 
-    qml.rootContext()->setContextProperty("backend", new Backend{this});
+    const auto backend = new Backend{this};
+    backend->load(arguments().count() > 1 ? arguments().at(1) : "level1.json");
+    qml.rootContext()->setContextProperty("backend", backend);
 
     qml.load(QUrl{"qrc:/GameOne/qml/main.qml"});
     if (qml.rootObjects().isEmpty())
