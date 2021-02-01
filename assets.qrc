@@ -9,5 +9,9 @@
         <file>assets/FenceRightBottom.svg</file>
         <file>assets/FenceRightTop.svg</file>
         <file>assets/FenceVertical.svg</file>
+        <file>assets/BottleSmallEnergydrink.svg</file>
+        <file>assets/BottleEmpty.svg</file>
+        <file>assets/Stairsdown.svg</file>
+        <file>assets/StairsUp.svg</file>
     </qresource>
 </RCC>
