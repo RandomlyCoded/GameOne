@@ -3,6 +3,7 @@
 
 #include "actors.h"
 
+#include <QMap>
 #include <memory>
 
 class QDir;
@@ -37,7 +38,9 @@ public:
     Player *player() const { return m_player.get(); }
     MapModel *map() const { return m_map; }
 
-    Q_INVOKABLE bool load(QString fileName);
+    InventoryItem *item(QString id) const;
+
+    Q_INVOKABLE bool load(QString fileName, std::optional<QPoint> playerPosition = {});
     Q_INVOKABLE void respawn();
 
     bool canMoveTo(Actor *actor, QPoint destination) const;
@@ -56,13 +59,21 @@ signals:
     void playerChanged(Player *player);
 
 private:
+    void loadItems();
     void onTimeout();
 
     QTimer *const m_timer;
     MapModel *const m_map;
 
+    QList<Actor *> m_actors;
+
+    QMap<QString, InventoryItem *> m_items;
+    QList<std::shared_ptr<Ladder>> m_ladders;
+    QList<std::shared_ptr<Chest>> m_chests;
+
     QList<std::shared_ptr<Enemy>> m_enemies;
     std::unique_ptr<Player> m_player;
+
     QString m_levelFileName;
     QString m_levelName;
 };

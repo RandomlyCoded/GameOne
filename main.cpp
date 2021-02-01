@@ -1,4 +1,5 @@
 #include "backend.h"
+#include "inventorymodel.h"
 #include "levelmodel.h"
 #include "mapmodel.h"
 
@@ -22,6 +23,7 @@ int Application::run()
 {
     QQmlApplicationEngine qml;
 
+    qmlRegisterType<InventoryModel>("GameOne", 1, 0, "InventoryModel");
     qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
 

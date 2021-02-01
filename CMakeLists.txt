@@ -26,6 +26,7 @@ target_sources(
     actors.cpp actors.h
     assets.qrc
     backend.cpp backend.h
+    inventorymodel.cpp inventorymodel.h
     levelmodel.cpp levelmodel.h
     main.cpp main.qrc
     mapmodel.cpp mapmodel.h

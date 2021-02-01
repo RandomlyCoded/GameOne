@@ -11,8 +11,13 @@
         {"x": 3, "y": 3, "maximumEnergy": 15}
     ],
 
-    "items": [
-        {"x": 3, "y": 2, "type": "chest", "item": "arrow", "amount": 2},
+    "chests": [
+        {"x": 3, "y": 2, "item": "arrow", "amount": 2}
+    ],
+
+    "ladders": [
+        {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5},
+        {"x": 5, "y": 0, "level": 16, "dx": 14, "dy": 5}
     ],
 
     "player": {

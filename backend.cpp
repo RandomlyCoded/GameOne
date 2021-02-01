@@ -1,4 +1,5 @@
 #include "backend.h"
+#include "inventorymodel.h"
 #include "mapmodel.h"
 
 #include <QJsonArray>
@@ -24,6 +25,8 @@ Backend::Backend(QObject *parent)
 
     connect(m_map, &MapModel::columnsChanged, this, &Backend::columnsChanged);
     connect(m_map, &MapModel::rowsChanged, this, &Backend::rowsChanged);
+
+    loadItems();
 }
 
 int Backend::columns() const
@@ -38,15 +41,7 @@ int Backend::rows() const
 
 QList<Actor *> Backend::actors() const
 {
-    QList<Actor *> actors;
-    actors.reserve(m_enemies.size() + 1);
-
-    if (m_player)
-        actors += m_player.get();
-    for (auto enemy: m_enemies)
-        actors += enemy.get();
-
-    return actors;
+    return m_actors;
 }
 
 QList<Enemy *> Backend::enemies() const
@@ -60,7 +55,12 @@ QList<Enemy *> Backend::enemies() const
     return enemies;
 }
 
-bool Backend::load(QString fileName)
+InventoryItem *Backend::item(QString id) const
+{
+    return m_items.value(id);
+}
+
+bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 {
     qCInfo(lcBackend, "Loading level from %ls", qUtf16Printable(fileName));
 
@@ -93,13 +93,29 @@ bool Backend::load(QString fileName)
         if (m_levelName.isEmpty())
             m_levelName = QFileInfo{file.fileName()}.baseName();
 
+        m_actors.clear();
+        m_chests.clear();
+        m_ladders.clear();
         m_enemies.clear();
 
+        for (const auto value: level["chests"].toArray())
+            m_chests += std::make_shared<Chest>(value.toObject(), this);
+        for (const auto value: level["ladders"].toArray())
+            m_ladders += std::make_shared<Ladder>(value.toObject(), this);
         for (const auto value: level["enemies"].toArray())
             m_enemies += std::make_shared<Enemy>(value.toObject(), this);
 
         const auto playerData = level["player"].toObject();
-        m_player = std::make_unique<Player>(playerData, this);
+        m_player = std::make_unique<Player>(std::move(playerData), this);
+
+        if (playerPosition.has_value())
+            m_player->moveTo(*playerPosition);
+
+        m_actors += m_player.get();
+        const auto toRawPointer = [](auto ptr) { return ptr.get(); };
+        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
+        std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
+        std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
 
         connect(m_player.get(), &Player::positionChanged, this, [this] { m_timer->start(); });
         connect(m_player.get(), &Player::livesChanged, this, [this] { m_timer->stop(); });
@@ -149,7 +165,7 @@ bool Backend::canMoveTo(Actor *actor, QPoint destination) const
 
         if (destination == opponent->position()) {
             if (actor->canAttack(opponent))
-                actor->giveEnergy(actor->attack(opponent));
+                opponent->giveBonus(actor, actor->attack(opponent));
 
             return false;
         }
@@ -166,6 +182,13 @@ QDir Backend::dataDir()
 QString Backend::dataFileName(QString fileName)
 {
     return dataDir().filePath(fileName);
+}
+
+void Backend::loadItems()
+{
+    // TODO: Load from JSON
+    m_items["arrow"] = new InventoryItem{"Arrow", this};
+    m_items["bow"] = new InventoryItem{"Bow", this};
 }
 
 void Backend::onTimeout()

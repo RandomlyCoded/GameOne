@@ -1,6 +1,7 @@
 #include "actors.h"
 
 #include "backend.h"
+#include "inventorymodel.h"
 
 #include <QJsonObject>
 
@@ -32,17 +33,26 @@ QString Actor::name() const
     return m_name;
 }
 
+void Actor::giveBonus(Actor *actor, int amount)
+{
+    actor->giveEnergy(amount);
+}
+
 Backend *Actor::backend() const
 {
     return static_cast<Backend *>(parent());
 }
 
+void Actor::moveTo(QPoint destination)
+{
+    m_position = destination;
+    emit positionChanged(m_position);
+}
+
 void Actor::tryMoveTo(QPoint destination)
 {
-    if (backend()->canMoveTo(this, destination)) {
-        m_position = destination;
-        emit positionChanged(m_position);
-    }
+    if (backend()->canMoveTo(this, destination))
+        moveTo(std::move(destination));
 }
 
 void Actor::moveLeft()
@@ -151,6 +161,11 @@ void Enemy::act()
     }
 }
 
+Player::Player(QJsonObject spec, Backend *backend)
+    : Actor{std::move(spec), backend}
+    , m_inventory{new InventoryModel{this}}
+{}
+
 QString Player::type() const
 {
     return "Player";
@@ -158,7 +173,7 @@ QString Player::type() const
 
 bool Player::canAttack(const Actor *opponent) const
 {
-    return dynamic_cast<const Enemy *>(opponent)/* && m_hitEnergy > 0*/;
+    return !dynamic_cast<const Player *>(opponent)/* && m_hitEnergy > 0*/;
 }
 
 int Player::attack(Actor *opponent)
@@ -169,6 +184,74 @@ int Player::attack(Actor *opponent)
         return std::rand() % 2; // FIXME: use proper generator from std::random
     }
 
+    return 0;
+}
+
+Chest::Chest(QJsonObject spec, Backend *backend)
+    : Actor{spec, backend}
+{
+    const auto itemType = spec["item"].toString();
+    m_item = backend->item(itemType);
+    m_amount = spec["amount"].toInt();
+}
+
+QString Chest::type() const
+{
+    return "chest";
+}
+
+void Chest::giveBonus(Actor *actor, int)
+{
+    if (const auto player = backend()->player(); player == actor) {
+        player->inventory()->updateItem(m_item, std::exchange(m_amount, 0));
+        emit countChanged(m_amount);
+    }
+}
+
+bool Chest::canAttack(const Actor *) const
+{
+    return false;
+}
+
+int Chest::attack(Actor *actor)
+{
+    return 0;
+}
+
+InventoryItem *Chest::item() const
+{
+    return m_item.data();
+}
+
+Ladder::Ladder(QJsonObject spec, Backend *backend)
+    : Actor{spec, backend}
+{
+    m_level = spec["level"].toInt();
+    m_destination = {spec["dx"].toInt(), spec["dy"].toInt()};
+}
+
+QString Ladder::type() const
+{
+    return "ladder";
+}
+
+void Ladder::giveBonus(Actor *, int)
+{
+    if (m_level > 0) {
+        const auto fileName = QString{"level%1.json"}.arg(m_level);
+        backend()->load(fileName, m_destination);
+    } else {
+        backend()->player()->tryMoveTo(m_destination);
+    }
+}
+
+bool Ladder::canAttack(const Actor *actor) const
+{
+    return false;
+}
+
+int Ladder::attack(Actor *opponent)
+{
     return 0;
 }
 
