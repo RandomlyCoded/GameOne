@@ -92,7 +92,7 @@ Item {
 
                     anchors.centerIn: parent
                     source: model.imageSource || ""
-                    visible: !!model.imageSource
+                    visible: source.toString()
                 }
 
                 Rectangle {
