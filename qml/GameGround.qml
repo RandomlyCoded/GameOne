@@ -46,8 +46,7 @@ Item {
 
                 readonly property var actor: {
                     return backend && backend.actors.find(
-                                actor => actor.isAlive
-                                && actor.x === model.column
+                                actor => actor.x === model.column
                                 && actor.y === model.row);
                 }
 
@@ -105,14 +104,14 @@ Item {
                     height: 2 * radius
 
                     color: colorOf(model.item)
-                    visible: model.item && !itemImage.visible || false
+                    visible: !actor && model.item && !itemImage.visible || false
                 }
 
                 Image {
                     id: actorImage
 
                     anchors.fill: parent
-                    source: actor && actor.imageSource || ""
+                    source: actor && actor.isAlive && actor.imageSource || ""
                     sourceSize: Qt.size(width, height)
                     visible: source.toString()
                 }
@@ -127,7 +126,7 @@ Item {
                     height: 2 * radius
 
                     color: colorOf(actor && actor.type)
-                    visible: actor && !actorImage.visible || false
+                    visible: actor && actor.isAlive && !actorImage.visible || false
                 }
 
                 Rectangle {
