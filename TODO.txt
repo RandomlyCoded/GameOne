@@ -57,3 +57,8 @@ Level explizit freischalten und nur freigeschaltene Level zeigen
     Der Bogen schießt zwei Felder weit
 12.:
 Wenn man angreift oder an eine Grenze oder Wand geht die Bewegung der Monster erlauben
+
+13.:
+Stärkeres Monster, das Hindernisse umgeht
+(liest Karte ein, verfährt dann wie Schleimpilz im Hintergrund(rechnet sich besten Weg zu Joe(Spieler) aus),
+läuft ihn dann jeden 2. Takt(oder auch jeden ? )
