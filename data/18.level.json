@@ -1,17 +1,18 @@
 {
+    "levelName": "The canyon",
+
     "map": {
         "format": 2,
-        "filename": "map11.txt"
+        "filename": "18.map.txt"
     },
-
+    
     "enemies": [
-        {"x": 12, "y": 12, "maximumEnergy": 25},
-        {"x": 3, "y": 3, "maximumEnergy": 2}
+    
     ],
-
+    
     "player": {
         "x": 0,
-        "y": 4,
+        "y": 0,
         "name": "Joe",
         "maximumLifes": 3,
         "maximumEnergy": 5

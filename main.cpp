@@ -28,7 +28,7 @@ int Application::run()
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
 
     const auto backend = new Backend{this};
-    backend->load(arguments().count() > 1 ? arguments().at(1) : "level1.json");
+    backend->load(arguments().count() > 1 ? arguments().at(1) : Backend::levelFileName(1));
     qml.rootContext()->setContextProperty("backend", backend);
 
     qml.load(QUrl{"qrc:/GameOne/qml/main.qml"});

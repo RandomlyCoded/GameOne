@@ -239,8 +239,7 @@ QString Ladder::type() const
 void Ladder::giveBonus(Actor *, int)
 {
     if (m_level > 0) {
-        const auto fileName = QString{"level%1.json"}.arg(m_level);
-        backend()->load(fileName, m_destination);
+        backend()->load(Backend::levelFileName(m_level), m_destination);
     } else {
         backend()->player()->tryMoveTo(m_destination);
     }

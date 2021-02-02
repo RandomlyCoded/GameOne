@@ -3,7 +3,7 @@
 
     "map": {
         "format": 2,
-        "filename": "map17.txt"
+        "filename": "17.map.txt"
     },
 
     "enemies": [

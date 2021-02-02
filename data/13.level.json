@@ -2,7 +2,7 @@
     "levelName": "Lavalake",
     "map": {
         "format": 2,
-        "filename": "map13.txt"
+        "filename": "13.map.txt"
     },
 
     "enemies": [

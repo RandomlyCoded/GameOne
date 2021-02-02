@@ -1,40 +1,40 @@
 <RCC>
     <qresource prefix="/GameOne">
-        <file>data/level1.json</file>
-        <file>data/level10.json</file>
-        <file>data/level11.json</file>
-        <file>data/level12.json</file>
-        <file>data/level13.json</file>
-        <file>data/level14.json</file>
-        <file>data/level15.json</file>
-        <file>data/level16.json</file>
-        <file>data/level17.json</file>
-        <file>data/level2.json</file>
-        <file>data/level3.json</file>
-        <file>data/level4.json</file>
-        <file>data/level5.json</file>
-        <file>data/level6.json</file>
-        <file>data/level7.json</file>
-        <file>data/level8.json</file>
-        <file>data/level9.json</file>
+        <file>data/1.level.json</file>
+        <file>data/10.level.json</file>
+        <file>data/11.level.json</file>
+        <file>data/12.level.json</file>
+        <file>data/13.level.json</file>
+        <file>data/14.level.json</file>
+        <file>data/15.level.json</file>
+        <file>data/16.level.json</file>
+        <file>data/17.level.json</file>
+        <file>data/2.level.json</file>
+        <file>data/3.level.json</file>
+        <file>data/4.level.json</file>
+        <file>data/5.level.json</file>
+        <file>data/6.level.json</file>
+        <file>data/7.level.json</file>
+        <file>data/8.level.json</file>
+        <file>data/9.level.json</file>
         <file>data/map.txt</file>
-        <file>data/map1.txt</file>
-        <file>data/map10.txt</file>
-        <file>data/map11.txt</file>
-        <file>data/map12.txt</file>
-        <file>data/map13.txt</file>
-        <file>data/map14.txt</file>
-        <file>data/map15.txt</file>
-        <file>data/map16.txt</file>
-        <file>data/map17.txt</file>
-        <file>data/map2.txt</file>
-        <file>data/map3.txt</file>
-        <file>data/map4.txt</file>
-        <file>data/map5.txt</file>
-        <file>data/map6.txt</file>
-        <file>data/map7.txt</file>
-        <file>data/map8.txt</file>
-        <file>data/map9.txt</file>
+        <file>data/1.map.txt</file>
+        <file>data/10.map.txt</file>
+        <file>data/11.map.txt</file>
+        <file>data/12.map.txt</file>
+        <file>data/13.map.txt</file>
+        <file>data/14.map.txt</file>
+        <file>data/15.map.txt</file>
+        <file>data/16.map.txt</file>
+        <file>data/17.map.txt</file>
+        <file>data/2.map.txt</file>
+        <file>data/3.map.txt</file>
+        <file>data/4.map.txt</file>
+        <file>data/5.map.txt</file>
+        <file>data/6.map.txt</file>
+        <file>data/7.map.txt</file>
+        <file>data/8.map.txt</file>
+        <file>data/9.map.txt</file>
         <file>qml/BossBattleScreen.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/Circle.qml</file>
@@ -50,9 +50,9 @@
         <file>qml/TheGameIsOverScreen.qml</file>
         <file>qml/WelcomeScreen.qml</file>
         <file>qml/main.qml</file>
-        <file>data/level18.json</file>
-        <file>data/map18.txt</file>
-        <file>data/map19.txt</file>
-        <file>data/level19.json</file>
+        <file>data/18.level.json</file>
+        <file>data/18.map.txt</file>
+        <file>data/19.map.txt</file>
+        <file>data/19.level.json</file>
     </qresource>
 </RCC>

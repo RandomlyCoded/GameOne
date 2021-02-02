@@ -51,6 +51,8 @@ public:
     static QUrl imageUrl(QString fileName);
     static QUrl imageUrl(QUrl imageUrl);
 
+    static QString levelFileName(int index);
+
 signals:
     void levelFileNameChanged(QString levelFileName);
     void levelNameChanged(QString levelName);

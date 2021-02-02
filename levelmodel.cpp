@@ -68,8 +68,8 @@ void LevelModel::refresh()
     beginResetModel();
     m_levels.clear();
 
-    for (const auto &fi: Backend::dataDir().entryInfoList({"level*.json"})) {
-        if (const auto index = toInt(fi.baseName().mid(5))) {
+    for (const auto &fi: Backend::dataDir().entryInfoList({"*.level.json"})) {
+        if (const auto index = toInt(fi.baseName())) {
             if (levelReader.load(fi.fileName()))
                 m_levels += {*index, levelReader.levelName(), fi.filePath()};
         }

@@ -1,18 +1,18 @@
 {
     "map": {
         "format": 2,
-        "filename": "map4.txt"
+        "filename": "8.map.txt"
     },
 
     "enemies": [
-        {"x": 1, "y": 2, "maximumEnergy": 5}
+        {"x": 1, "y": 1, "maximumEnergy": 3}
     ],
 
     "player": {
         "x": 0,
         "y": 0,
         "name": "Joe",
-        "maximumLives": 3,
-        "maximumEnergy": 5
+        "maximumLives": 1,
+        "maximumEnergy": 1.1
     }
 }

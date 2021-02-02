@@ -1,13 +1,11 @@
 {
     "map": {
         "format": 2,
-        "filename": "map6.txt"
+        "filename": "4.map.txt"
     },
 
     "enemies": [
-        {"x": 1, "y": 1, "maximumEnergy": 1},
-        {"x": 9, "y": 11, "maximumEnergy": 50},
-        {"x": 11, "y": 11, "maximumEnergy": 50}
+        {"x": 1, "y": 2, "maximumEnergy": 5}
     ],
 
     "player": {

@@ -2,7 +2,7 @@
     "levelName": "Vulcanway",
     "map": {
         "format": 2,
-        "filename": "map12.txt"
+        "filename": "12.map.txt"
     },
 
     "enemies": [

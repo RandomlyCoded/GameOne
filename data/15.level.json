@@ -2,7 +2,7 @@
     "levelName": "the abandoned Vilage",
     "map": {
         "format": 2,
-        "filename": "map15.txt"
+        "filename": "15.map.txt"
     },
 
     "enemies": [
