@@ -16,5 +16,8 @@
         <file>assets/Tree.svg</file>
         <file>assets/BottleLargeEnergydrink.svg</file>
         <file>assets/BottleLargeEmpty.svg</file>
+        <file>assets/LongSword.svg</file>
+        <file>assets/SmallSword.svg</file>
+        <file>assets/dagger.svg</file>
     </qresource>
 </RCC>

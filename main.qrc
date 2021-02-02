@@ -52,8 +52,6 @@
         <file>qml/main.qml</file>
         <file>data/level18.json</file>
         <file>data/map18.txt</file>
-        <file>data/map20.txt</file>
-        <file>data/level20.json</file>
         <file>data/map19.txt</file>
         <file>data/level19.json</file>
     </qresource>
