@@ -48,17 +48,36 @@ Level explizit freischalten und nur freigeschaltene Level zeigen
 
     11.2.:
     Feuerpfeile geben Gegnern temporären Schaden und geben von Zeit zu Zeit Schaden, aber nur für eine bestimmte Zeit, sie geben zwei Schaden
-    und halten drei sec. pro sec. einen Schaden
+    und halten drei sec. ,pro sec. einen Schaden
 
     11.3.:
     Eispfeile lassen die Gegner einfrieren bis man sie das nächste mal angreift
 
     11.4.:
     Der Bogen schießt zwei Felder weit
+
 12.:
 Wenn man angreift oder an eine Grenze oder Wand geht die Bewegung der Monster erlauben
 
 13.:
+Tränke sollen in Fässern sein
+
+14.:
+Vorschlag für Anzeige bei Eintrag 5. : Ausdauer
+
+15.:
+Der Schlüssel soll für einen Dungeon sein
+
+16.:
+Vieleicht einen änderbaren Namen für den Spieler
+
+17.:
+Stärkere Monster die mehr Schaden machen
+
+18.:
+Items gehen kaputt?
+
+19.:
 Stärkeres Monster, das Hindernisse umgeht
 (liest Karte ein, verfährt dann wie Schleimpilz im Hintergrund(rechnet sich besten Weg zu Joe(Spieler) aus),
 läuft ihn dann jeden 2. Takt(oder auch jeden ? )

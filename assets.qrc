@@ -34,5 +34,6 @@
         <file>assets/Barrel2.svg</file>
         <file>assets/Barrel3.svg</file>
         <file>assets/Barrel4.svg</file>
+        <file>assets/DungeonEntrance.svg</file>
     </qresource>
 </RCC>
