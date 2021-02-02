@@ -19,5 +19,6 @@
         <file>assets/LongSword.svg</file>
         <file>assets/SmallSword.svg</file>
         <file>assets/dagger.svg</file>
+        <file>assets/StarArrow.svg</file>
     </qresource>
 </RCC>
