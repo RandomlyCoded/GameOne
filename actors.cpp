@@ -15,6 +15,7 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_maximumEnergy{qMax(spec["maximumEnergy"].toInt(), 1)}
     , m_maximumLifes{qMax(spec["maximumLifes"].toInt(), 1)}
     , m_lives{m_maximumLifes}
+    , m_imageSource{Backend::imageUrl(spec["image"].toString())}
 {
     respawn();
 }

@@ -1,5 +1,7 @@
 #include "inventorymodel.h"
 
+#include "backend.h"
+
 namespace GameOne {
 
 InventoryItem::InventoryItem(QString name, QObject *parent)
@@ -9,7 +11,7 @@ InventoryItem::InventoryItem(QString name, QObject *parent)
 InventoryItem::InventoryItem(QString name, QUrl imageSource, QObject *parent)
     : QObject{parent}
     , m_name{std::move(name)}
-    , m_imageSource{QUrl{"qrc:/assets/"}.resolved(imageSource)}
+    , m_imageSource{Backend::imageUrl(imageSource)}
 {}
 
 QVariant InventoryModel::data(const QModelIndex &index, int role) const

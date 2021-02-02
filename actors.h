@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QPoint>
 #include <QPointer>
+#include <QUrl>
 
 namespace GameOne {
 
@@ -27,6 +28,8 @@ class Actor : public QObject
     Q_PROPERTY(int energy READ energy NOTIFY energyChanged FINAL)
     Q_PROPERTY(int maximumEnergy READ maximumEnergy NOTIFY maximumEnergyChanged FINAL)
 
+    Q_PROPERTY(QUrl imageSource READ imageSource CONSTANT FINAL)
+
 public:
     explicit Actor(QJsonObject spec, Backend *backend);
 
@@ -38,6 +41,8 @@ public:
 
     void setName(QString name);
     QString name() const;
+
+    auto imageSource() const { return m_imageSource; }
 
     auto lives() const { return m_lives; }
     auto energy() const { return m_energy; }
@@ -83,6 +88,8 @@ private:
     int m_maximumLifes;
     int m_energy;
     int m_lives;
+
+    QUrl m_imageSource;
 };
 
 class Enemy : public Actor

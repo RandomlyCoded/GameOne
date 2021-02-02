@@ -105,7 +105,16 @@ Item {
                     height: 2 * radius
 
                     color: colorOf(model.item)
-                    visible: !itemImage.visible && model.item || false
+                    visible: model.item && !itemImage.visible || false
+                }
+
+                Image {
+                    id: actorImage
+
+                    anchors.fill: parent
+                    source: actor && actor.imageSource || ""
+                    sourceSize: Qt.size(width, height)
+                    visible: source.toString()
                 }
 
                 Rectangle {
@@ -118,7 +127,7 @@ Item {
                     height: 2 * radius
 
                     color: colorOf(actor && actor.type)
-                    visible: !!actor
+                    visible: actor && !actorImage.visible || false
                 }
 
                 Rectangle {

@@ -184,6 +184,19 @@ QString Backend::dataFileName(QString fileName)
     return dataDir().filePath(fileName);
 }
 
+QUrl Backend::imageUrl(QString fileName)
+{
+    return imageUrl(QUrl{std::move(fileName)});
+}
+
+QUrl Backend::imageUrl(QUrl imageUrl)
+{
+    if (imageUrl.isEmpty())
+        return {};
+
+    return QUrl{"qrc:/assets/"}.resolved(std::move(imageUrl));
+}
+
 void Backend::loadItems()
 {
     // TODO: Load from JSON
@@ -193,7 +206,7 @@ void Backend::loadItems()
 
 void Backend::onTimeout()
 {
-    for (auto enemy: m_enemies)
+    for (auto enemy: qAsConst(m_enemies))
         enemy->act();
 }
 

@@ -48,6 +48,9 @@ public:
     static QDir dataDir();
     static QString dataFileName(QString fileName);
 
+    static QUrl imageUrl(QString fileName);
+    static QUrl imageUrl(QUrl imageUrl);
+
 signals:
     void levelFileNameChanged(QString levelFileName);
     void levelNameChanged(QString levelName);
