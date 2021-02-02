@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   sodipodi:docname="LightningArrow.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-331.88386"
+     inkscape:cy="223.9359"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1576">
+      <g
+         id="g836"
+         transform="matrix(1.0428587,0,0,1.0428587,-31.462257,-185.29204)">
+        <path
+           style="fill:#784421;stroke:#784421;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 56.761185,205.35053 2.743125,0.15252 40.94137,36.73957 -2.462928,3.12423 -41.656536,-36.92181 z"
+           id="path841" />
+        <path
+           style="fill:#f4e3d7;stroke:#f4e3d7;stroke-width:0.204854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 96.908198,237.7423 9.343142,7.81835 -4.59765,0.78735 0.15885,3.92977 -8.998084,-8.14465 -0.253233,-4.25934 z"
+           id="path845" />
+      </g>
+      <g
+         id="g1565"
+         transform="rotate(-60.600858,29.331268,18.693877)">
+        <path
+           style="fill:#ffcc00;stroke:#ffcc00;stroke-width:0.29045px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 16.095027,7.1034615 -3.734846,14.7948625 8.87026,0.56469 -7.749806,12.423167 12.04488,-14.004298 -10.270829,-0.903503 z"
+           id="path1554" />
+        <path
+           style="fill:#ffcc00;stroke:#ffcc00;stroke-width:0.29045px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 21.790669,8.1199025 3.734846,14.7948625 -8.87026,0.56469 7.749806,12.423167 -12.04488,-14.004298 10.270829,-0.903503 z"
+           id="path1561" />
+      </g>
+      <rect
+         style="fill:#ffcc00;fill-rule:evenodd;stroke:#ffcc00;stroke-width:0.286938"
+         id="rect1567"
+         width="3.9107103"
+         height="3.7406538"
+         x="27.146008"
+         y="28.859545" />
+    </g>
+  </g>
+</svg>

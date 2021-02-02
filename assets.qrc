@@ -20,5 +20,7 @@
         <file>assets/SmallSword.svg</file>
         <file>assets/dagger.svg</file>
         <file>assets/StarArrow.svg</file>
+        <file>assets/FireArrow.svg</file>
+        <file>assets/LightningArrow.svg</file>
     </qresource>
 </RCC>
