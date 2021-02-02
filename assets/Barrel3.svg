@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Barrel.svg">
+   sodipodi:docname="Barrel3.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="203.89989"
-     inkscape:cy="197.55648"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="451.52374"
+     inkscape:cy="426.22578"
      inkscape:document-units="mm"
      inkscape:current-layer="g22"
      inkscape:document-rotation="0"
@@ -57,7 +57,8 @@
          id="g22"
          transform="matrix(3.5327121,0,0,3.5327396,-79.061045,-358.83584)">
         <g
-           id="g1056">
+           id="g1056"
+           transform="matrix(1.2647357,0,0,1.2647357,1.5972176,-20.94949)">
           <ellipse
              style="fill:#784421;fill-rule:evenodd;stroke:#000000;stroke-width:0.0787413"
              id="ellipse853"

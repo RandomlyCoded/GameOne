@@ -1,7 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>assets/Arrow.svg</file>
-        <file>assets/Barrel.svg</file>
+        <file>assets/Barrel1open.svg</file>
+        <file>assets/Barrel2open.svg</file>
+        <file>assets/Barrel3open.svg</file>
+        <file>assets/Barrel4open.svg</file>
         <file>assets/BottleLargeEmpty.svg</file>
         <file>assets/BottleLargeEnergydrink.svg</file>
         <file>assets/BottleSmallEmpty.svg</file>
@@ -27,5 +30,9 @@
         <file>assets/StairsUp.svg</file>
         <file>assets/StarArrow.svg</file>
         <file>assets/Tree.svg</file>
+        <file>assets/Barrel1.svg</file>
+        <file>assets/Barrel2.svg</file>
+        <file>assets/Barrel3.svg</file>
+        <file>assets/Barrel4.svg</file>
     </qresource>
 </RCC>
