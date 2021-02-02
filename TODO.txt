@@ -41,3 +41,17 @@ unsichtbare Truhen die erst sichtbar werden wenn man einen Bestimmten Gegner get
 
 10.:
 Level explizit freischalten und nur freigeschaltene Level zeigen
+
+11.: Pfeil und Bogen
+    11.1.:
+    Blitzpfeile schocken die Gegner und lähmen sie, sie geben zwei Schaden
+
+    11.2.:
+    Feuerpfeile geben Gegnern temporären Schaden und geben von Zeit zu Zeit Schaden, aber nur für eine bestimmte Zeit, sie geben zwei Schaden
+    und halten drei sec. pro sec. einen Schaden
+
+    11.3.:
+    Eispfeile lassen die Gegner einfrieren bis man sie das nächste mal angreift
+
+    11.4.:
+    Der Bogen schießt zwei Felder weit
