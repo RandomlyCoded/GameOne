@@ -15,6 +15,9 @@
         {"x": 14, "y": 3, "maximumEnergy": 100},
         {"x": 14, "y": 8, "maximumEnergy": 100}
     ],
+    "ladders": [
+    {"x": 0, "y": 0, "level": 16, "dx": 0, "dy": 0}
+    ],
 
     "player": {
         "x": 0,

@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="467.08009"
-     inkscape:cy="426.22578"
+     inkscape:zoom="1"
+     inkscape:cx="231.21492"
+     inkscape:cy="37.573145"
      inkscape:document-units="mm"
      inkscape:current-layer="g22"
      inkscape:document-rotation="0"
@@ -55,10 +55,10 @@
        id="g78">
       <g
          id="g22"
-         transform="matrix(3.5327121,0,0,3.5327396,-79.061045,-358.83584)">
+         transform="matrix(3.5327121,0,0,3.5327396,-79.061045,-359.36501)">
         <g
            id="g1956"
-           transform="matrix(0,0.99999222,-1.0000078,0,152.56803,79.124932)">
+           transform="matrix(0,0.99999222,1.0000078,0,-94.632766,79.260429)">
           <g
              id="g1842">
             <ellipse

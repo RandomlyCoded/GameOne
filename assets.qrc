@@ -53,5 +53,7 @@
         <file>assets/weapons/SmallSword.svg</file>
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
+        <file>assets/enemys/Tentaklon.svg</file>
+        <file>assets/enemys/FireGhost.svg</file>
     </qresource>
 </RCC>

@@ -12,17 +12,14 @@
     ],
 
     "chests": [
-        {"x": 3, "y": 2, "item": "arrow", "amount": 2}
-    ],
-
-    "bottles": [
-        {"x": 3, "y": 2, "type": "chest", "item": "BottleSmallEnergydrink", "amount": 2},
-        {"x": 3, "y": 2, "type": "chest", "item": "BottleSmallEmpty", "amount": 2}
+        {"x": 3, "y": 2, "item": "Arrow", "image": "weapons/Arrow.svg", "amount": 2, "image": "items/Chest.svg"},
+        {"x": 2, "y": 0, "item": "BottleSmallEnergydrink.svg", "amount": 2, "image": "items/Barrel2.svg"},
+        {"x": 2, "y": 1, "item": "BottleSmallEmpty.svg", "amount": 2, "image": "items/Barrel1.svg"}
     ],
 
     "ladders": [
-        {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5},
-        {"x": 5, "y": 0, "level": 16, "dx": 14, "dy": 5}
+        {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5, "image": "items/StairsUp.svg"},
+        {"x": 5, "y": 0, "level": 16, "dx": 14, "dy": 5, "image": "items/StairsUp.svg"}
     ],
 
     "player": {

@@ -8,6 +8,10 @@
         {"x": 1, "y": 2, "maximumEnergy": 5}
     ],
 
+    "ladders": [
+    {"x": 11, "y": 4, "level": 5, "dx": 0, "dy": 0}
+    ],
+
     "player": {
         "x": 0,
         "y": 0,
