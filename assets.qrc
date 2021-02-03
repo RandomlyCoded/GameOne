@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>assets/Template.svg</file>
         <file>assets/enemys/FireGhost.svg</file>
         <file>assets/enemys/Tentaklon.svg</file>
         <file>assets/inventory/BottleLargeEmpty.svg</file>
@@ -30,11 +31,13 @@
         <file>assets/items/FenceRightBottom.svg</file>
         <file>assets/items/FenceRightTop.svg</file>
         <file>assets/items/FenceVertical.svg</file>
+        <file>assets/items/Gate.svg</file>
         <file>assets/items/HouseRoof.svg</file>
         <file>assets/items/Portal.svg</file>
         <file>assets/items/StairsDown.svg</file>
         <file>assets/items/StairsUp.svg</file>
         <file>assets/items/Tree.svg</file>
+        <file>assets/items/Wall.svg</file>
         <file>assets/panel/DungeonEntrance.svg</file>
         <file>assets/panel/WarmSea1.svg</file>
         <file>assets/panel/WarmSea2.svg</file>
