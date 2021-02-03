@@ -27,6 +27,7 @@ class Actor : public QObject
 
     Q_PROPERTY(int energy READ energy NOTIFY energyChanged FINAL)
     Q_PROPERTY(int maximumEnergy READ maximumEnergy NOTIFY maximumEnergyChanged FINAL)
+    Q_PROPERTY(bool energyVisible READ energyVisible CONSTANT FINAL)
 
     Q_PROPERTY(QUrl imageSource READ imageSource CONSTANT FINAL)
 
@@ -49,8 +50,8 @@ public:
     auto maximumEnergy() const { return m_maximumEnergy; }
     auto isAlive() const { return m_lives > 0 && m_energy > 0; }
 
+    virtual bool energyVisible() const = 0;
     virtual bool canAttack(const Actor *opponent) const = 0;
-
     virtual int attack(Actor *opponent) = 0;
     virtual void giveBonus(Actor *actor, int amount);
 
@@ -101,6 +102,7 @@ public:
 
     QString type() const override;
 
+    bool energyVisible() const override { return true; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
 
@@ -117,6 +119,7 @@ public:
 
     QString type() const override;
 
+    bool energyVisible() const override { return true; };
 //    bool canHit(int m_hitEnergy);
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
@@ -139,9 +142,10 @@ public:
 
     QString type() const override;
 
-    void giveBonus(Actor *actor, int amount) override;
+    bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *actor) override;
+    void giveBonus(Actor *actor, int amount) override;
 
     InventoryItem *item() const;
     auto count() const { return m_amount; }
@@ -165,9 +169,10 @@ public:
 
     QString type() const override;
 
-    void giveBonus(Actor *actor, int amount) override;
+    bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
+    void giveBonus(Actor *actor, int amount) override;
 
     auto level() const { return m_level; }
 

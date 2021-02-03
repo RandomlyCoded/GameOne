@@ -130,6 +130,8 @@ Item {
                 }
 
                 Rectangle {
+                    id: energyIndicator
+
                     border { width: 1; color: "#000000" }
                     color: "#800000000"
 
@@ -138,7 +140,7 @@ Item {
                     width: parent.width - 6
                     height: 10
 
-                    visible: cell.actor && cell.actor.isAlive || false
+                    visible: cell.actor && cell.actor.energyVisible && cell.actor.isAlive || false
 
                     Rectangle {
                         id: energyBar
