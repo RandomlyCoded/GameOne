@@ -13,7 +13,7 @@
         {"x": 0, "y": 8, "maximumEnergy": 20}
     ],
     "ladders": [
-    {"x": 0, "y": 0, "level": 13, "dx": 0, "dy": 0}
+    {"x": 0, "y": 0, "level": 13, "dx": 0, "dy": 0, "image": "items/Portal.svg"}
     ],
 
     "player": {

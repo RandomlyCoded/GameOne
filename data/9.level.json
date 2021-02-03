@@ -7,8 +7,9 @@
     "enemies": [
         {"x": 1, "y": 1, "maximumEnergy": 50}
     ],
+
     "ladders": [
-    {"x": 0, "y": 0, "level": 10, "dx": 0, "dy": 0}
+    {"x": 0, "y": 0, "level": 10, "dx": 0, "dy": 0, "image": "items/Portal.svg"}
     ],
 
     "player": {
