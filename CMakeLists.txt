@@ -26,10 +26,12 @@ target_sources(
     actors.cpp actors.h
     assets.qrc
     backend.cpp backend.h
+    data.qrc
     inventorymodel.cpp inventorymodel.h
     levelmodel.cpp levelmodel.h
-    main.cpp main.qrc
+    main.cpp
     mapmodel.cpp mapmodel.h
+    qml.qrc
     )
 
 add_custom_target(

@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/GameOne">
+        <file>data/1.level.json</file>
+        <file>data/1.map.txt</file>
+        <file>data/10.level.json</file>
+        <file>data/10.map.txt</file>
+        <file>data/11.level.json</file>
+        <file>data/11.map.txt</file>
+        <file>data/12.level.json</file>
+        <file>data/12.map.txt</file>
+        <file>data/13.level.json</file>
+        <file>data/13.map.txt</file>
+        <file>data/14.level.json</file>
+        <file>data/14.map.txt</file>
+        <file>data/15.level.json</file>
+        <file>data/15.map.txt</file>
+        <file>data/16.level.json</file>
+        <file>data/16.map.txt</file>
+        <file>data/17.level.json</file>
+        <file>data/17.map.txt</file>
+        <file>data/18.level.json</file>
+        <file>data/18.map.txt</file>
+        <file>data/19.level.json</file>
+        <file>data/19.map.txt</file>
+        <file>data/2.level.json</file>
+        <file>data/2.map.txt</file>
+        <file>data/20.level.json</file>
+        <file>data/20.map.txt</file>
+        <file>data/3.level.json</file>
+        <file>data/3.map.txt</file>
+        <file>data/4.level.json</file>
+        <file>data/4.map.txt</file>
+        <file>data/5.level.json</file>
+        <file>data/5.map.txt</file>
+        <file>data/6.level.json</file>
+        <file>data/6.map.txt</file>
+        <file>data/7.level.json</file>
+        <file>data/7.map.txt</file>
+        <file>data/8.level.json</file>
+        <file>data/8.map.txt</file>
+        <file>data/9.level.json</file>
+        <file>data/9.map.txt</file>
+        <file>data/map.txt</file>
+    </qresource>
+</RCC>
