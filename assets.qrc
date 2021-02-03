@@ -55,5 +55,6 @@
         <file>assets/weapons/TwohandSword.svg</file>
         <file>assets/enemys/Tentaklon.svg</file>
         <file>assets/enemys/FireGhost.svg</file>
+        <file>assets/items/Portal.svg</file>
     </qresource>
 </RCC>
