@@ -54,5 +54,7 @@
         <file>data/18.map.txt</file>
         <file>data/19.map.txt</file>
         <file>data/19.level.json</file>
+        <file>data/20.map.txt</file>
+        <file>data/20.level.json</file>
     </qresource>
 </RCC>

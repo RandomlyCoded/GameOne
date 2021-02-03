@@ -1,18 +1,16 @@
 {
-    "levelName": "the treasure map",
+    "levelName": "level 20",
 
     "map": {
         "format": 2,
-        "filename": "19.map.txt"
+        "filename": "20.map.txt"
     },
 
     "enemies": [
-        {"x": 2, "y": 2, "maximumEnergy": 10},
-        {"x": 3, "y": 3, "maximumEnergy": 15}
     ],
 
     "ladders": [
-        {"x": 8, "y": 7, "level": 20, "dx": 0, "dy": 0}
+        {"x": 0, "y": 0, "level": 19, "dx": 8, "dy": 7}
     ],
 
     "player": {
@@ -23,4 +21,3 @@
         "maximumEnergy": 5
     }
 }
-

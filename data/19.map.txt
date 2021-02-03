@@ -1,14 +1,14 @@
 W W W W W W W W W W W W W
 W w w w w w w w w w w w W
 W w S S S S S S S S S w W
-W w S G G G G @ @ G S w W
-W w S G G G @ @ G G S w W
+W w S G G G G G@G@G S w W
+W w S G G G G@G@G G S w W
 W w S S S S S S S S S w W
 W w w w w w w w w w w w W
-W W W W W W w W W W W W W
+W W W W W W w W w-W W W W
 W w w w w w w w w w w w W
 W w S S S S S S S S S w W
-W w S G G G G @ @ G S w W
+W w S G G G G G@G@G S w W
 W w S S S S S S S S S w W
 W w w w w w w w w w w w W
 W W W W W W W W W W W W W
