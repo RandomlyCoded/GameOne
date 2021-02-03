@@ -51,6 +51,7 @@ MapModel::Tile::Tile(QByteArray spec)
         {'u',   {"Underground", true}},
         {'c',   {"Chest",       true}},
         {'b',   {"Bridge",      true}},
+        {'C',   {"Caribbean",   true}}
     };
 
     type = types.value(tspec);

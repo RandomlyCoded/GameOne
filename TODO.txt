@@ -75,7 +75,7 @@ Vieleicht einen änderbaren Namen für den Spieler
 Stärkere Monster die mehr Schaden machen
 
 18.:
-Items gehen kaputt?
+Items gehen kaputt? Bogen zebrochen
 
 19.:
 Stärkeres Monster, das Hindernisse umgeht

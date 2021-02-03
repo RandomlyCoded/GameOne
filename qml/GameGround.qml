@@ -75,6 +75,7 @@ Item {
                         "Underground": "#5f5f5f",
                         "Chest": "#b29764",
                         "Bridge": "#895900",
+                        "Caribbean": "2AFFD5"
                     }[type] || "white";
                 }
 

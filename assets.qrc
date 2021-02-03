@@ -1,17 +1,25 @@
 <RCC>
     <qresource prefix="/">
         <file>assets/Arrow.svg</file>
+        <file>assets/Barrel1.svg</file>
         <file>assets/Barrel1open.svg</file>
+        <file>assets/Barrel2.svg</file>
         <file>assets/Barrel2open.svg</file>
+        <file>assets/Barrel3.svg</file>
         <file>assets/Barrel3open.svg</file>
+        <file>assets/Barrel4.svg</file>
         <file>assets/Barrel4open.svg</file>
         <file>assets/BottleLargeEmpty.svg</file>
+        <file>assets/BottleLargeEndurancedrink.svg</file>
         <file>assets/BottleLargeEnergydrink.svg</file>
         <file>assets/BottleSmallEmpty.svg</file>
+        <file>assets/BottleSmallEndurancedrink.svg</file>
         <file>assets/BottleSmallEnergydrink.svg</file>
         <file>assets/Bow.svg</file>
+        <file>assets/BowBroken.svg</file>
         <file>assets/Chest.svg</file>
         <file>assets/Dagger.svg</file>
+        <file>assets/DungeonEntrance.svg</file>
         <file>assets/Earthhole.svg</file>
         <file>assets/FenceHorizontal.svg</file>
         <file>assets/FenceLeftBottom.svg</file>
@@ -20,6 +28,10 @@
         <file>assets/FenceRightTop.svg</file>
         <file>assets/FenceVertical.svg</file>
         <file>assets/FireArrow.svg</file>
+        <file>assets/GoldCoin1.svg</file>
+        <file>assets/GoldCoin10.svg</file>
+        <file>assets/GoldCoin2.svg</file>
+        <file>assets/GoldCoin5.svg</file>
         <file>assets/HouseRoof.svg</file>
         <file>assets/IceArrow.svg</file>
         <file>assets/Key.svg</file>
@@ -30,10 +42,15 @@
         <file>assets/StairsUp.svg</file>
         <file>assets/StarArrow.svg</file>
         <file>assets/Tree.svg</file>
-        <file>assets/Barrel1.svg</file>
-        <file>assets/Barrel2.svg</file>
-        <file>assets/Barrel3.svg</file>
-        <file>assets/Barrel4.svg</file>
-        <file>assets/DungeonEntrance.svg</file>
+        <file>assets/TwohandSword.svg</file>
+        <file>assets/WarmSea1.svg</file>
+        <file>assets/WarmSea2.svg</file>
+        <file>assets/WarmSea3.svg</file>
+        <file>assets/WarmSea4.svg</file>
+        <file>assets/WarmSea5.svg</file>
+        <file>assets/WarmSea6.svg</file>
+        <file>assets/WarmSea7.svg</file>
+        <file>assets/WarmSea8.svg</file>
+        <file>assets/WarmSea9.svg</file>
     </qresource>
 </RCC>
