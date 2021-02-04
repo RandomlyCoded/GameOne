@@ -8,6 +8,7 @@
         <file>assets/inventory/BottleSmallEmpty.svg</file>
         <file>assets/inventory/BottleSmallEndurancedrink.svg</file>
         <file>assets/inventory/BottleSmallEnergydrink.svg</file>
+        <file>assets/inventory/Compass.svg</file>
         <file>assets/inventory/Divingfins.svg</file>
         <file>assets/inventory/GoldCoin1.svg</file>
         <file>assets/inventory/GoldCoin10.svg</file>
@@ -46,7 +47,9 @@
         <file>assets/weapons/Bow.svg</file>
         <file>assets/weapons/BowBroken.svg</file>
         <file>assets/weapons/Dagger.svg</file>
+        <file>assets/weapons/DoublAx.svg</file>
         <file>assets/weapons/FireArrow.svg</file>
+        <file>assets/weapons/FireSword.svg</file>
         <file>assets/weapons/IceArrow.svg</file>
         <file>assets/weapons/LightningArrow.svg</file>
         <file>assets/weapons/LongSword.svg</file>

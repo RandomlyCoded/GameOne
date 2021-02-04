@@ -23,7 +23,8 @@
     "ladders": [
         {"x":  8, "y": 7, "level": 17, "dx":  0, "dy": 2, "image": "items/Earthhole.svg"},
         {"x": 12, "y": 5, "level": 17, "dx":  3, "dy": 0, "image": "items/StairsUp.svg"},
-        {"x": 14, "y": 5, "level": 17, "dx":  5, "dy": 0, "image": "items/StairsUp.svg"}
+        {"x": 14, "y": 5, "level": 17, "dx":  5, "dy": 0, "image": "items/StairsUp.svg"},
+        {"x": 17, "y": 5, "level": 18, "dx":  5, "dy": 0, "image": "items/Portal.svg"}
     ],
 
     "player": {

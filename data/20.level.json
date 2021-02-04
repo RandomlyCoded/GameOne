@@ -11,7 +11,7 @@
     ],
 
     "chests": [
-        {"x": 1, "y": 1, "item": "Arrow", "amount": 2, "image": "items/Chest.svg"}
+        {"x": 1, "y": 1, "item": "StarArrow", "amount": 2}
     ],
 
     "ladders": [
