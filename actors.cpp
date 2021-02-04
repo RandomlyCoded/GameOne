@@ -18,6 +18,7 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_energyLevels{makeEnergyLevels(spec["energyLevels"].toArray())}
     , m_lives{m_maximumLifes}
     , m_imageSource{Backend::imageUrl(spec["image"].toString())}
+    , m_imageCount{spec["imageCount"].toInt()}
 {
     respawn();
 }
@@ -36,6 +37,14 @@ QUrl Actor::imageSource() const
     return m_imageSource;
 }
 
+int Actor::imageCount() const
+{
+    if (const auto level = currentEnergyLevel(); level != m_energyLevels.end() && level->imageCount > 0)
+        return level->imageCount;
+
+    return m_imageCount;
+}
+
 void Actor::giveBonus(Actor *actor, int amount)
 {
     actor->giveEnergy(amount);
@@ -50,12 +59,15 @@ void Actor::setEnergy(int energy)
 {
     if (std::exchange(m_energy, energy) != m_energy) {
         const auto oldImageSource = imageSource();
+        const auto oldImageCount = imageCount();
 
         m_energy = energy;
         emit energyChanged(m_energy);
 
         if (const auto newImageSource = imageSource(); newImageSource != oldImageSource)
             emit imageSourceChanged(newImageSource);
+        if (const auto newImageCount = imageCount(); newImageCount != oldImageCount)
+            emit imageCountChanged(newImageCount);
 
         if (m_energy == 0)
             die();
@@ -70,7 +82,8 @@ QList<Actor::EnergyLevel> Actor::makeEnergyLevels(QJsonArray array)
         const auto spec = value.toObject();
         const auto minimumEnergy = static_cast<qreal>(spec["minimumEnergy"].toDouble());
         const auto imageSource = Backend::imageUrl(spec["image"].toString());
-        levels.append({minimumEnergy, imageSource});
+        const auto imageCount = spec["imageCount"].toInt();
+        levels.append({minimumEnergy, imageSource, imageCount});
     }
 
     const auto byDescendingEnergy = [](const auto &lhs, const auto &rhs) {

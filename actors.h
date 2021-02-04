@@ -30,6 +30,7 @@ class Actor : public QObject
     Q_PROPERTY(bool energyVisible READ energyVisible CONSTANT FINAL)
 
     Q_PROPERTY(QUrl imageSource READ imageSource NOTIFY imageSourceChanged FINAL)
+    Q_PROPERTY(int imageCount READ imageCount NOTIFY imageCountChanged FINAL)
 
 public:
     explicit Actor(QJsonObject spec, Backend *backend);
@@ -44,6 +45,7 @@ public:
     auto name() const { return m_name; }
 
     QUrl imageSource() const;
+    int imageCount() const;
 
     auto lives() const { return m_lives; }
     auto energy() const { return m_energy; }
@@ -76,6 +78,7 @@ signals:
     void energyChanged(int energy);
     void maximumEnergyChanged(int maximumEnergy);
     void imageSourceChanged(QUrl imageSource);
+    void imageCountChanged(int imageCount);
 
 protected:
     Backend *backend() const;
@@ -84,6 +87,7 @@ private:
     struct EnergyLevel {
         qreal minimumEnergy;
         QUrl imageSource;
+        int imageCount;
     };
 
     void setEnergy(int energy);
@@ -103,6 +107,7 @@ private:
 
     QList<EnergyLevel> m_energyLevels;
     QUrl m_imageSource;
+    int m_imageCount;
 };
 
 class Enemy : public Actor

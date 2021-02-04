@@ -8,6 +8,8 @@
 #include <QLoggingCategory>
 #include <QTimer>
 
+using namespace std::chrono_literals;
+
 namespace GameOne {
 
 namespace {
@@ -16,11 +18,15 @@ Q_LOGGING_CATEGORY(lcBackend, "GameOne.backend");
 
 Backend::Backend(QObject *parent)
     : QObject{parent}
-    , m_timer{new QTimer{this}}
+    , m_actionTimer{new QTimer{this}}
+    , m_ticksTimer{new QTimer{this}}
     , m_map{new MapModel{this}}
 {
-    m_timer->setInterval(100);
-    connect(m_timer, &QTimer::timeout, this, &Backend::onTimeout);
+    connect(m_actionTimer, &QTimer::timeout, this, &Backend::onActionTimeout);
+    m_actionTimer->setInterval(100ms);
+
+    connect(m_ticksTimer, &QTimer::timeout, this, &Backend::onTicksTimeout);
+    m_ticksTimer->start(100ms);
 
     connect(m_map, &MapModel::columnsChanged, this, &Backend::columnsChanged);
     connect(m_map, &MapModel::rowsChanged, this, &Backend::rowsChanged);
@@ -38,6 +44,11 @@ int Backend::rows() const
     return m_map->rows();
 }
 
+qint64 Backend::ticks() const
+{
+    return m_ticks.elapsed() / m_ticksTimer->interval();
+}
+
 QList<Actor *> Backend::actors() const
 {
     return m_actors;
@@ -48,7 +59,7 @@ QList<Enemy *> Backend::enemies() const
     QList<Enemy *> enemies;
     enemies.reserve(m_enemies.size());
 
-    for (auto enemy: m_enemies)
+    for (const auto &enemy: m_enemies)
         enemies += enemy.get();
 
     return enemies;
@@ -63,7 +74,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 {
     qCInfo(lcBackend, "Loading level from %ls", qUtf16Printable(fileName));
 
-    m_timer->stop();
+    m_actionTimer->stop();
 
     fileName = dataFileName(std::move(fileName));
     if (fileName.endsWith(".json")) {
@@ -116,8 +127,8 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
         std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
 
-        connect(m_player.get(), &Player::positionChanged, this, [this] { m_timer->start(); });
-        connect(m_player.get(), &Player::livesChanged, this, [this] { m_timer->stop(); });
+        connect(m_player.get(), &Player::positionChanged, this, [this] { m_actionTimer->start(); });
+        connect(m_player.get(), &Player::livesChanged, this, [this] { m_actionTimer->stop(); });
 
         emit actorsChanged();
         emit enemiesChanged();
@@ -141,7 +152,7 @@ void Backend::respawn()
     if (m_player)
         m_player->respawn();
 
-    m_timer->stop();
+    m_actionTimer->stop();
 }
 
 bool Backend::canMoveTo(Actor *actor, QPoint destination) const
@@ -196,6 +207,14 @@ QUrl Backend::imageUrl(QUrl imageUrl)
     return QUrl{"image://assets/"}.resolved(std::move(imageUrl));
 }
 
+QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
+{
+    if (imageCount > 1)
+        imageUrl.setQuery(imageUrl.query().replace("(t)", QString::number(tick % imageCount)));
+
+    return imageUrl;
+}
+
 QString Backend::levelFileName(int index)
 {
     return QString::number(index) + ".level.json";
@@ -221,13 +240,18 @@ void Backend::loadItems()
     m_items["SmallSword"] = new InventoryItem{"Small Sword", QUrl{"weapons/SmallSword.svg"}, this};
     m_items["StarArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}, this};
     m_items["TwoHandSword"] = new InventoryItem{"Two Hand Sword", QUrl{"weapons/TwohandSword.svg"}, this};
-    m_items[""] = new InventoryItem{"", QUrl{"/.svg"}, this};
+    m_items[""] = new InventoryItem{{}, QUrl{}, this};
 }
 
-void Backend::onTimeout()
+void Backend::onActionTimeout()
 {
     for (auto enemy: qAsConst(m_enemies))
         enemy->act();
+}
+
+void Backend::onTicksTimeout()
+{
+    emit ticksChanged(ticks());
 }
 
 QJsonDocument Backend::cachedDocument(QUrl url) const

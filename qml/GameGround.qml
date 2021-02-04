@@ -112,9 +112,15 @@ Item {
                     id: actorImage
 
                     anchors.fill: parent
-                    source: actor && actor.isAlive && actor.imageSource || ""
                     sourceSize: Qt.size(width, height)
                     visible: source.toString()
+
+                    source: {
+                        if (actor && actor.isAlive)
+                            return backend.imageUrl(actor.imageSource, actor.imageCount, backend.ticks);
+
+                        return "";
+                    }
                 }
 
                 Rectangle {
