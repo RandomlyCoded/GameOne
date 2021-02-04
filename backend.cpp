@@ -208,6 +208,9 @@ void Backend::loadItems()
     m_items["arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
     m_items["bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
     m_items["sword"] = new InventoryItem{"Sword", QUrl{"weapons/Dagger.svg"}, this};
+    m_items["fireArrow"] = new InventoryItem{"Fire Arrow", QUrl{"weapons/FireArrow.svg"}};
+    m_items["iceArrow"] = new InventoryItem{"Ice Arrow", QUrl{"weapons/IceArrow.svg"}};
+    m_items["starArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}};
 }
 
 void Backend::onTimeout()
