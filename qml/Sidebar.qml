@@ -146,6 +146,10 @@ Rectangle {
                         anchors.fill: parent
                         source: model.imageSource
                         sourceSize: Qt.size(width, height)
+
+                        Debug {
+                            value: model.imageSource
+                        }
                     }
 
                     Column {

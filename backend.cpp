@@ -205,8 +205,9 @@ QString Backend::levelFileName(int index)
 void Backend::loadItems()
 {
     // TODO: Load from JSON
-    m_items["arrow"] = new InventoryItem{"Arrow", QUrl{"Arrow.svg"}, this};
-    m_items["bow"] = new InventoryItem{"Bow", QUrl{"Bow.svg"}, this};
+    m_items["arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
+    m_items["bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
+    m_items["sword"] = new InventoryItem{"Sword", QUrl{"weapons/Dagger.svg"}, this};
 }
 
 void Backend::onTimeout()
