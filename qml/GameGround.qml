@@ -177,7 +177,7 @@ Item {
                     styleColor: "#80000000"
 
                     text: cell.actor && cell.actor.name || ""
-                    visible: cell.actor && cell.actor.name || false
+                    visible: cell.actor && cell.actor.isAlive && cell.actor.name || false
                 }
             }
         }
