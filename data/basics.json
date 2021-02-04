@@ -1,0 +1,13 @@
+{
+    "FireGhost": {
+        "name": "Fire Ghost",
+        "image": "enemies/FireGhost.svg",
+        "maximumEnergy": 100,
+
+        "energyLevels": [
+            {"minimumEnergy": 60, "imageLayers": "max,max.flames%1"},
+            {"minimumEnergy": 20, "imageLayers": "med,med.flames%1"},
+            {"minimumEnergy":  0, "imageLayers": "min,min.flames%1"}
+        ]
+    }
+}

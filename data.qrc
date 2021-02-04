@@ -40,6 +40,7 @@
         <file>data/8.map.txt</file>
         <file>data/9.level.json</file>
         <file>data/9.map.txt</file>
+        <file>data/basics.json</file>
         <file>data/map.txt</file>
     </qresource>
 </RCC>
