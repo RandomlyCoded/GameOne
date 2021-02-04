@@ -7,7 +7,7 @@
     },
 
     "enemies": [
-        {"x": 5, "y": 1, "maximumEnergy": 30, "image": "enemys/FireGhost.svg"}
+        {"x": 5, "y": 1, "maximumEnergy": 30, "image": "enemies/FireGhost.svg"}
     ],
 
     "chests": [

@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>assets/Template.svg</file>
-        <file>assets/enemys/FireGhost.svg</file>
-        <file>assets/enemys/Tentaklon.svg</file>
+        <file>assets/enemies/FireGhost.svg</file>
+        <file>assets/enemies/Tentaklon.svg</file>
         <file>assets/inventory/BottleLargeEmpty.svg</file>
         <file>assets/inventory/BottleLargeEndurancedrink.svg</file>
         <file>assets/inventory/BottleLargeEnergydrink.svg</file>
