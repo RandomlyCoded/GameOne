@@ -81,3 +81,6 @@ Items gehen kaputt? Bogen zebrochen
 Stärkeres Monster, das Hindernisse umgeht
 (liest Karte ein, verfährt dann wie Schleimpilz im Hintergrund(rechnet sich besten Weg zu Joe(Spieler) aus),
 läuft ihn dann jeden 2. Takt(oder auch jeden ? )
+
+20.:
+Können wir Schnecken als items an Bäume setzen?

@@ -15,6 +15,7 @@
         <file>assets/inventory/GoldCoin2.svg</file>
         <file>assets/inventory/GoldCoin5.svg</file>
         <file>assets/inventory/Key.svg</file>
+        <file>assets/inventory/Smokebomb.svg</file>
         <file>assets/items/Barrel1.svg</file>
         <file>assets/items/Barrel1open.svg</file>
         <file>assets/items/Barrel2.svg</file>
@@ -31,6 +32,7 @@
         <file>assets/items/FenceRightBottom.svg</file>
         <file>assets/items/FenceRightTop.svg</file>
         <file>assets/items/FenceVertical.svg</file>
+        <file>assets/items/Fir.svg</file>
         <file>assets/items/Gate.svg</file>
         <file>assets/items/HouseRoof.svg</file>
         <file>assets/items/Portal.svg</file>
@@ -59,5 +61,6 @@
         <file>assets/weapons/SmallSword.svg</file>
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
+        <file>assets/inventory/Slug.svg</file>
     </qresource>
 </RCC>
