@@ -12,9 +12,9 @@
     ],
 
     "chests": [
-        {"x": 3, "y": 2, "item": "Arrow", "image": "weapons/Arrow.svg", "amount": 2, "image": "items/Chest.svg"},
-        {"x": 2, "y": 0, "item": "BottleSmallEnergydrink.svg", "amount": 2, "image": "items/Barrel2.svg"},
-        {"x": 2, "y": 1, "item": "BottleSmallEmpty.svg", "amount": 2, "image": "items/Barrel1.svg"}
+        {"x": 3, "y": 2, "item": "Arrow", "amount": 2, "image": "items/Chest.svg"},
+        {"x": 2, "y": 0, "item": "BottleSmallEnergydrink", "amount": 2, "image": "items/Barrel2.svg"},
+        {"x": 2, "y": 1, "item": "BottleSmallEmpty", "amount": 2, "image": "items/Barrel1.svg"}
     ],
 
     "ladders": [

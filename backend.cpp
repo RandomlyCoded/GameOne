@@ -205,12 +205,13 @@ QString Backend::levelFileName(int index)
 void Backend::loadItems()
 {
     // TODO: Load from JSON
-    m_items["arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
-    m_items["bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
-    m_items["sword"] = new InventoryItem{"Sword", QUrl{"weapons/Dagger.svg"}, this};
-    m_items["fireArrow"] = new InventoryItem{"Fire Arrow", QUrl{"weapons/FireArrow.svg"}};
-    m_items["iceArrow"] = new InventoryItem{"Ice Arrow", QUrl{"weapons/IceArrow.svg"}};
-    m_items["starArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}};
+    m_items["Arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
+    m_items["Bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
+    m_items["Sword"] = new InventoryItem{"Sword", QUrl{"weapons/Dagger.svg"}, this};
+    m_items["FireArrow"] = new InventoryItem{"Fire Arrow", QUrl{"weapons/FireArrow.svg"}};
+    m_items["IceArrow"] = new InventoryItem{"Ice Arrow", QUrl{"weapons/IceArrow.svg"}};
+    m_items["StarArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}};
+    m_items["BottleSmallEmpty"] = new InventoryItem{"empty small bottle", QUrl{"inventory/BottleSmallEmpty.svg"}};
 }
 
 void Backend::onTimeout()
