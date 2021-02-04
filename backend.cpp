@@ -193,7 +193,7 @@ QUrl Backend::imageUrl(QUrl imageUrl)
     if (imageUrl.isEmpty())
         return {};
 
-    return QUrl{"qrc:/assets/"}.resolved(std::move(imageUrl));
+    return QUrl{"image://assets/"}.resolved(std::move(imageUrl));
 }
 
 QString Backend::levelFileName(int index)

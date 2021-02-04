@@ -1,6 +1,5 @@
 <RCC>
-    <qresource prefix="/">
-        <file>assets/Template.svg</file>
+    <qresource prefix="/GameOne">
         <file>assets/enemies/FireGhost.svg</file>
         <file>assets/enemies/Tentaklon.svg</file>
         <file>assets/inventory/BottleLargeEmpty.svg</file>
@@ -42,15 +41,7 @@
         <file>assets/items/Tree.svg</file>
         <file>assets/items/Wall.svg</file>
         <file>assets/panel/DungeonEntrance.svg</file>
-        <file>assets/panel/WarmSea1.svg</file>
-        <file>assets/panel/WarmSea2.svg</file>
-        <file>assets/panel/WarmSea3.svg</file>
-        <file>assets/panel/WarmSea4.svg</file>
-        <file>assets/panel/WarmSea5.svg</file>
-        <file>assets/panel/WarmSea6.svg</file>
-        <file>assets/panel/WarmSea7.svg</file>
-        <file>assets/panel/WarmSea8.svg</file>
-        <file>assets/panel/WarmSea9.svg</file>
+        <file>assets/panel/WarmSea.svg</file>
         <file>assets/weapons/Arrow.svg</file>
         <file>assets/weapons/Bow.svg</file>
         <file>assets/weapons/BowBroken.svg</file>
