@@ -32,7 +32,7 @@ MapModel::Tile::Tile(QByteArray spec)
         {'M',   {"Mountain",    false}},
         {'S',   {"Sand",        true}},
         {'I',   {"Ice",         true}},
-        {'L',   {"Lava",        true}},
+        {'L',   {"Lava",        false}},
         {'@',   {"Tree",        false}},
         {'#',   {"Fence",       false}},
         {'_',   {"Fence",       false}},
