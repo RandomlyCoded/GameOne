@@ -3,7 +3,6 @@
 #include "mapmodel.h"
 
 #include <QJsonArray>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include <QDir>
 #include <QLoggingCategory>
@@ -99,11 +98,11 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         m_enemies.clear();
 
         for (const auto chests = level["chests"].toArray(); const auto &value: chests)
-            m_chests += std::make_shared<Chest>(value.toObject(), this);
+            m_chests += std::make_shared<Chest>(resolve(value.toObject()), this);
         for (const auto ladders = level["ladders"].toArray(); const auto &value: ladders)
-            m_ladders += std::make_shared<Ladder>(value.toObject(), this);
+            m_ladders += std::make_shared<Ladder>(resolve(value.toObject()), this);
         for (const auto enemies = level["enemies"].toArray(); const auto &value: enemies)
-            m_enemies += std::make_shared<Enemy>(value.toObject(), this);
+            m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
 
         const auto playerData = level["player"].toObject();
         m_player = std::make_unique<Player>(std::move(playerData), this);
@@ -229,6 +228,59 @@ void Backend::onTimeout()
 {
     for (auto enemy: qAsConst(m_enemies))
         enemy->act();
+}
+
+QJsonDocument Backend::cachedDocument(QUrl url) const
+{
+    if (const auto it = m_jsonCache.find(url); it != m_jsonCache.end())
+        return *it;
+
+    if (url.scheme() != "qrc") {
+        qCWarning(lcBackend, "%ls: Unsupported URL", qUtf16Printable(url.toDisplayString()));
+        return {};
+    }
+
+    QFile file{":" + url.path()};
+
+    if (!file.open(QFile::ReadOnly)) {
+        qCWarning(lcBackend, "%ls: %ls", qUtf16Printable(url.toDisplayString()), qUtf16Printable(file.errorString()));
+        return {};
+    }
+
+    QJsonParseError status;
+    const auto document = QJsonDocument::fromJson(file.readAll(), &status);
+
+    if (status.error != QJsonParseError::NoError) {
+        qCWarning(lcBackend, "%ls: %ls", qUtf16Printable(url.toDisplayString()), qUtf16Printable(status.errorString()));
+        return {};
+    }
+
+    return *m_jsonCache.insert(url, document);
+}
+
+QJsonObject Backend::resolve(QJsonObject object) const
+{
+    QUrl ref{object["$ref"].toString()};
+
+    if (!ref.isEmpty()) {
+        if (ref.path().isEmpty()) {
+            ref.setPath("/GameOne/data/basics.json");
+            ref.setScheme("qrc");
+        }
+
+        auto json = cachedDocument(ref).object();
+        if (const auto id = ref.fragment(); !id.isEmpty())
+            json = resolve(json[id].toObject());
+
+        for (auto it = json.begin(); it != json.end(); ++it) {
+            if (!object.contains(it.key()))
+                object.insert(it.key(), it.value());
+        }
+
+        object.remove("$ref");
+    }
+
+    return object;
 }
 
 } // namespace GameOne

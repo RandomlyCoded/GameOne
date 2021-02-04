@@ -3,7 +3,9 @@
 
 #include "actors.h"
 
+#include <QJsonDocument>
 #include <QMap>
+
 #include <memory>
 
 class QDir;
@@ -67,6 +69,9 @@ private:
     void loadItems();
     void onTimeout();
 
+    QJsonDocument cachedDocument(QUrl url) const;
+    QJsonObject resolve(QJsonObject object) const;
+
     QTimer *const m_timer;
     MapModel *const m_map;
 
@@ -81,6 +86,8 @@ private:
 
     QString m_levelFileName;
     QString m_levelName;
+
+    mutable QHash<QUrl, QJsonDocument> m_jsonCache;
 };
 
 } // namespace GameOne
