@@ -18,21 +18,25 @@ endif()
 
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
-add_executable(GameOne WIN32)
-target_link_libraries(GameOne PRIVATE Qt::Quick)
+add_library(GameOneCore STATIC)
+target_include_directories(GameOneCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(GameOneCore PUBLIC Qt::Quick)
 
 target_sources(
-    GameOne PRIVATE
+    GameOneCore PRIVATE
     actors.cpp actors.h
+    application.cpp application.h
     assets.qrc
     backend.cpp backend.h
     data.qrc
     inventorymodel.cpp inventorymodel.h
     levelmodel.cpp levelmodel.h
-    main.cpp
     mapmodel.cpp mapmodel.h
     qml.qrc
     )
+
+add_executable(GameOne WIN32 main.cpp)
+target_link_libraries(GameOne PRIVATE GameOneCore)
 
 add_custom_target(
     Documentation SOURCES
