@@ -29,7 +29,10 @@ class Actor : public QObject
     Q_PROPERTY(int maximumEnergy READ maximumEnergy NOTIFY maximumEnergyChanged FINAL)
     Q_PROPERTY(bool energyVisible READ energyVisible CONSTANT FINAL)
 
-    Q_PROPERTY(QUrl imageSource READ imageSource CONSTANT FINAL)
+    Q_PROPERTY(QUrl imageSource READ imageSource NOTIFY imageSourceChanged FINAL)
+    Q_PROPERTY(int imageCount READ imageCount NOTIFY imageCountChanged FINAL)
+
+    Q_PROPERTY(int rotationSteps READ rotationSteps CONSTANT FINAL)
 
 public:
     explicit Actor(QJsonObject spec, Backend *backend);
@@ -43,7 +46,10 @@ public:
     void setName(QString name);
     auto name() const { return m_name; }
 
-    auto imageSource() const { return m_imageSource; }
+    QUrl imageSource() const;
+    int imageCount() const;
+
+    auto rotationSteps() const { return m_rotationSteps; }
 
     auto lives() const { return m_lives; }
     auto energy() const { return m_energy; }
@@ -75,11 +81,23 @@ signals:
     void livesChanged(int lives);
     void energyChanged(int energy);
     void maximumEnergyChanged(int maximumEnergy);
+    void imageSourceChanged(QUrl imageSource);
+    void imageCountChanged(int imageCount);
 
 protected:
     Backend *backend() const;
 
 private:
+    struct EnergyLevel {
+        qreal minimumEnergy;
+        QUrl imageSource;
+        int imageCount;
+    };
+
+    void setEnergy(int energy);
+
+    static QList<EnergyLevel> makeEnergyLevels(QJsonArray array);
+    QList<EnergyLevel>::ConstIterator currentEnergyLevel() const;
 
     QString m_name;
     QPoint m_origin;
@@ -88,9 +106,13 @@ private:
     int m_maximumEnergy;
     int m_maximumLifes;
     int m_energy;
+
     int m_lives;
 
+    QList<EnergyLevel> m_energyLevels;
     QUrl m_imageSource;
+    int m_imageCount;
+    int m_rotationSteps;
 };
 
 class Enemy : public Actor

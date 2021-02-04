@@ -1,13 +1,24 @@
 {
-    "FireGhost": {
+    "enemies/FireGhost": {
         "name": "Fire Ghost",
-        "image": "enemies/FireGhost.svg",
         "maximumEnergy": 100,
+        "image": "enemies/FireGhost.svg?show=max",
+        "imageCount": 5,
 
         "energyLevels": [
-            {"minimumEnergy": 60, "imageLayers": "max,max.flames%1"},
-            {"minimumEnergy": 20, "imageLayers": "med,med.flames%1"},
-            {"minimumEnergy":  0, "imageLayers": "min,min.flames%1"}
+            {"minimumEnergy": 0.0, "image": "enemies/FireGhost.svg?show=min,min.flames(t)", "imageCount": 3},
+            {"minimumEnergy": 0.1, "image": "enemies/FireGhost.svg?show=med,med_max.flames(t)"},
+            {"minimumEnergy": 0.5, "image": "enemies/FireGhost.svg?show=max,med_max.flames(t)"}
         ]
+    },
+
+    "enemies/Tentaklon": {
+        "maximumEnergy": 100,
+        "image": "enemies/Tentaklon.svg"
+    },
+
+    "items/Portal": {
+        "image": "items/Portal.svg",
+        "rotationSteps": 36
     }
 }

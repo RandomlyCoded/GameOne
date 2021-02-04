@@ -1,0 +1,2 @@
+add_executable(SvgAnimations WIN32 svganimations.cpp svganimations.qrc)
+target_link_libraries(SvgAnimations PRIVATE GameOneCore)

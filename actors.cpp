@@ -3,6 +3,7 @@
 #include "backend.h"
 #include "inventorymodel.h"
 
+#include <QJsonArray>
 #include <QJsonObject>
 
 namespace GameOne {
@@ -14,8 +15,11 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_position{m_origin}
     , m_maximumEnergy{qMax(spec["maximumEnergy"].toInt(), 1)}
     , m_maximumLifes{qMax(spec["maximumLifes"].toInt(), 1)}
+    , m_energyLevels{makeEnergyLevels(spec["energyLevels"].toArray())}
     , m_lives{m_maximumLifes}
     , m_imageSource{Backend::imageUrl(spec["image"].toString())}
+    , m_imageCount{spec["imageCount"].toInt()}
+    , m_rotationSteps{spec["rotationSteps"].toInt()}
 {
     respawn();
 }
@@ -26,6 +30,22 @@ void Actor::setName(QString name)
         emit nameChanged(m_name);
 }
 
+QUrl Actor::imageSource() const
+{
+    if (const auto level = currentEnergyLevel(); level != m_energyLevels.end() && !level->imageSource.isEmpty())
+        return level->imageSource;
+
+    return m_imageSource;
+}
+
+int Actor::imageCount() const
+{
+    if (const auto level = currentEnergyLevel(); level != m_energyLevels.end() && level->imageCount > 0)
+        return level->imageCount;
+
+    return m_imageCount;
+}
+
 void Actor::giveBonus(Actor *actor, int amount)
 {
     actor->giveEnergy(amount);
@@ -34,6 +54,55 @@ void Actor::giveBonus(Actor *actor, int amount)
 Backend *Actor::backend() const
 {
     return static_cast<Backend *>(parent());
+}
+
+void Actor::setEnergy(int energy)
+{
+    if (std::exchange(m_energy, energy) != m_energy) {
+        const auto oldImageSource = imageSource();
+        const auto oldImageCount = imageCount();
+
+        m_energy = energy;
+        emit energyChanged(m_energy);
+
+        if (const auto newImageSource = imageSource(); newImageSource != oldImageSource)
+            emit imageSourceChanged(newImageSource);
+        if (const auto newImageCount = imageCount(); newImageCount != oldImageCount)
+            emit imageCountChanged(newImageCount);
+
+        if (m_energy == 0)
+            die();
+    }
+}
+
+QList<Actor::EnergyLevel> Actor::makeEnergyLevels(QJsonArray array)
+{
+    QList<Actor::EnergyLevel> levels;
+
+    for (const auto &value: array) {
+        const auto spec = value.toObject();
+        const auto minimumEnergy = static_cast<qreal>(spec["minimumEnergy"].toDouble());
+        const auto imageSource = Backend::imageUrl(spec["image"].toString());
+        const auto imageCount = spec["imageCount"].toInt();
+        levels.append({minimumEnergy, imageSource, imageCount});
+    }
+
+    const auto byDescendingEnergy = [](const auto &lhs, const auto &rhs) {
+        return lhs.minimumEnergy > rhs.minimumEnergy;
+    };
+
+    std::sort(levels.begin(), levels.end(), byDescendingEnergy);
+
+    return levels;
+}
+
+QList<Actor::EnergyLevel>::ConstIterator Actor::currentEnergyLevel() const
+{
+    const auto fitsCurrentLevel = [current = energy(), maximum = maximumEnergy()](const auto &level) {
+        return current >= level.minimumEnergy * maximum;
+    };
+
+    return std::find_if(m_energyLevels.begin(), m_energyLevels.end(), fitsCurrentLevel);
 }
 
 void Actor::moveTo(QPoint destination)
@@ -70,11 +139,9 @@ void Actor::moveRight()
 
 void Actor::respawn()
 {
-    m_energy = m_maximumEnergy;
     m_position = m_origin;
-
+    setEnergy(m_maximumEnergy);
     emit positionChanged(m_position);
-    emit energyChanged(m_energy);
 }
 
 int Actor::attack(Actor *)
@@ -84,17 +151,12 @@ int Actor::attack(Actor *)
 
 void Actor::stealEnergy(int amount)
 {
-    m_energy = qMax(0, m_energy - amount);
-    emit energyChanged(m_energy);
-
-    if (m_energy == 0)
-        die();
+    setEnergy(qMax(0, m_energy - amount));
 }
 
 void Actor::giveEnergy(int amount)
 {
-    m_energy = qMin(m_maximumEnergy, m_energy + amount);
-    emit energyChanged(m_energy);
+    setEnergy(qMin(m_maximumEnergy, m_energy + amount));
 }
 
 void Actor::die()

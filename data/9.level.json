@@ -9,7 +9,7 @@
     ],
 
     "ladders": [
-    {"x": 2, "y": 11, "level": 10, "dx": 0, "dy": 0, "image": "items/Portal.svg"}
+    {"x": 2, "y": 11, "level": 10, "dx": 0, "dy": 0, "$ref": "#items/Portal"}
     ],
 
     "player": {

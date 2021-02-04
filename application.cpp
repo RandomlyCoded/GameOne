@@ -1,0 +1,49 @@
+#include "application.h"
+
+#include "backend.h"
+#include "imageprovider.h"
+#include "inventorymodel.h"
+#include "levelmodel.h"
+#include "mapmodel.h"
+
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+static void initResources()
+{
+    Q_INIT_RESOURCE(assets);
+    Q_INIT_RESOURCE(data);
+    Q_INIT_RESOURCE(qml);
+}
+
+namespace GameOne {
+
+int Application::run(QUrl qmlRoot)
+{
+    if (qmlRoot.isEmpty())
+        return run(QUrl{"qrc:/GameOne/qml/main.qml"});
+
+    initResources();
+
+    qmlRegisterType<InventoryModel>("GameOne", 1, 0, "InventoryModel");
+    qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
+    qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
+
+    const auto backend = new Backend{this};
+    backend->load(arguments().count() > 1 ? arguments().at(1) : Backend::levelFileName(1));
+
+    QQmlApplicationEngine qml;
+    qml.rootContext()->setContextProperty("backend", backend);
+    qml.addImageProvider("assets", new ImageProvider);
+    qml.load(qmlRoot);
+
+    if (qml.rootObjects().isEmpty())
+        return EXIT_FAILURE;
+
+    return exec();
+}
+
+} // namespace GameOne
+
+#include "moc_application.cpp"

@@ -3,6 +3,7 @@
 
 #include "actors.h"
 
+#include <QElapsedTimer>
 #include <QJsonDocument>
 #include <QMap>
 
@@ -26,14 +27,17 @@ class Backend : public QObject
     Q_PROPERTY(QList<GameOne::Enemy *> enemies READ enemies NOTIFY enemiesChanged FINAL)
     Q_PROPERTY(GameOne::Player *player READ player NOTIFY playerChanged FINAL)
     Q_PROPERTY(GameOne::MapModel *map READ map CONSTANT FINAL)
+    Q_PROPERTY(qint64 ticks READ ticks NOTIFY ticksChanged FINAL)
 
 public:
     explicit Backend(QObject *parent = {});
 
-    QString levelFileName() const { return m_levelFileName; }
-    QString levelName() const { return m_levelName; }
+    auto levelFileName() const { return m_levelFileName; }
+    auto levelName() const { return m_levelName; }
     int columns() const;
     int rows() const;
+
+    qint64 ticks() const;
 
     QList<Actor *> actors() const;
     QList<Enemy *> enemies() const;
@@ -53,6 +57,8 @@ public:
     static QUrl imageUrl(QString fileName);
     static QUrl imageUrl(QUrl imageUrl);
 
+    Q_INVOKABLE static QUrl imageUrl(QUrl imageUrl, int imageCount, qint64 tick);
+
     static QString levelFileName(int index);
 
 signals:
@@ -65,14 +71,20 @@ signals:
     void enemiesChanged();
     void playerChanged(Player *player);
 
+    void ticksChanged(qint64 ticks);
+
 private:
     void loadItems();
-    void onTimeout();
+    void onActionTimeout();
+    void onTicksTimeout();
 
     QJsonDocument cachedDocument(QUrl url) const;
     QJsonObject resolve(QJsonObject object) const;
 
-    QTimer *const m_timer;
+    QTimer *const m_actionTimer;
+    QTimer *const m_ticksTimer;
+    QElapsedTimer m_ticks;
+
     MapModel *const m_map;
 
     QList<Actor *> m_actors;

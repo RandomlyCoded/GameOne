@@ -80,6 +80,7 @@ Item {
                 }
 
                 color: colorOf(model.type)
+                clip: true
 
                 border.color: "black"
                 border.width: 1
@@ -112,9 +113,22 @@ Item {
                     id: actorImage
 
                     anchors.fill: parent
-                    source: actor && actor.isAlive && actor.imageSource || ""
                     sourceSize: Qt.size(width, height)
                     visible: source.toString()
+
+                    rotation: {
+                        if (actor && actor.isAlive && actor.rotationSteps > 1)
+                            return 360 * (backend.ticks % actor.rotationSteps) / actor.rotationSteps;
+
+                        return 0;
+                    }
+
+                    source: {
+                        if (actor && actor.isAlive)
+                            return backend.imageUrl(actor.imageSource, actor.imageCount, backend.ticks);
+
+                        return "";
+                    }
                 }
 
                 Rectangle {
