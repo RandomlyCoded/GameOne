@@ -11,11 +11,11 @@
     ],
 
     "chests": [
-        {"x": 1, "y": 1, "item": "Arrow", "amount": 2}
+        {"x": 1, "y": 1, "item": "Arrow", "amount": 2, "image": "items/Chest.svg"}
     ],
 
     "ladders": [
-        {"x": 0, "y": 0, "level": 19, "dx": 8, "dy": 7},
+        {"x": 0, "y": 0, "level": 19, "dx": 8, "dy": 7, "image": "items/Portal.svg"},
         {"x": 9, "y": 1, "level": 1, "dx": 0, "dy": 9, "image": "items/Portal.svg"}
     ],
 

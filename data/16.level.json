@@ -15,7 +15,9 @@
     ],
 
     "chests": [
-        {"x": 1, "y": 0, "item": "Bow", "amount": 1, "image": "items/Chest.svg"}
+        {"x": 1, "y": 0, "item": "Bow", "amount": 1, "image": "items/Chest.svg"},
+        {"x": 12, "y": 0, "item": "TwoHandSword", "amount": 1, "image": "items/Chest.svg"},
+        {"x": 12, "y": 11, "item": "LightningArrow", "amount": 5, "image": "items/Chest.svg"}
     ],
 
     "ladders": [
