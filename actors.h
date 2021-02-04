@@ -41,7 +41,7 @@ public:
     auto position() const { return m_position; }
 
     void setName(QString name);
-    QString name() const;
+    auto name() const { return m_name; }
 
     auto imageSource() const { return m_imageSource; }
 

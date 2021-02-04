@@ -137,7 +137,9 @@ Item {
                     color: "#800000000"
 
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: 3
+                    anchors.top: parent.top
+                    anchors.topMargin: 3
+
                     width: parent.width - 6
                     height: 10
 
@@ -162,6 +164,20 @@ Item {
                         anchors.centerIn: parent
                         text: cell.actor ? "%1 / %2".arg(cell.actor.energy).arg(cell.actor.maximumEnergy) : ""
                     }
+                }
+
+                Text {
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 3
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    color: "#fff"
+                    font.pixelSize: 12
+                    style: Text.Outline
+                    styleColor: "#80000000"
+
+                    text: cell.actor && cell.actor.name || ""
+                    visible: cell.actor && cell.actor.name || false
                 }
             }
         }

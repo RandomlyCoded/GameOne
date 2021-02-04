@@ -26,14 +26,6 @@ void Actor::setName(QString name)
         emit nameChanged(m_name);
 }
 
-QString Actor::name() const
-{
-    if (m_name.isEmpty())
-        return tr("no name");
-
-    return m_name;
-}
-
 void Actor::giveBonus(Actor *actor, int amount)
 {
     actor->giveEnergy(amount);
