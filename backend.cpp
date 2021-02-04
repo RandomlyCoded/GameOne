@@ -206,12 +206,23 @@ void Backend::loadItems()
 {
     // TODO: Load from JSON
     m_items["Arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
+    m_items["BottleLargeEmpty"] = new InventoryItem{"empty large bottle", QUrl{"inventory/BottleLargeEmpty.svg"}, this};
+    m_items["BottleLargeEndurancedrink"] = new InventoryItem{"large endurancedrink", QUrl{"inventory/BottleLargeEndurancedrink.svg"}, this};
+    m_items["BottleLargeEnergydrink"] = new InventoryItem{"large energydrink", QUrl{"inventory/BottleLargeEnergydrink.svg"}, this};
+    m_items["BottleSmallEmpty"] = new InventoryItem{"empty small bottle", QUrl{"inventory/BottleSmallEmpty.svg"}, this};
+    m_items["BottleSmallEndurancedrink"] = new InventoryItem{"small endurancedrink", QUrl{"inventory/BottleSmallEndurancedrink.svg"}, this};
+    m_items["BottleSmallEnergydrink"] = new InventoryItem{"small energydrink", QUrl{"inventory/BottleSmallEnergydrink.svg"}, this};
     m_items["Bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
-    m_items["Sword"] = new InventoryItem{"Sword", QUrl{"weapons/Dagger.svg"}, this};
-    m_items["FireArrow"] = new InventoryItem{"Fire Arrow", QUrl{"weapons/FireArrow.svg"}};
-    m_items["IceArrow"] = new InventoryItem{"Ice Arrow", QUrl{"weapons/IceArrow.svg"}};
-    m_items["StarArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}};
-    m_items["BottleSmallEmpty"] = new InventoryItem{"empty small bottle", QUrl{"inventory/BottleSmallEmpty.svg"}};
+    m_items["BowBroken"] = new InventoryItem{"broken Bow", QUrl{"inventory/BowBroken.svg"}, this};
+    m_items["Dagger"] = new InventoryItem{"Dagger", QUrl{"weapons/Dagger.svg"}, this};
+    m_items["FireArrow"] = new InventoryItem{"Fire Arrow", QUrl{"weapons/FireArrow.svg"}, this};
+    m_items["IceArrow"] = new InventoryItem{"Ice Arrow", QUrl{"weapons/IceArrow.svg"}, this};
+    m_items["LightningArrow"] = new InventoryItem{"electric Arrow", QUrl{"weapons/LightningArrow.svg"}, this};
+    m_items["LongSword"] = new InventoryItem{"Long Sword", QUrl{"weapons/LongSword.svg"}, this};
+    m_items["SmallSword"] = new InventoryItem{"Small Sword", QUrl{"weapons/SmallSword.svg"}, this};
+    m_items["StarArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}, this};
+    m_items["TwoHandSword"] = new InventoryItem{"Two Hand Sword", QUrl{"weapons/TwohandSword.svg"}, this};
+    m_items[""] = new InventoryItem{"", QUrl{"/.svg"}, this};
 }
 
 void Backend::onTimeout()
