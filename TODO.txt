@@ -63,7 +63,7 @@ Wenn man angreift oder an eine Grenze oder Wand geht die Bewegung der Monster er
 Tränke sollen in Fässern sein
 
 14.:
-Vorschlag für Anzeige bei Eintrag 5. : Ausdauer
+Vorschlag für Anzeigename und Aussehen bei Eintrag 5. : Ausdauer und wie bei den Leben bloß ist diese an der Seite
 
 15.:
 Der Schlüssel soll für einen Dungeon sein
@@ -87,3 +87,6 @@ Können wir Schnecken als items an Bäume setzen?
 
 21.:
 Die rote Nadel zeigt zum Schatz
+
+22.:
+Goldmünzen werden von Gegnern fallen gelassen, mit ihnen kann man sich vielleicht Waffen oder Tränke kaufen ;-)
