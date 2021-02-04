@@ -1,13 +1,13 @@
 {
     "FireGhost": {
         "name": "Fire Ghost",
-        "image": "enemies/FireGhost.svg",
+        "image": "enemies/FireGhost.svg?show=max",
         "maximumEnergy": 100,
 
         "energyLevels": [
-            {"minimumEnergy": 60, "imageLayers": "max,max.flames%1"},
-            {"minimumEnergy": 20, "imageLayers": "med,med.flames%1"},
-            {"minimumEnergy":  0, "imageLayers": "min,min.flames%1"}
+            {"minimumEnergy": 0.0, "image": "enemies/FireGhost.svg?show=min,min.flames%1"},
+            {"minimumEnergy": 0.1, "image": "enemies/FireGhost.svg?show=med,med_max.flames%1"},
+            {"minimumEnergy": 0.5, "image": "enemies/FireGhost.svg?show=max,med_max.flames%1"}
         ]
     }
 }
