@@ -1,5 +1,5 @@
 {
-    "FireGhost": {
+    "enemies/FireGhost": {
         "name": "Fire Ghost",
         "maximumEnergy": 100,
         "image": "enemies/FireGhost.svg?show=max",
@@ -10,5 +10,15 @@
             {"minimumEnergy": 0.1, "image": "enemies/FireGhost.svg?show=med,med_max.flames(t)"},
             {"minimumEnergy": 0.5, "image": "enemies/FireGhost.svg?show=max,med_max.flames(t)"}
         ]
+    },
+
+    "enemies/Tentaklon": {
+        "maximumEnergy": 100,
+        "image": "enemies/Tentaklon.svg"
+    },
+
+    "items/Portal": {
+        "image": "items/Portal.svg",
+        "rotationSteps": 36
     }
 }

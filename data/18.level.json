@@ -11,7 +11,7 @@
     ],
 
     "ladders": [
-        {"x": 4, "y": 8, "level": 19, "dx": 1, "dy": 1, "image": "items/Portal.svg"}
+        {"x": 4, "y": 8, "level": 19, "dx": 1, "dy": 1, "$ref": "#items/Portal"}
     ],
 
     "chests": [

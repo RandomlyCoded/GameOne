@@ -32,6 +32,8 @@ class Actor : public QObject
     Q_PROPERTY(QUrl imageSource READ imageSource NOTIFY imageSourceChanged FINAL)
     Q_PROPERTY(int imageCount READ imageCount NOTIFY imageCountChanged FINAL)
 
+    Q_PROPERTY(int rotationSteps READ rotationSteps CONSTANT FINAL)
+
 public:
     explicit Actor(QJsonObject spec, Backend *backend);
 
@@ -46,6 +48,8 @@ public:
 
     QUrl imageSource() const;
     int imageCount() const;
+
+    auto rotationSteps() const { return m_rotationSteps; }
 
     auto lives() const { return m_lives; }
     auto energy() const { return m_energy; }
@@ -108,6 +112,7 @@ private:
     QList<EnergyLevel> m_energyLevels;
     QUrl m_imageSource;
     int m_imageCount;
+    int m_rotationSteps;
 };
 
 class Enemy : public Actor

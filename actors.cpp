@@ -19,6 +19,7 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_lives{m_maximumLifes}
     , m_imageSource{Backend::imageUrl(spec["image"].toString())}
     , m_imageCount{spec["imageCount"].toInt()}
+    , m_rotationSteps{spec["rotationSteps"].toInt()}
 {
     respawn();
 }
