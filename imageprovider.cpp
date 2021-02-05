@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QLoggingCategory>
 #include <QPainter>
+#include <QRegularExpression>
 #include <QSvgRenderer>
 #include <QUrlQuery>
 
@@ -43,6 +44,18 @@ auto resolveLayers(const QByteArray &data)
     }
 
     return layers;
+}
+
+auto makeRegularExpression(QStringList wildcards)
+{
+    QStringList expressions;
+
+    for (const auto &pattern: wildcards) {
+        const auto wildcardExpression = QRegularExpression::wildcardToRegularExpression(pattern);
+        expressions += QRegularExpression::anchoredPattern(wildcardExpression);
+    }
+
+    return QRegularExpression(expressions.join("|"));
 }
 
 } // namespace
@@ -102,10 +115,13 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
         if (debug)
             qCInfo(lcImages, "- #layers=%d", layers.count());
 
+        const auto hidePattern = makeRegularExpression(hide);
+        const auto showPattern = makeRegularExpression(show);
+
         for (const auto &l: layers) {
-            if (hide.contains(l.layerId))
+            if (!hide.isEmpty() && hidePattern.match(l.layerId).hasMatch())
                 continue;
-            if (!show.contains(l.layerId) && !show.isEmpty())
+            if (!show.isEmpty() && !showPattern.match(l.layerId).hasMatch())
                 continue;
 
             if (debug) {
