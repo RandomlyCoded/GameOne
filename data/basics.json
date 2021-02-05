@@ -1,4 +1,5 @@
 {
+    "characters": {"$ref": "characters.json"},
     "enemies": {"$ref": "enemies.json"},
     "items": {"$ref": "items.json"}
 }

@@ -1,0 +1,11 @@
+{
+    "Anni": {
+        "name": "Anni",
+        "image": "Characters.svg?show=*-human1,*-girl1"
+    },
+
+    "Joe": {
+        "name": "Joe",
+        "image": "Characters.svg?show=*-human1,*-boy1"
+    }
+}
