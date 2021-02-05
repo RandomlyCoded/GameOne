@@ -27,6 +27,7 @@ class Actor : public QObject
     Q_PROPERTY(bool isAlive READ isAlive NOTIFY energyChanged FINAL)
 
     Q_PROPERTY(int energy READ energy NOTIFY energyChanged FINAL)
+    Q_PROPERTY(int minimumEnergy READ minimumEnergy NOTIFY minimumEnergyChanged FINAL)
     Q_PROPERTY(int maximumEnergy READ maximumEnergy NOTIFY maximumEnergyChanged FINAL)
     Q_PROPERTY(bool energyVisible READ energyVisible CONSTANT FINAL)
 
@@ -57,6 +58,7 @@ public:
 
     auto lives() const { return m_lives; }
     auto energy() const { return m_energy; }
+    auto minimumEnergy() const { return m_minimumEnergy; }
     auto maximumEnergy() const { return m_maximumEnergy; }
     auto isAlive() const { return m_lives > 0 && m_energy > 0; }
 
@@ -84,6 +86,7 @@ signals:
     void nameChanged(QString name);
     void livesChanged(int lives);
     void energyChanged(int energy);
+    void minimumEnergyChanged(int minimumEnergy);
     void maximumEnergyChanged(int maximumEnergy);
     void imageSourceChanged(QUrl imageSource);
     void imageCountChanged(int imageCount);
@@ -107,13 +110,14 @@ private:
     QPoint m_origin;
     QPoint m_position;
 
+    QList<EnergyLevel> m_energyLevels;
+    int m_minimumEnergy;
     int m_maximumEnergy;
-    int m_maximumLifes;
     int m_energy;
 
+    int m_maximumLifes;
     int m_lives;
 
-    QList<EnergyLevel> m_energyLevels;
     QUrl m_imageSource;
     int m_imageCount;
     int m_rotationSteps;
@@ -184,6 +188,8 @@ signals:
     void countChanged(int count);
 
 private:
+    static QJsonObject applyDefaults(QJsonObject json);
+
     QPointer<InventoryItem> m_item;
     int m_amount = 0;
 };
@@ -207,6 +213,8 @@ public:
     auto level() const { return m_level; }
 
 private:
+    static QJsonObject applyDefaults(QJsonObject json);
+
     int m_level = 0;
     QPoint m_destination;
 };

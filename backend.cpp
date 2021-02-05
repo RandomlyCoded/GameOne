@@ -178,6 +178,9 @@ bool Backend::canMoveTo(Actor *actor, QPoint destination) const
             continue;
 
         if (destination == opponent->position()) {
+            if (opponent->energy() == opponent->minimumEnergy())
+                return true;
+
             if (actor->canAttack(opponent))
                 opponent->giveBonus(actor, actor->attack(opponent));
 

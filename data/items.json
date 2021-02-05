@@ -1,6 +1,5 @@
 {
     "Chest": {
-        "maximumEnergy": 2,
         "energyLevels": [
             {"minimumEnergy": 0.0, "image": "items/ChestOpen.svg"},
             {"minimumEnergy": 1.0, "image": "items/Chest.svg"}
@@ -8,7 +7,6 @@
     },
 
     "Barrel1": {
-        "maximumEnergy": 2,
         "energyLevels": [
             {"minimumEnergy": 0.0, "image": "items/Barrel1open.svg"},
             {"minimumEnergy": 1.0, "image": "items/Barrel1.svg"}
@@ -16,7 +14,6 @@
     },
 
     "Barrel2": {
-        "maximumEnergy": 2,
         "energyLevels": [
             {"minimumEnergy": 0.0, "image": "items/Barrel2open.svg"},
             {"minimumEnergy": 1.0, "image": "items/Barrel2.svg"}
@@ -24,7 +21,6 @@
     },
 
     "Barrel3": {
-        "maximumEnergy": 2,
         "energyLevels": [
             {"minimumEnergy": 0.0, "image": "items/Barrel3open.svg"},
             {"minimumEnergy": 1.0, "image": "items/Barrel3.svg"}
@@ -32,7 +28,6 @@
     },
 
     "Barrel4": {
-        "maximumEnergy": 2,
         "energyLevels": [
             {"minimumEnergy": 0.0, "image": "items/Barrel4open.svg"},
             {"minimumEnergy": 1.0, "image": "items/Barrel4.svg"}

@@ -13,9 +13,10 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_name{spec["name"].toString()}
     , m_origin{spec["x"].toInt(), spec["y"].toInt()}
     , m_position{m_origin}
+    , m_energyLevels{makeEnergyLevels(spec["energyLevels"].toArray())}
+    , m_minimumEnergy{spec["minimumEnergy"].toInt()}
     , m_maximumEnergy{qMax(spec["maximumEnergy"].toInt(), 1)}
     , m_maximumLifes{qMax(spec["maximumLifes"].toInt(), 1)}
-    , m_energyLevels{makeEnergyLevels(spec["energyLevels"].toArray())}
     , m_lives{m_maximumLifes}
     , m_imageSource{Backend::imageUrl(spec["image"].toString())}
     , m_imageCount{spec["imageCount"].toInt()}
@@ -151,7 +152,7 @@ int Actor::attack(Actor *)
 
 void Actor::stealEnergy(int amount)
 {
-    setEnergy(qMax(0, m_energy - amount));
+    setEnergy(qMax(m_minimumEnergy, m_energy - amount));
 }
 
 void Actor::giveEnergy(int amount)
@@ -234,11 +235,21 @@ int Player::attack(Actor *opponent)
 }
 
 Chest::Chest(QJsonObject spec, Backend *backend)
-    : Actor{spec, backend}
+    : Actor{applyDefaults(spec), backend}
 {
     const auto itemType = spec["item"].toString();
     m_item = backend->item(itemType);
     m_amount = spec["amount"].toInt();
+}
+
+QJsonObject GameOne::Chest::applyDefaults(QJsonObject json)
+{
+    if (!json.contains("minimumEnergy"))
+        json.insert("minimumEnergy", 1);
+    if (!json.contains("maximumEnergy"))
+        json.insert("maximumEnergy", 2);
+
+    return json;
 }
 
 void Chest::giveBonus(Actor *actor, int)
@@ -265,10 +276,20 @@ InventoryItem *Chest::item() const
 }
 
 Ladder::Ladder(QJsonObject spec, Backend *backend)
-    : Actor{spec, backend}
+    : Actor{applyDefaults(spec), backend}
 {
     m_level = spec["level"].toInt();
     m_destination = {spec["dx"].toInt(), spec["dy"].toInt()};
+}
+
+QJsonObject GameOne::Ladder::applyDefaults(QJsonObject json)
+{
+    if (!json.contains("minimumEnergy"))
+        json.insert("minimumEnergy", 1);
+    if (!json.contains("maximumEnergy"))
+        json.insert("maximumEnergy", 2);
+
+    return json;
 }
 
 void Ladder::giveBonus(Actor *, int)
