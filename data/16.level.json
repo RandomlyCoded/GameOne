@@ -21,10 +21,10 @@
     ],
 
     "ladders": [
-        {"x":  8, "y": 7, "level": 17, "dx":  0, "dy": 2, "ref$": "#items/Earthhole"},
-        {"x": 12, "y": 5, "level": 17, "dx":  3, "dy": 0, "ref$": "#items/StairsDown"},
-        {"x": 14, "y": 5, "level": 17, "dx":  5, "dy": 0, "ref$": "#items/StairsDown"},
-        {"x": 17, "y": 5, "level": 18, "dx":  5, "dy": 0, "ref$": "#items/Portal"}
+        {"x":  8, "y": 7, "level": 17, "dx":  0, "dy": 2, "$ref": "#items/Earthhole"},
+        {"x": 12, "y": 5, "level": 17, "dx":  3, "dy": 0, "$ref": "#items/StairsDown"},
+        {"x": 14, "y": 5, "level": 17, "dx":  5, "dy": 0, "$ref": "#items/StairsDown"},
+        {"x": 17, "y": 5, "level": 18, "dx":  5, "dy": 0, "$ref": "#items/Portal"}
     ],
 
     "player": {
