@@ -161,6 +161,8 @@ void Backend::respawn()
 
 bool Backend::canMoveTo(Actor *actor, QPoint destination) const
 {
+    if (actor == m_player.get())
+        m_actionTimer->start();
     if (!actor->isAlive())
         return false;
 
