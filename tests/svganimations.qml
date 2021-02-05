@@ -12,9 +12,9 @@ Window {
     }
 
     readonly property var fireGhost: {
-        "frameCount": 3,
+        "frameCount": 5,
         "imageSource": "enemies/FireGhost.svg",
-        "stages": ["show=max,max.flames%1", "show=med,med.flames%1", "show=min,min.flames%1"]
+        "stages": ["show=max,med_max.flames%1", "show=med,med_max.flames%1", "show=min,min.flames%1"]
     }
 
     property int currentFrame: 0
