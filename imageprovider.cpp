@@ -129,9 +129,9 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
                        qUtf16Printable(l.layerId), qUtf16Printable(l.xmlId));
             }
 
-            const auto vbs = svg.viewBoxF().size();
-            auto sx = static_cast<qreal>(imageSize.width()) / vbs.width();
-            auto sy = static_cast<qreal>(imageSize.height()) / vbs.height();
+            const auto viewBox = svg.viewBoxF().size();
+            auto sx = static_cast<qreal>(imageSize.width()) / viewBox.width();
+            auto sy = static_cast<qreal>(imageSize.height()) / viewBox.height();
             const auto bounds = QTransform{}.scale(sx, sy).mapRect(svg.boundsOnElement(l.xmlId));
             svg.render(&painter, l.xmlId, bounds);
         }
