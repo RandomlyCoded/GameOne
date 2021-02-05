@@ -108,11 +108,15 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         m_ladders.clear();
         m_enemies.clear();
 
-        for (const auto chests = level["chests"].toArray(); const auto &value: chests)
+        const auto chests = level["chests"].toArray();
+        const auto ladders = level["ladders"].toArray();
+        const auto enemies = level["enemies"].toArray();
+
+        for (const auto &value: chests)
             m_chests += std::make_shared<Chest>(resolve(value.toObject()), this);
-        for (const auto ladders = level["ladders"].toArray(); const auto &value: ladders)
+        for (const auto &value: ladders)
             m_ladders += std::make_shared<Ladder>(resolve(value.toObject()), this);
-        for (const auto enemies = level["enemies"].toArray(); const auto &value: enemies)
+        for (const auto &value: enemies)
             m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
 
         const auto playerData = level["player"].toObject();
