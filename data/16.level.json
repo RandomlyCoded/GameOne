@@ -30,9 +30,8 @@
     "player": {
         "x": 0,
         "y": 0,
-        "name": "Joe",
         "maximumLifes": 3,
         "maximumEnergy": 5,
-        "image": "weapons/Dagger.svg"
+        "$ref": "#characters/Joe"
     }
 }

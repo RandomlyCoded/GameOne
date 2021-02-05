@@ -72,8 +72,6 @@ InventoryItem *Backend::item(QString id) const
 
 bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 {
-    qCInfo(lcBackend, "Loading level from %ls", qUtf16Printable(fileName));
-
     m_actionTimer->stop();
 
     fileName = dataFileName(std::move(fileName));
@@ -119,7 +117,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         for (const auto &value: enemies)
             m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
 
-        const auto playerData = level["player"].toObject();
+        const auto playerData = resolve(level["player"].toObject());
         m_player = std::make_unique<Player>(std::move(playerData), this);
 
         if (playerPosition.has_value())

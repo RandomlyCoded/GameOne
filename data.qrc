@@ -44,5 +44,6 @@
         <file>data/enemies.json</file>
         <file>data/items.json</file>
         <file>data/tiles.json</file>
+        <file>data/characters.json</file>
     </qresource>
 </RCC>

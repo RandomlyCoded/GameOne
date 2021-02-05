@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QLoggingCategory>
 #include <QPainter>
+#include <QRegularExpression>
 #include <QSvgRenderer>
 #include <QUrlQuery>
 
@@ -43,6 +44,18 @@ auto resolveLayers(const QByteArray &data)
     }
 
     return layers;
+}
+
+auto makeRegularExpression(QStringList wildcards)
+{
+    QStringList expressions;
+
+    for (const auto &pattern: wildcards) {
+        const auto wildcardExpression = QRegularExpression::wildcardToRegularExpression(pattern);
+        expressions += QRegularExpression::anchoredPattern(wildcardExpression);
+    }
+
+    return QRegularExpression(expressions.join("|"));
 }
 
 } // namespace
@@ -102,10 +115,13 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
         if (debug)
             qCInfo(lcImages, "- #layers=%d", layers.count());
 
+        const auto hidePattern = makeRegularExpression(hide);
+        const auto showPattern = makeRegularExpression(show);
+
         for (const auto &l: layers) {
-            if (hide.contains(l.layerId))
+            if (!hide.isEmpty() && hidePattern.match(l.layerId).hasMatch())
                 continue;
-            if (!show.contains(l.layerId) && !show.isEmpty())
+            if (!show.isEmpty() && !showPattern.match(l.layerId).hasMatch())
                 continue;
 
             if (debug) {
@@ -113,9 +129,9 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
                        qUtf16Printable(l.layerId), qUtf16Printable(l.xmlId));
             }
 
-            const auto vbs = svg.viewBoxF().size();
-            auto sx = static_cast<qreal>(imageSize.width()) / vbs.width();
-            auto sy = static_cast<qreal>(imageSize.height()) / vbs.height();
+            const auto viewBox = svg.viewBoxF().size();
+            auto sx = static_cast<qreal>(imageSize.width()) / viewBox.width();
+            auto sy = static_cast<qreal>(imageSize.height()) / viewBox.height();
             const auto bounds = QTransform{}.scale(sx, sy).mapRect(svg.boundsOnElement(l.xmlId));
             svg.render(&painter, l.xmlId, bounds);
         }
