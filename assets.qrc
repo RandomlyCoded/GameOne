@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/GameOne">
+        <file>assets/Characters.svg</file>
         <file>assets/enemies/FireGhost.svg</file>
         <file>assets/enemies/Spider.svg</file>
         <file>assets/enemies/Tentaklon.svg</file>
@@ -28,6 +29,7 @@
         <file>assets/items/Barrel4open.svg</file>
         <file>assets/items/Bridge.svg</file>
         <file>assets/items/Chest.svg</file>
+        <file>assets/items/ChestOpen.svg</file>
         <file>assets/items/Earthhole.svg</file>
         <file>assets/items/FenceHorizontal.svg</file>
         <file>assets/items/FenceLeftBottom.svg</file>
@@ -58,6 +60,5 @@
         <file>assets/weapons/SmallSword.svg</file>
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
-        <file>assets/items/ChestOpen.svg</file>
     </qresource>
 </RCC>
