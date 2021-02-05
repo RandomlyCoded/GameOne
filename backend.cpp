@@ -72,8 +72,6 @@ InventoryItem *Backend::item(QString id) const
 
 bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 {
-    qCInfo(lcBackend, "Loading level from %ls", qUtf16Printable(fileName));
-
     m_actionTimer->stop();
 
     fileName = dataFileName(std::move(fileName));
