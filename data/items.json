@@ -1,6 +1,10 @@
 {
     "Chest": {
-        "image": "items/Chest.svg"
+        "maximumEnergy": 2,
+        "energyLevels": [
+            {"minimumEnergy": 0.0, "image": "items/ChestOpen.svg"},
+            {"minimumEnergy": 1.0, "image": "items/Chest.svg"}
+        ]
     },
 
     "Barrel1": {
