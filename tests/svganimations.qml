@@ -8,13 +8,13 @@ Window {
     readonly property var warmSea: {
         "frameCount": 9,
         "imageSource": "panel/WarmSea.svg",
-        "stages": ["show=background,frame%1"]
+        "stages": ["show=background,frame(t),frame(t+1),frame(t+2)"]
     }
 
     readonly property var fireGhost: {
         "frameCount": 5,
         "imageSource": "enemies/FireGhost.svg",
-        "stages": ["show=max,med_max.flames%1", "show=med,med_max.flames%1", "show=min,min.flames%1"]
+        "stages": ["show=max,med_max.flames(t)", "show=med,med_max.flames(t)", "show=min,min.flames(t)"]
     }
 
     property int currentFrame: 0
@@ -26,6 +26,10 @@ Window {
 
     function frameNumber(i) {
         return (frameCount + currentFrame + (i || 0)) % frameCount;
+    }
+
+    function imageUrl(url) {
+        return backend.imageUrl(url, frameCount, currentFrame);
     }
 
     onFrameCountChanged: {
@@ -91,22 +95,22 @@ Window {
                     }
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1".arg(frameNumber())
+                        source: imageUrl("image://assets/panel/WarmSea.svg?show=background,frame(t)")
                         sourceSize: Qt.size(modelData, modelData)
                     }
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1,frame%2,frame%3&debug".arg(frameNumber(0)).arg(frameNumber(1)).arg(frameNumber(2))
+                        source: imageUrl("image://assets/panel/WarmSea.svg?show=background,frame(t),frame(t+1),frame(t+2)")
                         sourceSize: Qt.size(modelData, modelData)
                     }
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1,frame%2,frame%3,frame%4".arg(frameNumber(0)).arg(frameNumber(2)).arg(frameNumber(4)).arg(frameNumber(6))
+                        source: imageUrl("image://assets/panel/WarmSea.svg?show=background,frame(t),frame(t+2),frame(t+4),frame(t+6)")
                         sourceSize: Qt.size(modelData, modelData)
                     }
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?hide=frame%1,frame%2,frame%3".arg(frameNumber(0)).arg(frameNumber(1)).arg(frameNumber(2))
+                        source: imageUrl("image://assets/panel/WarmSea.svg?hide=frame(t),frame(t+1),frame(t+2)")
                         sourceSize: Qt.size(modelData, modelData)
                     }
                 }
@@ -121,7 +125,7 @@ Window {
                     model: parent.columns * parent.columns
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1".arg(frameNumber())
+                        source: imageUrl("image://assets/panel/WarmSea.svg?show=background,frame(t)")
                         sourceSize: Qt.size(59, 59)
                     }
                 }
@@ -143,7 +147,7 @@ Window {
                     spacing: 50
 
                     Image {
-                        source: "qrc:/GameOne/assets/%1".arg(imageSource)
+                        source: "qrc:/GameOne/assets/" + imageSource
                         sourceSize: Qt.size(modelData, modelData)
                     }
 
@@ -151,7 +155,7 @@ Window {
                         model: stages
 
                         Image {
-                            source: "image://assets/%1?%2".arg(imageSource).arg(modelData.arg(frameNumber()))
+                            source: imageUrl("image://assets/" + imageSource + "?" + modelData)
                             sourceSize: imageSize
                         }
                     }
