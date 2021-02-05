@@ -61,6 +61,9 @@ public:
 
     static QString levelFileName(int index);
 
+    QJsonObject resolve(QJsonObject object) const;
+    QJsonObject resolve(QUrl ref) const;
+
 signals:
     void levelFileNameChanged(QString levelFileName);
     void levelNameChanged(QString levelName);
@@ -79,20 +82,15 @@ private:
     void onTicksTimeout();
 
     QJsonDocument cachedDocument(QUrl url) const;
-    QJsonObject resolve(QJsonObject object) const;
 
     QTimer *const m_actionTimer;
     QTimer *const m_ticksTimer;
     QElapsedTimer m_ticks;
 
-    MapModel *const m_map;
-
     QList<Actor *> m_actors;
-
     QMap<QString, InventoryItem *> m_items;
     QList<std::shared_ptr<Ladder>> m_ladders;
     QList<std::shared_ptr<Chest>> m_chests;
-
     QList<std::shared_ptr<Enemy>> m_enemies;
     std::unique_ptr<Player> m_player;
 
@@ -100,6 +98,7 @@ private:
     QString m_levelName;
 
     mutable QHash<QUrl, QJsonDocument> m_jsonCache;
+    MapModel *const m_map;
 };
 
 } // namespace GameOne

@@ -213,8 +213,24 @@ QUrl Backend::imageUrl(QUrl imageUrl)
 
 QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
 {
-    if (imageCount > 1)
-        imageUrl.setQuery(imageUrl.query().replace("(t)", QString::number(tick % imageCount)));
+    if (imageCount > 1) {
+        static const auto pattern = QRegularExpression{R"(\(t([+-]\d+)?\))"};
+        const auto inputQueryString = imageUrl.query();
+
+        int start = 0;
+        QString outputQueryString;
+
+        for (auto it = pattern.globalMatch(inputQueryString); it.hasNext(); ) {
+            const auto match = it.next();
+
+            outputQueryString += inputQueryString.midRef(start, match.capturedStart() - start);
+            outputQueryString += QString::number((tick + match.captured(1).toInt()) % imageCount);
+            start = match.capturedEnd();
+        }
+
+        outputQueryString += inputQueryString.midRef(start);
+        imageUrl.setQuery(outputQueryString);
+    }
 
     return imageUrl;
 }
@@ -288,25 +304,38 @@ QJsonDocument Backend::cachedDocument(QUrl url) const
 
 QJsonObject Backend::resolve(QJsonObject object) const
 {
-    QUrl ref{object["$ref"].toString()};
-
-    if (!ref.isEmpty()) {
-        if (ref.path().isEmpty()) {
-            ref.setPath("/GameOne/data/basics.json");
-            ref.setScheme("qrc");
-        }
-
-        auto json = cachedDocument(ref).object();
-        if (const auto id = ref.fragment(); !id.isEmpty())
-            json = resolve(json[id].toObject());
+    if (const auto ref = object.find("$ref"); ref != object.end()) {
+        auto json = resolve(ref->toString());
+        object.erase(ref);
 
         for (auto it = json.begin(); it != json.end(); ++it) {
             if (!object.contains(it.key()))
                 object.insert(it.key(), it.value());
         }
-
-        object.remove("$ref");
     }
+
+    return object;
+}
+
+QJsonObject Backend::resolve(QUrl ref) const
+{
+    static const auto s_basicsUrl = QUrl{"qrc:/GameOne/data/basics.json"};
+
+    if (ref.isEmpty())
+        return {};
+
+    if (ref.path().isEmpty()) {
+        ref.setScheme(s_basicsUrl.scheme());
+        ref.setPath(s_basicsUrl.path());
+    } else if (ref.isRelative()) {
+        ref = s_basicsUrl.resolved(ref);
+    }
+
+    const auto path = ref.fragment().split('/', Qt::SkipEmptyParts);
+    auto object = cachedDocument(ref).object();
+
+    for (const auto &id: path)
+        object = resolve(object[id].toObject());
 
     return object;
 }

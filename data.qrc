@@ -41,6 +41,7 @@
         <file>data/9.level.json</file>
         <file>data/9.map.txt</file>
         <file>data/basics.json</file>
-        <file>data/map.txt</file>
+        <file>data/enemies.json</file>
+        <file>data/tiles.json</file>
     </qresource>
 </RCC>

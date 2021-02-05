@@ -1,0 +1,38 @@
+{
+    "Player": { "color": "silver" },
+    "Enemy": { "color": "red" },
+
+    "Hill": { "keys": "H", "color": "brown", "walkable": true },
+    "Mountain": { "keys": "M", "color": "gray", "walkable": false },
+
+    "Water": {
+        "keys": "w", "color": "blue", "walkable": true
+    },
+    "Caribbean": {
+        "keys": "C", "color": "#00ffe1", "walkable": true,
+        "image": "panel/WarmSea.svg?show=background,frame(t),frame(t+1),frame(t+2)", "imageCount": 9
+    },
+    "DeepWater": {
+        "keys": "W", "color": "darkblue", "walkable": false
+    },
+
+    "Bridge": { "keys": "b", "color": "#895900", "walkable": true },
+    "Grass": { "keys": "G", "color": "lawngreen", "walkable": true },
+    "Fire": { "keys": "f", "color": "#f98d00", "walkable": true },
+    "Ice": { "keys": "I", "color": "white", "walkable": true },
+    "Lava": { "keys": "L", "color": "#cd0000", "walkable": false },
+    "Sand": { "keys": "S", "color": "#ffff60", "walkable": true },
+    "Underground": { "keys": "u", "color": "#5f5f5f", "walkable": true },
+    "Vulcanrock": { "keys": "V", "color": "#190202", "walkable": true },
+
+    "Earthhole": { "keys": "e", "color": "#391504", "walkable": true },
+    "Gate": { "keys": "g", "color": "#6c4a0a", "walkable": true },
+    "Ladder▲": { "keys": "+", "color": "#625507", "walkable": true },
+    "Ladder▼": { "keys": "-", "color": "#625507", "walkable": true },
+
+    "Chest": { "keys": "c", "color": "#b29764", "walkable": true },
+    "Fence": { "keys": "|\\/-", "color": "saddlebrown", "walkable": false },
+    "House": { "keys": "v", "color": "#711414", "walkable": false },
+    "Tree": { "keys": "@", "color": "darkgreen", "walkable": false },
+    "Wall": { "keys": "m", "color": "#8a8a8a", "walkable": false }
+}
