@@ -209,4 +209,29 @@
      style="fill:#784400;fill-opacity:1;stroke:#3c0800;stroke-width:3.77953;stroke-opacity:1;stop-color:#000000"
      d="m 262.49063,242.52908 c 61.3722,34.20226 126.66078,62.73564 164.85415,99.72059 51.52192,49.89178 68.54234,109.42159 99.72283,164.85639 L 514.99853,519.17513 250.42155,254.59816 Z"
      sodipodi:nodetypes="cscccc" />
+  <g
+     id="g910"
+     transform="rotate(30,-78.033616,394.50924)">
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#808080;fill-opacity:1;stroke:#a7908c;stroke-width:2.00001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       id="rect1209"
+       width="50.563293"
+       height="35.199039"
+       x="325.69473"
+       y="227.44923" />
+    <ellipse
+       style="font-variation-settings:normal;vector-effect:none;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.00001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       id="path1213"
+       cx="350.97638"
+       cy="241.84155"
+       rx="5.0563293"
+       ry="5.0494738" />
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       id="rect1215"
+       width="2.3806882"
+       height="9.9516716"
+       x="349.78604"
+       y="246.38475" />
+  </g>
 </svg>
