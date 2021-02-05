@@ -11,7 +11,7 @@
     ],
 
     "chests": [
-        {"x": 1, "y": 1, "item": "StarArrow", "amount": 2}
+        {"x": 1, "y": 1, "item": "StarArrow", "amount": 2, "$ref": "#items/Chest"}
     ],
 
     "ladders": [
@@ -24,7 +24,6 @@
         "y": 1,
         "name": "Joe",
         "maximumLifes": 3,
-        "maximumEnergy": 5,
-        "image": "weapons/StarArrow"
+        "maximumEnergy": 5
     }
 }
