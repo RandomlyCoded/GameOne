@@ -7,17 +7,26 @@ import QtQuick.Window 2.15
 Window {
     id: animationTest
 
-    readonly property var warmSea: {
-        "frameCount": 9,
-        "imageSource": "panel/WarmSea.svg",
-        "stages": ["show=background,frame(t),frame(t+1),frame(t+2)"]
-    }
+    readonly property var warmSea: allModes[0]
 
-    readonly property var fireGhost: {
-        "frameCount": 5,
-        "imageSource": "enemies/FireGhost.svg",
-        "stages": ["show=max,med_max.flames(t)", "show=med,med_max.flames(t)", "show=min,min.flames(t)"]
-    }
+    readonly property var allModes: [
+        {
+            "name": "Warm Sea",
+            "frameCount": 9,
+            "imageSource": "panel/WarmSea.svg",
+            "stages": ["show=background,frame(t),frame(t+1),frame(t+2)"]
+        }, {
+            "name": "Fire Ghost",
+            "frameCount": 5,
+            "imageSource": "enemies/FireGhost.svg",
+            "stages": ["show=max,med_max.flames(t)", "show=med,med_max.flames(t)", "show=min,min.flames(t)"]
+        }, {
+            "name": "Characters",
+            "frameCount": 1,
+            "imageSource": "Characters.svg",
+            "stages": ["show=*-human1,*-girl1", "show=*-human1,*-boy1"]
+        }
+    ]
 
     property int currentFrame: 0
     property var mode: warmSea
@@ -171,25 +180,15 @@ Window {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
 
-            Button {
-                checked: mode === warmSea
-                text: "Warm Sea"
+            Repeater {
+                model: allModes
 
-                onClicked: mode = warmSea
-            }
+                Button {
+                    checked: mode === modelData
+                    text: modelData.name
 
-            Button {
-                checked: mode === fireGhost
-                text: "Fire Ghost"
-
-                onClicked: mode = fireGhost
-            }
-
-            Button {
-                checked: mode === null
-                text: "Custom"
-
-                onClicked: mode = null
+                    onClicked: mode = modelData
+                }
             }
 
             Button {
