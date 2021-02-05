@@ -223,12 +223,12 @@ QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
         for (auto it = pattern.globalMatch(inputQueryString); it.hasNext(); ) {
             const auto match = it.next();
 
-            outputQueryString += inputQueryString.midRef(start, match.capturedStart() - start);
+            outputQueryString += inputQueryString.mid(start, match.capturedStart() - start);
             outputQueryString += QString::number((tick + match.captured(1).toInt()) % imageCount);
             start = match.capturedEnd();
         }
 
-        outputQueryString += inputQueryString.midRef(start);
+        outputQueryString += inputQueryString.mid(start);
         imageUrl.setQuery(outputQueryString);
     }
 
