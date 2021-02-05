@@ -173,7 +173,7 @@ Rectangle {
                                 return 0;
                         }
 
-                        onClicked: console.info(model.amount + model.itemName + [" is", "s' are"][returning()] + " selected.")
+                        onClicked: console.info(model.amount + " " + model.itemName + [" is", "s' are"][returning()] + " selected.")
                     }
                 }
             }
