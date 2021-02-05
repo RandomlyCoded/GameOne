@@ -7,19 +7,19 @@
     },
 
     "enemies": [
-        {"x": 2, "y": 2, "maximumEnergy": 10},
-        {"x": 3, "y": 3, "maximumEnergy": 15}
+        {"x": 2, "y": 2, "$ref": "#enemies/Spider"},
+        {"x": 3, "y": 3, "$ref": "#enemies/Spider"}
     ],
 
     "chests": [
-        {"x": 3, "y": 2, "item": "Arrow", "amount": 2, "image": "items/Chest.svg"},
-        {"x": 0, "y": 1, "item": "BottleSmallEnergydrink", "amount": 2, "image": "items/Barrel2.svg"},
-        {"x": 2, "y": 1, "item": "BottleSmallEmpty", "amount": 2, "image": "items/Barrel1.svg"}
+        {"x": 3, "y": 2, "item": "Arrow", "amount": 2, "$ref": "#items/Chest"},
+        {"x": 0, "y": 1, "item": "BottleSmallEnergydrink", "amount": 2, "$ref": "#items/Barrel2"},
+        {"x": 2, "y": 1, "item": "BottleSmallEmpty", "amount": 2, "$ref": "#items/Barrel1"}
     ],
 
     "ladders": [
-        {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5, "image": "items/StairsUp.svg"},
-        {"x": 5, "y": 0, "level": 16, "dx": 14, "dy": 5, "image": "items/StairsUp.svg"}
+        {"x": 3, "y": 0, "level": 16, "dx": 12, "dy": 5, "$ref": "#items/StairsUp"},
+        {"x": 5, "y": 0, "level": 16, "dx": 14, "dy": 5, "$ref": "#items/StairsUp"}
     ],
 
     "player": {

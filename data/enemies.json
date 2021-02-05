@@ -1,7 +1,7 @@
 {
     "FireGhost": {
         "name": "Fire Ghost",
-        "maximumEnergy": 100,
+        "maximumEnergy": 50,
         "image": "enemies/FireGhost.svg?show=max",
         "imageCount": 5,
 
@@ -10,6 +10,11 @@
             {"minimumEnergy": 0.1, "image": "enemies/FireGhost.svg?show=med,med_max.flames(t)"},
             {"minimumEnergy": 0.5, "image": "enemies/FireGhost.svg?show=max,med_max.flames(t)"}
         ]
+    },
+
+    "Spider": {
+        "maximumEnergy": 10,
+        "image": "enemies/Spider.svg"
     },
 
     "Tentaklon": {

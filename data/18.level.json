@@ -15,7 +15,7 @@
     ],
 
     "chests": [
-        {"x": 9, "y": 11, "item": "Dagger", "amount": 1, "image": "items/Chest.svg"}
+        {"x": 9, "y": 11, "item": "Dagger", "amount": 1, "$ref": "#items/Chest"}
     ],
     
     "player": {

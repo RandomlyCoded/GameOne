@@ -1,9 +1,4 @@
 {
     "enemies": {"$ref": "enemies.json"},
-    "items": {
-        "Portal": {
-            "image": "items/Portal.svg",
-            "rotationSteps": 36
-        }
-    }
+    "items": {"$ref": "items.json"}
 }
