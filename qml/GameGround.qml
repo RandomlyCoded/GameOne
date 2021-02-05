@@ -60,10 +60,20 @@ Item {
                 height: width
 
                 Image {
+                    id: tileImage
+
+                    anchors.fill: parent
+                    source: backend.imageUrl(model.tileImageSource, model.tileImageCount, backend.ticks)
+                    sourceSize: Qt.size(width, height)
+                    visible: source.toString()
+                }
+
+                Image {
                     id: itemImage
 
-                    anchors.centerIn: parent
-                    source: model.imageSource || ""
+                    anchors.fill: parent
+                    source: backend.imageUrl(model.itemImageSource, model.itemImageCount, backend.ticks)
+                    sourceSize: Qt.size(width, height)
                     visible: source.toString()
                 }
 

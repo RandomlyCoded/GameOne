@@ -25,8 +25,11 @@ public:
         RowRole,
         ItemRole,
         TileColorRole,
+        TileImageSourceRole,
+        TileImageCountRole,
         ItemColorRole,
-        ImageSourceRole,
+        ItemImageSourceRole,
+        ItemImageCountRole,
         WalkableRole,
     };
 
@@ -68,17 +71,17 @@ private:
     {
         struct Type
         {
-            QColor color;
             QString name;
+            QColor color;
+            QUrl imageSource;
+            int imageCount = 0;
             bool walkable = false;
 
             bool isValid() const { return !name.isEmpty(); }
-            QUrl imageSource() const { return {}; };
         };
 
         explicit Tile(const QHash<char, Type> &types, QByteArray spec);
 
-        QUrl imageSource() const;
         bool isWalkable() const;
 
         Type type;

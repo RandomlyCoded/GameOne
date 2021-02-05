@@ -96,7 +96,7 @@ Window {
                     }
 
                     Image {
-                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1,frame%2,frame%3".arg(frameNumber(0)).arg(frameNumber(1)).arg(frameNumber(2))
+                        source: "image://assets/panel/WarmSea.svg?show=background,frame%1,frame%2,frame%3&debug".arg(frameNumber(0)).arg(frameNumber(1)).arg(frameNumber(2))
                         sourceSize: Qt.size(modelData, modelData)
                     }
 

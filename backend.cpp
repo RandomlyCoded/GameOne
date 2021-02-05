@@ -213,8 +213,24 @@ QUrl Backend::imageUrl(QUrl imageUrl)
 
 QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
 {
-    if (imageCount > 1)
-        imageUrl.setQuery(imageUrl.query().replace("(t)", QString::number(tick % imageCount)));
+    if (imageCount > 1) {
+        static const auto pattern = QRegularExpression{R"(\(t([+-]\d+)?\))"};
+        const auto inputQueryString = imageUrl.query();
+
+        int start = 0;
+        QString outputQueryString;
+
+        for (auto it = pattern.globalMatch(inputQueryString); it.hasNext(); ) {
+            const auto match = it.next();
+
+            outputQueryString += inputQueryString.midRef(start, match.capturedStart() - start);
+            outputQueryString += QString::number((tick + match.captured(1).toInt()) % imageCount);
+            start = match.capturedEnd();
+        }
+
+        outputQueryString += inputQueryString.midRef(start);
+        imageUrl.setQuery(outputQueryString);
+    }
 
     return imageUrl;
 }

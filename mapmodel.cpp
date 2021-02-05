@@ -37,14 +37,6 @@ bool MapModel::Tile::isWalkable() const
     return type.walkable;
 }
 
-QUrl MapModel::Tile::imageSource() const
-{
-    if (item.isValid() && item.imageSource().isValid())
-        return item.imageSource();
-
-    return type.imageSource();
-}
-
 MapModel::MapModel(Backend *backend)
     : MapModel{static_cast<QObject *>(backend)}
 {
@@ -69,10 +61,16 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
             return tile.item.name;
         case TileColorRole:
             return tile.type.color;
+        case TileImageSourceRole:
+            return tile.type.imageSource;
+        case TileImageCountRole:
+            return tile.type.imageCount;
         case ItemColorRole:
             return tile.item.color;
-        case ImageSourceRole:
-            return tile.imageSource();
+        case ItemImageSourceRole:
+            return tile.item.imageSource;
+        case ItemImageCountRole:
+            return tile.item.imageCount;
         case WalkableRole:
             return tile.isWalkable();
         }
@@ -97,8 +95,11 @@ QHash<int, QByteArray> MapModel::roleNames() const
         {TypeRole, "type"},
         {ItemRole, "item"},
         {TileColorRole, "tileColor"},
+        {TileImageSourceRole, "tileImageSource"},
+        {TileImageCountRole, "tileImageCount"},
         {ItemColorRole, "itemColor"},
-        {ImageSourceRole, "imageSource"},
+        {ItemImageSourceRole, "itemImageSource"},
+        {ItemImageCountRole, "itemImageCount"},
         {WalkableRole, "walkable"},
     };
 }
@@ -128,8 +129,11 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
 
         for (const auto key: tile["keys"].toString()) {
             const QColor color{tile["color"].toString()};
+            const QUrl imageSource = Backend::imageUrl(tile["image"].toString());
+            const auto imageCount = tile["imageCount"].toInt(1);
             const auto walkable = tile["walkable"].toBool();
-            types.insert(key.toLatin1(), {color, it.key(), walkable});
+
+            types.insert(key.toLatin1(), {it.key(), color, imageSource, imageCount, walkable});
         }
     }
 

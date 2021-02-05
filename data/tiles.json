@@ -5,9 +5,16 @@
     "Hill": { "keys": "H", "color": "brown", "walkable": true },
     "Mountain": { "keys": "M", "color": "gray", "walkable": false },
 
-    "Water": { "keys": "w", "color": "blue", "walkable": true },
-    "Caribbean": { "keys": "C", "color": "#00ffe1", "walkable": true },
-    "DeepWater": { "keys": "W", "color": "darkblue", "walkable": false },
+    "Water": {
+        "keys": "w", "color": "blue", "walkable": true
+    },
+    "Caribbean": {
+        "keys": "C", "color": "#00ffe1", "walkable": true,
+        "image": "panel/WarmSea.svg?show=background,frame(t),frame(t+1),frame(t+2)", "imageCount": 9
+    },
+    "DeepWater": {
+        "keys": "W", "color": "darkblue", "walkable": false
+    },
 
     "Bridge": { "keys": "b", "color": "#895900", "walkable": true },
     "Grass": { "keys": "G", "color": "lawngreen", "walkable": true },
