@@ -126,6 +126,9 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
     if (QMutexLocker lock{&m_cacheMutex}; true)
         m_cache.insert(key, image);
 
+    if (size)
+        *size = image.size();
+
     return image;
 }
 
