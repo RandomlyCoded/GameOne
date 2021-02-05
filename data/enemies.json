@@ -1,0 +1,19 @@
+{
+    "FireGhost": {
+        "name": "Fire Ghost",
+        "maximumEnergy": 100,
+        "image": "enemies/FireGhost.svg?show=max",
+        "imageCount": 5,
+
+        "energyLevels": [
+            {"minimumEnergy": 0.0, "image": "enemies/FireGhost.svg?show=min,min.flames(t)", "imageCount": 3},
+            {"minimumEnergy": 0.1, "image": "enemies/FireGhost.svg?show=med,med_max.flames(t)"},
+            {"minimumEnergy": 0.5, "image": "enemies/FireGhost.svg?show=max,med_max.flames(t)"}
+        ]
+    },
+
+    "Tentaklon": {
+        "maximumEnergy": 100,
+        "image": "enemies/Tentaklon.svg"
+    }
+}

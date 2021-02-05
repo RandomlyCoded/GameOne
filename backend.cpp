@@ -288,16 +288,20 @@ QJsonDocument Backend::cachedDocument(QUrl url) const
 
 QJsonObject Backend::resolve(QJsonObject object) const
 {
+    static const auto s_basicsUrl = QUrl{"qrc:/GameOne/data/basics.json"};
+
     QUrl ref{object["$ref"].toString()};
 
     if (!ref.isEmpty()) {
         if (ref.path().isEmpty()) {
-            ref.setPath("/GameOne/data/basics.json");
-            ref.setScheme("qrc");
+            ref.setScheme(s_basicsUrl.scheme());
+            ref.setPath(s_basicsUrl.path());
+        } else if (ref.isRelative()) {
+            ref = s_basicsUrl.resolved(ref);
         }
 
         auto json = cachedDocument(ref).object();
-        if (const auto id = ref.fragment(); !id.isEmpty())
+        for (const auto path = ref.fragment().split('/', Qt::SkipEmptyParts); const auto &id: path)
             json = resolve(json[id].toObject());
 
         for (auto it = json.begin(); it != json.end(); ++it) {
