@@ -161,6 +161,20 @@ Rectangle {
                             text: model.amount
                         }
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        function returning() {
+                            if(model.amount > 1)
+                                return 1
+
+                            else
+                                return 0;
+                        }
+
+                        onClicked: console.info(model.amount + model.itemName + [" is", "s' are"][returning()] + " selected.")
+                    }
                 }
             }
 
