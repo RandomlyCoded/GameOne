@@ -56,5 +56,7 @@
         <file>assets/weapons/SmallSword.svg</file>
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
+        <file>assets/items/Bridge.svg</file>
+        <file>assets/enemys/Spider.svg</file>
     </qresource>
 </RCC>
