@@ -135,10 +135,10 @@ Rectangle {
                 Behavior on opacity { NumberAnimation {} }
                 visible: opacity > 0
 
-                cellWidth: width/3
+                cellWidth: Math.floor(width/3)
                 cellHeight: cellWidth
 
-                delegate: Rectangle {
+                delegate: Item {
                     width: GridView.view.cellWidth
                     height: GridView.view.cellHeight
 
@@ -148,18 +148,41 @@ Rectangle {
                         sourceSize: Qt.size(width, height)
                     }
 
-                    Column {
-                        anchors.centerIn: parent
+                    Text {
+                        anchors.bottom: parent.bottom
+                        horizontalAlignment: Text.AlignHCenter
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                        width: parent.width
 
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.itemName
-                        }
+                        color: "#ffffff"
+                        font { pixelSize: 11 }
+                        style: Text.Outline
+                        styleColor: "#80000000"
+                        text: model.itemName
+                    }
 
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.amount
-                        }
+                    Rectangle {
+                        id: amountBadge
+
+                        anchors { right: parent.right; top: parent.top }
+                        height: amountLabel.height + 2
+                        width: Math.max(amountLabel.width + 2, height)
+                        radius: height/2
+
+                        color: "orange"
+                    }
+
+                    Text {
+                        id: amountLabel
+
+                        anchors.centerIn: amountBadge
+
+                        color: "white"
+                        font { bold: true; pixelSize: 14 }
+                        style: Text.Outline
+                        styleColor: "#000"
+
+                        text: model.amount
                     }
 
                     MouseArea {

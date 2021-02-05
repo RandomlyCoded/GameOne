@@ -253,8 +253,8 @@ void Backend::loadItems()
     m_items["BottleLargeEndurancedrink"] = new InventoryItem{"large endurancedrink", QUrl{"inventory/BottleLargeEndurancedrink.svg"}, this};
     m_items["BottleLargeEnergydrink"] = new InventoryItem{"large energydrink", QUrl{"inventory/BottleLargeEnergydrink.svg"}, this};
     m_items["BottleSmallEmpty"] = new InventoryItem{"empty small bottle", QUrl{"inventory/BottleSmallEmpty.svg"}, this};
-    m_items["BottleSmallEndurancedrink"] = new InventoryItem{"small endurancedrink", QUrl{"inventory/BottleSmallEndurancedrink.svg"}, this};
-    m_items["BottleSmallEnergydrink"] = new InventoryItem{"small energydrink", QUrl{"inventory/BottleSmallEnergydrink.svg"}, this};
+    m_items["BottleSmallEndurancedrink"] = new InventoryItem{"Endurance", QUrl{"inventory/BottleSmallEndurancedrink.svg"}, this};
+    m_items["BottleSmallEnergydrink"] = new InventoryItem{"small bottle of Energy", QUrl{"inventory/BottleSmallEnergydrink.svg"}, this};
     m_items["Bow"] = new InventoryItem{"Bow", QUrl{"weapons/Bow.svg"}, this};
     m_items["BowBroken"] = new InventoryItem{"broken Bow", QUrl{"inventory/BowBroken.svg"}, this};
     m_items["Dagger"] = new InventoryItem{"Dagger", QUrl{"weapons/Dagger.svg"}, this};
