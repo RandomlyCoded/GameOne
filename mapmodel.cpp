@@ -12,7 +12,7 @@ namespace {
 Q_LOGGING_CATEGORY(lcMap, "GameOne.map");
 } // namespace
 
-MapModel::Tile::Tile(QByteArray spec)
+MapModel::Tile::Tile(const QHash<char, Type> &types, QByteArray spec)
 {
     auto tspec = spec[0];
     auto ispec = spec.length() > 1 ? spec[1] : ' ';
@@ -24,35 +24,6 @@ MapModel::Tile::Tile(QByteArray spec)
         tspec = 'G';
         ispec = '#';
     }
-
-    static const QHash<char, Type> types = {
-        {'G',   {"Grass",       true}},
-        {'W',   {"DeepWater",   false}},
-        {'w',   {"Water",       true}},
-        {'M',   {"Mountain",    false}},
-        {'S',   {"Sand",        true}},
-        {'I',   {"Ice",         true}},
-        {'L',   {"Lava",        false}},
-        {'@',   {"Tree",        false}},
-        {'#',   {"Fence",       false}},
-        {'_',   {"Fence",       false}},
-        {'|',   {"Fence",       false}},
-        {'/',   {"Fence",       false}},
-        {'\\',  {"Fence",       false}},
-        {'V',   {"Vulcanrock",  true}},
-        {'f',   {"Fire",        true}},
-        {'H',   {"Hill",        true}},
-        {'v',   {"House",       false}},
-        {'m',   {"Wall",        false}},
-        {'g',   {"Gate",        true}},
-        {'e',   {"Earthhole",   true}},
-        {'-',   {"Ladder▼",     true}},
-        {'+',   {"Ladder▲",     true}},
-        {'u',   {"Underground", true}},
-        {'c',   {"Chest",       true}},
-        {'b',   {"Bridge",      true}},
-        {'C',   {"Caribbean",   true}}
-    };
 
     type = types.value(tspec);
     item = types.value(ispec);
@@ -74,6 +45,12 @@ QUrl MapModel::Tile::imageSource() const
     return type.imageSource();
 }
 
+MapModel::MapModel(Backend *backend)
+    : MapModel{static_cast<QObject *>(backend)}
+{
+    setBackend(backend);
+}
+
 QVariant MapModel::data(const QModelIndex &index, int role) const
 {
     if (hasIndex(index.row(), index.column(), index.parent())) {
@@ -90,10 +67,14 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
             return tile.type.name;
         case ItemRole:
             return tile.item.name;
-        case WalkableRole:
-            return tile.isWalkable();
+        case TileColorRole:
+            return tile.type.color;
+        case ItemColorRole:
+            return tile.item.color;
         case ImageSourceRole:
             return tile.imageSource();
+        case WalkableRole:
+            return tile.isWalkable();
         }
     }
 
@@ -111,13 +92,48 @@ int MapModel::rowCount(const QModelIndex &parent) const
 QHash<int, QByteArray> MapModel::roleNames() const
 {
     return {
-        {TypeRole, "type"},
-        {ItemRole, "item"},
         {ColumnRole, "column"},
         {RowRole, "row"},
+        {TypeRole, "type"},
+        {ItemRole, "item"},
+        {TileColorRole, "tileColor"},
+        {ItemColorRole, "itemColor"},
+        {ImageSourceRole, "imageSource"},
         {WalkableRole, "walkable"},
-        {ImageSourceRole, "imageSource"}
     };
+}
+
+void MapModel::setBackend(Backend *backend)
+{
+    if (std::exchange(m_backend, backend) != m_backend) {
+        if (m_backend)
+            m_tileInfo = backend->resolve(QUrl{"tiles.json"});
+        else
+            m_tileInfo = {};
+
+        beginResetModel();
+        m_tiles.clear();
+        endResetModel();
+
+        emit backendChanged(m_backend);
+    }
+}
+
+QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
+{
+    QHash<char, Tile::Type> types;
+
+    for (auto it = m_tileInfo.begin(); it != m_tileInfo.end(); ++it) {
+        const auto tile = it->toObject();
+
+        for (const auto key: tile["keys"].toString()) {
+            const QColor color{tile["color"].toString()};
+            const auto walkable = tile["walkable"].toBool();
+            types.insert(key.toLatin1(), {color, it.key(), walkable});
+        }
+    }
+
+    return types;
 }
 
 bool MapModel::load(QString fileName, Format format)
@@ -141,17 +157,18 @@ bool MapModel::load(QString fileName, Format format)
     for (auto &row: rows)
         row = row.trimmed();
 
+    const auto types = makeTypes();
     QList<Tile> tiles;
 
     if (format == CurrentFormat) {
         for (const auto &row: rows) {
             for (int i = 0; i < row.length(); i+= 2)
-                tiles += Tile{row.mid(i, 2)};
+                tiles += Tile{types, row.mid(i, 2)};
         }
     } else if (format == LegacyFormat) {
         for (const auto &row: rows) {
             for (int i = 0; i < row.length(); ++i)
-                tiles += Tile{row.mid(i, 1)};
+                tiles += Tile{types, row.mid(i, 1)};
         }
     }
 

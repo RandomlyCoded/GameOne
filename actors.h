@@ -1,6 +1,7 @@
 #ifndef GAMEONE_ACTORS_H
 #define GAMEONE_ACTORS_H
 
+#include <QColor>
 #include <QObject>
 #include <QPoint>
 #include <QPointer>
@@ -29,6 +30,7 @@ class Actor : public QObject
     Q_PROPERTY(int maximumEnergy READ maximumEnergy NOTIFY maximumEnergyChanged FINAL)
     Q_PROPERTY(bool energyVisible READ energyVisible CONSTANT FINAL)
 
+    Q_PROPERTY(QColor color READ color CONSTANT FINAL)
     Q_PROPERTY(QUrl imageSource READ imageSource NOTIFY imageSourceChanged FINAL)
     Q_PROPERTY(int imageCount READ imageCount NOTIFY imageCountChanged FINAL)
 
@@ -45,6 +47,8 @@ public:
 
     void setName(QString name);
     auto name() const { return m_name; }
+
+    virtual QColor color() const = 0;
 
     QUrl imageSource() const;
     int imageCount() const;
@@ -122,7 +126,8 @@ class Enemy : public Actor
 public:
     using Actor::Actor;
 
-    QString type() const override;
+    QString type() const override { return "Enemy"; }
+    QColor color() const override { return Qt::red; }
 
     bool energyVisible() const override { return true; };
     bool canAttack(const Actor *opponent) const override;
@@ -139,7 +144,8 @@ class Player : public Actor
 public:
     explicit Player(QJsonObject spec, Backend *backend);
 
-    QString type() const override;
+    QString type() const override { return "Player"; }
+    QColor color() const override { return "pink"; }
 
     bool energyVisible() const override { return true; };
 //    bool canHit(int m_hitEnergy);
@@ -162,7 +168,8 @@ class Chest : public Actor
 public:
     explicit Chest(QJsonObject spec, Backend *backend);
 
-    QString type() const override;
+    QString type() const override { return "chest"; }
+    QColor color() const override { return "#b29764"; }
 
     bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;
@@ -189,7 +196,8 @@ class Ladder : public Actor
 public:
     explicit Ladder(QJsonObject spec, Backend *backend);
 
-    QString type() const override;
+    QString type() const override { return "ladder"; }
+    QColor color() const override { return "#625507"; }
 
     bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;

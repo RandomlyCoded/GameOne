@@ -288,29 +288,38 @@ QJsonDocument Backend::cachedDocument(QUrl url) const
 
 QJsonObject Backend::resolve(QJsonObject object) const
 {
-    static const auto s_basicsUrl = QUrl{"qrc:/GameOne/data/basics.json"};
-
-    QUrl ref{object["$ref"].toString()};
-
-    if (!ref.isEmpty()) {
-        if (ref.path().isEmpty()) {
-            ref.setScheme(s_basicsUrl.scheme());
-            ref.setPath(s_basicsUrl.path());
-        } else if (ref.isRelative()) {
-            ref = s_basicsUrl.resolved(ref);
-        }
-
-        auto json = cachedDocument(ref).object();
-        for (const auto path = ref.fragment().split('/', Qt::SkipEmptyParts); const auto &id: path)
-            json = resolve(json[id].toObject());
+    if (const auto ref = object.find("$ref"); ref != object.end()) {
+        auto json = resolve(ref->toString());
+        object.erase(ref);
 
         for (auto it = json.begin(); it != json.end(); ++it) {
             if (!object.contains(it.key()))
                 object.insert(it.key(), it.value());
         }
-
-        object.remove("$ref");
     }
+
+    return object;
+}
+
+QJsonObject Backend::resolve(QUrl ref) const
+{
+    static const auto s_basicsUrl = QUrl{"qrc:/GameOne/data/basics.json"};
+
+    if (ref.isEmpty())
+        return {};
+
+    if (ref.path().isEmpty()) {
+        ref.setScheme(s_basicsUrl.scheme());
+        ref.setPath(s_basicsUrl.path());
+    } else if (ref.isRelative()) {
+        ref = s_basicsUrl.resolved(ref);
+    }
+
+    const auto path = ref.fragment().split('/', Qt::SkipEmptyParts);
+    auto object = cachedDocument(ref).object();
+
+    for (const auto &id: path)
+        object = resolve(object[id].toObject());
 
     return object;
 }

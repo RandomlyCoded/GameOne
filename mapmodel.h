@@ -2,13 +2,19 @@
 #define GAMEONE_MAPMODEL_H
 
 #include <QAbstractListModel>
+#include <QColor>
+#include <QJsonObject>
+#include <QPointer>
 #include <QUrl>
 
 namespace GameOne {
 
+class Backend;
+
 class MapModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(GameOne::Backend *backend READ backend WRITE setBackend NOTIFY backendChanged FINAL)
     Q_PROPERTY(int columns READ columns NOTIFY columnsChanged FINAL)
     Q_PROPERTY(int rows READ rows NOTIFY rowsChanged FINAL)
 
@@ -17,9 +23,11 @@ public:
         TypeRole = Qt::UserRole + 1,
         ColumnRole,
         RowRole,
-        WalkableRole,
         ItemRole,
+        TileColorRole,
+        ItemColorRole,
         ImageSourceRole,
+        WalkableRole,
     };
 
     Q_ENUM(Role)
@@ -32,11 +40,13 @@ public:
     Q_ENUM(Format)
 
     using QAbstractListModel::QAbstractListModel;
+    explicit MapModel(Backend *backend);
 
     QVariant data(const QModelIndex &index, int role) const override;
     int rowCount(const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
 
+    Backend *backend() const { return m_backend.data(); }
     int columns() const { return m_columns; }
     int rows() const { return m_rows; }
 
@@ -45,7 +55,11 @@ public:
     QModelIndex indexByPoint(QPoint point) const;
     QVariant dataByPoint(QPoint point, Role role) const;
 
+public slots:
+    void setBackend(GameOne::Backend *backend);
+
 signals:
+    void backendChanged(GameOne::Backend * backend);
     void columnsChanged(int columns);
     void rowsChanged(int rows);
 
@@ -54,6 +68,7 @@ private:
     {
         struct Type
         {
+            QColor color;
             QString name;
             bool walkable = false;
 
@@ -61,15 +76,19 @@ private:
             QUrl imageSource() const { return {}; };
         };
 
-        explicit Tile(QByteArray spec);
+        explicit Tile(const QHash<char, Type> &types, QByteArray spec);
 
-        bool isWalkable() const;
         QUrl imageSource() const;
+        bool isWalkable() const;
 
         Type type;
         Type item;
     };
 
+    QHash<char, Tile::Type> makeTypes() const;
+
+    QPointer<Backend> m_backend;
+    QJsonObject m_tileInfo;
     QList<Tile> m_tiles;
 
     int m_columns = 0;

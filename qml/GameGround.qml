@@ -50,36 +50,7 @@ Item {
                                 && actor.y === model.row);
                 }
 
-                function colorOf(type) {
-                    return {
-                        "Player": "silver",
-                        "Enemy": "red",
-                        "Hill": "brown",
-                        "Mountain": "gray",
-                        "DeepWater": "darkblue",
-                        "Water": "blue",
-                        "Grass": "lawngreen",
-                        "Tree": "darkgreen",
-                        "Sand": "#ffff60",
-                        "Ice": "white",
-                        "Fence": "saddlebrown",
-                        "Lava": "#cd0000",
-                        "Vulcanrock": "#190202",
-                        "Fire": "#f98d00", // BUGFIX: Gradient einbauen
-                        "House": "#711414",
-                        "Wall": "#8a8a8a",
-                        "Gate": "#6c4a0a",
-                        "Earthhole": "#391504",
-                        "Ladder▼": "#625507",
-                        "Ladder▲": "#625507",
-                        "Underground": "#5f5f5f",
-                        "Chest": "#b29764",
-                        "Bridge": "#895900",
-                        "Caribbean": "#00ffe1"
-                    }[type] || "white";
-                }
-
-                color: colorOf(model.type)
+                color: model.tileColor
                 clip: true
 
                 border.color: "black"
@@ -105,7 +76,7 @@ Item {
                     width: 2 * radius
                     height: 2 * radius
 
-                    color: colorOf(model.item)
+                    color: model.itemColor
                     visible: !actor && model.item && !itemImage.visible || false
                 }
 
@@ -140,7 +111,7 @@ Item {
                     width: 2 * radius
                     height: 2 * radius
 
-                    color: colorOf(actor && actor.type)
+                    color: actor && actor.isAlive && actor.color || ""
                     visible: actor && actor.isAlive && !actorImage.visible || false
                 }
 

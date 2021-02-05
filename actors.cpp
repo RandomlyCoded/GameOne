@@ -167,11 +167,6 @@ void Actor::die()
     }
 }
 
-QString Enemy::type() const
-{
-    return "Enemy";
-}
-
 bool Enemy::canAttack(const Actor *opponent) const
 {
     return dynamic_cast<const Player *>(opponent);
@@ -221,10 +216,6 @@ Player::Player(QJsonObject spec, Backend *backend)
     , m_inventory{new InventoryModel{this}}
 {}
 
-QString Player::type() const
-{
-    return "Player";
-}
 
 bool Player::canAttack(const Actor *opponent) const
 {
@@ -248,11 +239,6 @@ Chest::Chest(QJsonObject spec, Backend *backend)
     const auto itemType = spec["item"].toString();
     m_item = backend->item(itemType);
     m_amount = spec["amount"].toInt();
-}
-
-QString Chest::type() const
-{
-    return "chest";
 }
 
 void Chest::giveBonus(Actor *actor, int)
@@ -283,11 +269,6 @@ Ladder::Ladder(QJsonObject spec, Backend *backend)
 {
     m_level = spec["level"].toInt();
     m_destination = {spec["dx"].toInt(), spec["dy"].toInt()};
-}
-
-QString Ladder::type() const
-{
-    return "ladder";
 }
 
 void Ladder::giveBonus(Actor *, int)
