@@ -26,6 +26,12 @@ int Application::run(QUrl qmlRoot)
 
     initResources();
 
+    qmlRegisterUncreatableType<Actor>("GameOne", 1, 0, "Actor", "Cannot construct abstract base class");
+    qmlRegisterUncreatableType<Player>("GameOne", 1, 0, "Player", "Managed and created by Backend");
+    qmlRegisterUncreatableType<Chest>("GameOne", 1, 0, "Chest", "Managed and created by Backend");
+    qmlRegisterUncreatableType<Enemy>("GameOne", 1, 0, "Enemy", "Managed and created by Backend");
+    qmlRegisterUncreatableType<Ladder>("GameOne", 1, 0, "Ladder", "Managed and created by Backend");
+
     qmlRegisterType<InventoryModel>("GameOne", 1, 0, "InventoryModel");
     qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");

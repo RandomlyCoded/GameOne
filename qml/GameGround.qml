@@ -1,6 +1,12 @@
+import GameOne 1.0
+
 import QtQuick 2.15
 
 Item {
+    id: gameGround
+
+    property real cellSize: 60
+
     clip: true
 
     Rectangle {
@@ -44,21 +50,14 @@ Item {
             Rectangle {
                 id: cell
 
-                readonly property var actor: {
-                    return backend && backend.actors.find(
-                                actor => actor.isAlive
-                                && actor.x === model.column
-                                && actor.y === model.row);
-                }
-
                 color: model.tileColor
                 clip: true
 
                 border.color: "black"
                 border.width: 1
 
-                width: 60
-                height: width
+                width: gameGround.cellSize
+                height: gameGround.cellSize
 
                 Image {
                     id: tileImage
@@ -88,8 +87,32 @@ Item {
                     height: 2 * radius
 
                     color: model.itemColor
-                    visible: !actor && model.item && !itemImage.visible || false
+                    visible: model.itemType && !model.isStart && !itemImage.visible || false
                 }
+            }
+        }
+    }
+
+    Item {
+        id: actorGrid
+
+        anchors.fill: gameGrid
+
+        Repeater {
+            model: backend.actors
+
+            Item {
+                id: actorView
+
+                readonly property Actor actor: modelData
+
+                x: actorView.actor.x * width
+                y: actorView.actor.y * height
+
+                width: gameGround.cellSize
+                height: gameGround.cellSize
+
+                visible: actorView.actor.isAlive
 
                 Image {
                     id: actorImage
@@ -99,18 +122,17 @@ Item {
                     visible: source.toString()
 
                     rotation: {
-                        if (actor && actor.rotationSteps > 1)
-                            return 360 * (backend.ticks % actor.rotationSteps) / actor.rotationSteps;
+                        if (actorView.actor.rotationSteps > 1) {
+                            let step = backend.ticks % actorView.actor.rotationSteps;
+                            return 360 * step / actorView.actor.rotationSteps;
+                        }
 
                         return 0;
                     }
 
-                    source: {
-                        if (actor)
-                            return backend.imageUrl(actor.imageSource, actor.imageCount, backend.ticks);
-
-                        return "";
-                    }
+                    source: backend.imageUrl(actorView.actor.imageSource,
+                                             actorView.actor.imageCount,
+                                             backend.ticks)
                 }
 
                 Rectangle {
@@ -122,8 +144,8 @@ Item {
                     width: 2 * radius
                     height: 2 * radius
 
-                    color: actor && actor.color || ""
-                    visible: actor && !actorImage.visible || false
+                    color: actorView.actor.color
+                    visible: !actorImage.visible
                 }
 
                 Rectangle {
@@ -139,17 +161,17 @@ Item {
                     width: parent.width - 6
                     height: 10
 
-                    visible: cell.actor && cell.actor.energyVisible || false
+                    visible: actorView.actor.energyVisible
 
                     Rectangle {
                         id: energyBar
 
-                        property real energyLevel: cell.actor ? cell.actor.energy / cell.actor.maximumEnergy : 0
+                        property real level: actorView.actor.energy / actorView.actor.maximumEnergy
 
                         x: parent.border.width
                         y: parent.border.width
                         height: parent.height - 2 * parent.border.width
-                        width: (parent.width - 2 * parent.border.width) * energyLevel
+                        width: (parent.width - 2 * parent.border.width) * level
                         color: "lawngreen"
                     }
 
@@ -158,7 +180,7 @@ Item {
                         font.pixelSize: 8
                         font.bold: true
                         anchors.centerIn: parent
-                        text: cell.actor ? "%1 / %2".arg(cell.actor.energy).arg(cell.actor.maximumEnergy) : ""
+                        text: "%1 / %2".arg(actorView.actor.energy).arg(actorView.actor.maximumEnergy)
                     }
                 }
 
@@ -172,8 +194,8 @@ Item {
                     style: Text.Outline
                     styleColor: "#80000000"
 
-                    text: cell.actor && cell.actor.name || ""
-                    visible: cell.actor && cell.actor.name || false
+                    text: actorView.actor.name
+                    visible: text
                 }
             }
         }

@@ -1,4 +1,7 @@
 {
+    "Enemy": { "keys": "E", "color": "red", "walkable": true, "isStart": true },
+    "Player": { "keys": "P", "color": "pink", "walkable": true, "isStart": true },
+
     "Hill": { "keys": "H", "color": "brown", "walkable": true },
     "Mountain": { "keys": "M", "color": "gray", "walkable": false },
 
@@ -22,12 +25,13 @@
     "Underground": { "keys": "u", "color": "#5f5f5f", "walkable": true },
     "Vulcanrock": { "keys": "V", "color": "#190202", "walkable": true },
 
-    "Earthhole": { "keys": "e", "color": "#391504", "walkable": true },
-    "Gate": { "keys": "g", "color": "#6c4a0a", "walkable": true },
-    "Ladder▲": { "keys": "+", "color": "#625507", "walkable": true },
-    "Ladder▼": { "keys": "-", "color": "#625507", "walkable": true },
+    "Earthhole": { "keys": "e", "color": "#391504", "walkable": true, "isStart": true },
+    "Gate": { "keys": "g", "color": "#6c4a0a", "walkable": true, "isStart": true },
+    "Portal": { "keys": "p", "color": "7fffff", "walkable": true, "isStart": true },
+    "Ladder+": { "keys": "+", "color": "#625507", "walkable": true, "isStart": true },
+    "Ladder-": { "keys": "-", "color": "#625507", "walkable": true, "isStart": true },
 
-    "Chest": { "keys": "c", "color": "#b29764", "walkable": true },
+    "Chest": { "keys": "c", "color": "#b29764", "walkable": true, "isStart": true },
     "Fence": { "keys": "|\\/-", "color": "saddlebrown", "walkable": false },
     "House": { "keys": "v", "color": "#711414", "walkable": false },
     "Tree": { "keys": "@", "color": "darkgreen", "walkable": false },

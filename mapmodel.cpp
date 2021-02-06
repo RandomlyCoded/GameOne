@@ -51,13 +51,15 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
         const auto tile = m_tiles[index.row()];
 
         switch (static_cast<Role>(role)) {
+        case PositionRole:
+            return QPoint{column, row};
         case ColumnRole:
             return column;
         case RowRole:
             return row;
         case TypeRole:
             return tile.type.name;
-        case ItemRole:
+        case ItemTypeRole:
             return tile.item.name;
         case TileColorRole:
             return tile.type.color;
@@ -71,12 +73,26 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
             return tile.item.imageSource;
         case ItemImageCountRole:
             return tile.item.imageCount;
+        case IsStartRole:
+            return tile.item.isStart;
         case WalkableRole:
             return tile.isWalkable();
         }
     }
 
     return {};
+}
+
+bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (hasIndex(index.row(), index.column(), index.parent())) {
+        if (role == IsStartRole && value.canConvert(QVariant::Bool)) {
+            m_tiles[index.row()].item.isStart = value.toBool();
+            return true;
+        }
+    }
+
+    return false;
 }
 
 int MapModel::rowCount(const QModelIndex &parent) const
@@ -90,16 +106,18 @@ int MapModel::rowCount(const QModelIndex &parent) const
 QHash<int, QByteArray> MapModel::roleNames() const
 {
     return {
+        {PositionRole, "position"},
         {ColumnRole, "column"},
         {RowRole, "row"},
         {TypeRole, "type"},
-        {ItemRole, "item"},
+        {ItemTypeRole, "itemType"},
         {TileColorRole, "tileColor"},
         {TileImageSourceRole, "tileImageSource"},
         {TileImageCountRole, "tileImageCount"},
         {ItemColorRole, "itemColor"},
         {ItemImageSourceRole, "itemImageSource"},
         {ItemImageCountRole, "itemImageCount"},
+        {IsStartRole, "isStart"},
         {WalkableRole, "walkable"},
     };
 }
@@ -132,8 +150,9 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
             const QUrl imageSource = Backend::imageUrl(tile["image"].toString());
             const auto imageCount = tile["imageCount"].toInt(1);
             const auto walkable = tile["walkable"].toBool();
+            const auto isStart = tile["isStart"].toBool();
 
-            types.insert(key.toLatin1(), {it.key(), color, imageSource, imageCount, walkable});
+            types.insert(key.toLatin1(), {it.key(), color, imageSource, imageCount, walkable, isStart});
         }
     }
 

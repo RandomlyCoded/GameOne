@@ -77,11 +77,13 @@ signals:
     void ticksChanged(qint64 ticks);
 
 private:
+    QJsonDocument cachedDocument(QUrl url) const;
+
     void loadItems();
+    void validateActors(QString levelFileName, QString mapFileName) const;
+
     void onActionTimeout();
     void onTicksTimeout();
-
-    QJsonDocument cachedDocument(QUrl url) const;
 
     QTimer *const m_actionTimer;
     QTimer *const m_ticksTimer;

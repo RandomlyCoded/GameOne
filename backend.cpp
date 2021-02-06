@@ -92,7 +92,8 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         }
 
         const auto mapData = level["map"].toObject();
-        if (!m_map->load(mapData["filename"].toString(), static_cast<MapModel::Format>(mapData["format"].toInt())))
+        const auto mapFileName = mapData["filename"].toString();
+        if (!m_map->load(mapFileName, static_cast<MapModel::Format>(mapData["format"].toInt())))
             return false;
 
         m_levelFileName = fileName;
@@ -123,11 +124,13 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         if (playerPosition.has_value())
             m_player->moveTo(*playerPosition);
 
-        m_actors += m_player.get();
         const auto toRawPointer = [](auto ptr) { return ptr.get(); };
-        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
         std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
         std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
+        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
+        m_actors += m_player.get();
+
+        validateActors(fileName, mapFileName);
 
         connect(m_player.get(), &Player::positionChanged, this, [this] { m_actionTimer->start(); });
         connect(m_player.get(), &Player::livesChanged, this, [this] { m_actionTimer->stop(); });
@@ -264,6 +267,53 @@ void Backend::loadItems()
     m_items["StarArrow"] = new InventoryItem{"Star Arrow", QUrl{"weapons/StarArrow.svg"}, this}; // weapons/StarArrow.svg
     m_items["TwoHandSword"] = new InventoryItem{"Two Hand Sword", QUrl{"weapons/TwohandSword.svg"}, this};
     m_items[""] = new InventoryItem{{}, QUrl{}, this};
+}
+
+void Backend::validateActors(QString levelFileName, QString mapFileName) const
+{
+    QHash<int, QString> actorTypes;
+
+    // verify that actors are declared in the map
+    for (const auto actor: m_actors) {
+        const auto mapIndex = m_map->indexByPoint(actor->position());
+        const auto itemType = mapIndex.data(MapModel::ItemTypeRole).toString();
+
+        if (itemType.isEmpty()) {
+            qCWarning(lcBackend,
+                      "%ls: No item at supposed start position (%d,%d) of %ls \"%ls\"",
+                      qUtf16Printable(levelFileName), actor->x(), actor->y(),
+                      qUtf16Printable(actor->type()), qUtf16Printable(actor->name()));
+        } else if (actor->type() != itemType) {
+            qCWarning(lcBackend,
+                      "%ls: Unexpected item of type %ls at start position (%d,%d) of %ls \"%ls\"",
+                      qUtf16Printable(levelFileName), qUtf16Printable(itemType), actor->x(), actor->y(),
+                      qUtf16Printable(actor->type()), qUtf16Printable(actor->name()));
+        }
+
+        actorTypes.insert(mapIndex.row(), actor->type());
+    }
+
+    // verify that actors declared in the map also are declared in the JSON
+    for (int i = 0, c = m_map->rowCount(); i < c; ++i) {
+        const auto mapIndex =  m_map->index(i);
+        const auto isStart = mapIndex.data(MapModel::IsStartRole).toBool();
+
+        if (!isStart)
+            continue;
+
+        const auto itemType = mapIndex.data(MapModel::ItemTypeRole).toString();
+
+        if (actorTypes[mapIndex.row()] != itemType) {
+            const auto position = mapIndex.data(MapModel::PositionRole).toPoint();
+            m_map->setData(mapIndex, false, MapModel::IsStartRole);
+
+            qCWarning(lcBackend,
+                      "%ls: Map contains a start position of an actor of type %ls "
+                      "at (%d,%d), but the details are missing in the JSON",
+                      qUtf16Printable(mapFileName), qUtf16Printable(itemType),
+                      position.x(), position.y());
+        }
+    }
 }
 
 void Backend::onActionTimeout()
