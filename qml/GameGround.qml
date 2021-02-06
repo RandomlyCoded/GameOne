@@ -46,7 +46,8 @@ Item {
 
                 readonly property var actor: {
                     return backend && backend.actors.find(
-                                actor => actor.x === model.column
+                                actor => actor.isAlive
+                                && actor.x === model.column
                                 && actor.y === model.row);
                 }
 
@@ -98,14 +99,14 @@ Item {
                     visible: source.toString()
 
                     rotation: {
-                        if (actor && actor.isAlive && actor.rotationSteps > 1)
+                        if (actor && actor.rotationSteps > 1)
                             return 360 * (backend.ticks % actor.rotationSteps) / actor.rotationSteps;
 
                         return 0;
                     }
 
                     source: {
-                        if (actor && actor.isAlive)
+                        if (actor)
                             return backend.imageUrl(actor.imageSource, actor.imageCount, backend.ticks);
 
                         return "";
@@ -121,8 +122,8 @@ Item {
                     width: 2 * radius
                     height: 2 * radius
 
-                    color: actor && actor.isAlive && actor.color || ""
-                    visible: actor && actor.isAlive && !actorImage.visible || false
+                    color: actor && actor.color || ""
+                    visible: actor && !actorImage.visible || false
                 }
 
                 Rectangle {
@@ -138,7 +139,7 @@ Item {
                     width: parent.width - 6
                     height: 10
 
-                    visible: cell.actor && cell.actor.energyVisible && cell.actor.isAlive || false
+                    visible: cell.actor && cell.actor.energyVisible || false
 
                     Rectangle {
                         id: energyBar
@@ -172,7 +173,7 @@ Item {
                     styleColor: "#80000000"
 
                     text: cell.actor && cell.actor.name || ""
-                    visible: cell.actor && cell.actor.isAlive && cell.actor.name || false
+                    visible: cell.actor && cell.actor.name || false
                 }
             }
         }
