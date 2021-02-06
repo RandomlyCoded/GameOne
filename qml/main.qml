@@ -40,27 +40,5 @@ Window {
         height: parent.height
 
         enabled: currentScreen === game
-
-        onBossBattle: currentScreen = bossBattle
-    }
-
-    BossBattleScreen {
-        id: bossBattle
-
-        width: parent.width
-        height: parent.height
-
-        enabled: currentScreen === bossBattle
-
-        onTheGameIsOver: currentScreen = theGameIsOver
-    }
-
-    TheGameIsOverScreen {
-        id: theGameIsOver
-
-        width: parent.width
-        height: parent.height
-
-        enabled: currentScreen === theGameIsOver
     }
 }

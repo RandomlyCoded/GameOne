@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/GameOne">
-        <file>qml/BossBattleScreen.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/Circle.qml</file>
         <file>qml/Debug.qml</file>
@@ -12,7 +11,6 @@
         <file>qml/Screen.qml</file>
         <file>qml/Sidebar.qml</file>
         <file>qml/StartScreen.qml</file>
-        <file>qml/TheGameIsOverScreen.qml</file>
         <file>qml/WelcomeScreen.qml</file>
         <file>qml/main.qml</file>
     </qresource>
