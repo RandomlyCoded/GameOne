@@ -113,6 +113,16 @@ Item {
 
                 visible: actorView.actor.isAlive
 
+                Behavior on x {
+                    enabled: actorView.isAlive
+                    NumberAnimation { duration: 100 }
+                }
+
+                Behavior on y {
+                    enabled: actorView.isAlive
+                    NumberAnimation { duration: 100 }
+                }
+
                 Image {
                     id: actorImage
 
