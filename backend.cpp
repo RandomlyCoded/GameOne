@@ -123,11 +123,11 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         if (playerPosition.has_value())
             m_player->moveTo(*playerPosition);
 
-        m_actors += m_player.get();
         const auto toRawPointer = [](auto ptr) { return ptr.get(); };
-        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
         std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
         std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
+        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
+        m_actors += m_player.get();
 
         connect(m_player.get(), &Player::positionChanged, this, [this] { m_actionTimer->start(); });
         connect(m_player.get(), &Player::livesChanged, this, [this] { m_actionTimer->stop(); });
