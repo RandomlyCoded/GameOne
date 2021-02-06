@@ -87,7 +87,7 @@ Item {
                     height: 2 * radius
 
                     color: model.itemColor
-                    visible: model.item && !itemImage.visible || false
+                    visible: model.itemType && !model.isStart && !itemImage.visible || false
                 }
             }
         }
