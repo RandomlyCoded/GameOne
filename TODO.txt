@@ -93,3 +93,6 @@ Goldmünzen werden von Gegnern fallen gelassen, mit ihnen kann man sich vielleic
 
 23.:
 Feuergeisster können NICHT durch Wasser durch Lava aber schon
+
+24.:
+🐞BUG: Auf Truhen und Fässern sind Feinden und du unverwundbar
