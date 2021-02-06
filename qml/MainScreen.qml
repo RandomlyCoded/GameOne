@@ -1,5 +1,4 @@
 import GameOne 1.0
-
 import QtQuick 2.15
 
 // bitte in den IntroScreen gucken!
@@ -47,21 +46,21 @@ GameScreen {
         focus: true
         radius: 100
 
-        onMoveUp: backend.player.moveUp()
-        onMoveDown: backend.player.moveDown()
-        onMoveLeft: backend.player.moveLeft()
-        onMoveRight: backend.player.moveRight()
+        onMoveUp: Backend.player.moveUp()
+        onMoveDown: Backend.player.moveDown()
+        onMoveLeft: Backend.player.moveLeft()
+        onMoveRight: Backend.player.moveRight()
     }
 
     Keys.onSpacePressed: {
-        if (!backend.player.isAlive)
-            backend.respawn();
+        if (!Backend.player.isAlive)
+            Backend.respawn();
     }
 
     Keys.onEscapePressed: {
-        console.info("isAlive:", backend.player.isAlive, ";",
-                     "lives:", backend.player.lives, ";",
-                     "energy:", backend.player.energy,
+        console.info("isAlive:", Backend.player.isAlive, ";",
+                     "lives:", Backend.player.lives, ";",
+                     "energy:", Backend.player.energy,
                      "levels:", levelCount,
                      "Tests:",
                      (parent.height - ((2 * 3) * 25) / 25),

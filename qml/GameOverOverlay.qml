@@ -1,3 +1,4 @@
+import GameOne 1.0
 import QtQuick 2.15
 
 Rectangle {
@@ -31,6 +32,6 @@ Rectangle {
     }
 
     visible: opacity > 0
-    opacity: backend && backend.player.lives === 0 ? 1 : 0
+    opacity: Backend && Backend.player.lives === 0 ? 1 : 0
     Behavior on opacity { NumberAnimation { duration: 750 } }
 }

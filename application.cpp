@@ -37,10 +37,10 @@ int Application::run(QUrl qmlRoot)
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
 
     const auto backend = new Backend{this};
+    qmlRegisterSingletonInstance<Backend>("GameOne", 1, 0, "Backend", backend);
     backend->load(arguments().count() > 1 ? arguments().at(1) : Backend::levelFileName(1));
 
     QQmlApplicationEngine qml;
-    qml.rootContext()->setContextProperty("backend", backend);
     qml.addImageProvider("assets", new ImageProvider);
     qml.load(qmlRoot);
 

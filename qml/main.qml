@@ -1,3 +1,5 @@
+import GameOne 1.0
+
 import QtQuick 2.15
 import QtQuick.Window 2.15
 
@@ -7,7 +9,7 @@ Window {
     height: 1000 // 1000 || 600
     visible: true
     visibility: Window.Maximized
-    title: "GameOne - %1".arg(backend.levelName)
+    title: "GameOne - %1".arg(Backend.levelName)
     // Bei Nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen
     property Item currentScreen: game // welcome
 
