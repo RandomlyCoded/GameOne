@@ -33,7 +33,7 @@ Window {
         onScreenFinished: currentScreen = game
     }
 
-    GameScreen {
+    MainScreen {
         id: game
 
         width: parent.width

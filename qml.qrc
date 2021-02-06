@@ -8,7 +8,7 @@
         <file>qml/GameScreen.qml</file>
         <file>qml/IntroScreen.qml</file>
         <file>qml/Joypad.qml</file>
-        <file>qml/Screen.qml</file>
+        <file>qml/MainScreen.qml</file>
         <file>qml/Sidebar.qml</file>
         <file>qml/StartScreen.qml</file>
         <file>qml/WelcomeScreen.qml</file>
