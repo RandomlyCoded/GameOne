@@ -104,14 +104,29 @@ Item {
                 id: actorView
 
                 readonly property Actor actor: modelData
+                readonly property bool isAlive: actor.isAlive
 
-                x: actorView.actor.x * width
-                y: actorView.actor.y * height
+                property real livingX: actorView.actor.x * width
+                property real livingY: actorView.actor.y * height
+
+                function mix(q, from, to) {
+                    return q * from + (1 - q) * to;
+                }
+
+                property real liftToHeaven: actorView.isAlive ? 1 : 0
+                property real mortalX: mix(1 - Math.cos(Math.PI/2 * Math.pow(liftToHeaven, 0.5)),
+                                           livingX, actorGrid.width/2)
+                property real mortalY: mix(Math.sin(Math.PI/2 * Math.pow(liftToHeaven, 0.5)),
+                                           livingY, -height)
+
+                x: actorView.isAlive ? livingX : mortalX
+                y: actorView.isAlive ? livingY : mortalY
 
                 width: gameGround.cellSize
                 height: gameGround.cellSize
 
-                visible: actorView.actor.isAlive
+                opacity: Math.pow(liftToHeaven, 0.7)
+                visible: opacity > 0
 
                 Behavior on x {
                     enabled: actorView.isAlive
@@ -121,6 +136,10 @@ Item {
                 Behavior on y {
                     enabled: actorView.isAlive
                     NumberAnimation { duration: 100 }
+                }
+
+                Behavior on liftToHeaven {
+                    NumberAnimation { duration: 1500 }
                 }
 
                 Image {
