@@ -23,7 +23,7 @@
         "x": 0,
         "y": 0,
         "name": "Joe",
-        "maximumLifes": 2,
+        "maximumLives": 2,
         "maximumEnergy": 5
     }
 }

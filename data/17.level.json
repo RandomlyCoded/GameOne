@@ -25,7 +25,7 @@
     "player": {
         "x": 0,
         "y": 0,
-        "maximumLifes": 3,
+        "maximumLives": 3,
         "maximumEnergy": 5,
         "$ref": "#characters/Anni"
     }

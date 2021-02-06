@@ -22,7 +22,7 @@
         "x": 0,
         "y": 0,
         "name": "Anni",
-        "maximumLifes": 3,
+        "maximumLives": 3,
         "maximumEnergy": 5,
         "$ref": "#characters/Anni"
     }

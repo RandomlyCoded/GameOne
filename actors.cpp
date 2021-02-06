@@ -16,8 +16,8 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     , m_energyLevels{makeEnergyLevels(spec["energyLevels"].toArray())}
     , m_minimumEnergy{spec["minimumEnergy"].toInt()}
     , m_maximumEnergy{qMax(spec["maximumEnergy"].toInt(), 1)}
-    , m_maximumLifes{qMax(spec["maximumLifes"].toInt(), 1)}
-    , m_lives{m_maximumLifes}
+    , m_maximumLives{qMax(spec["maximumLives"].toInt(), 1)}
+    , m_lives{m_maximumLives}
     , m_imageSource{Backend::imageUrl(spec["image"].toString())}
     , m_imageCount{spec["imageCount"].toInt()}
     , m_rotationSteps{spec["rotationSteps"].toInt()}

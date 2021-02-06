@@ -115,7 +115,7 @@ private:
     int m_maximumEnergy;
     int m_energy;
 
-    int m_maximumLifes;
+    int m_maximumLives;
     int m_lives;
 
     QUrl m_imageSource;

@@ -23,7 +23,7 @@
         "x": 1,
         "y": 1,
         "name": "Ghost",
-        "maximumLifes": 3,
+        "maximumLives": 3,
         "maximumEnergy": 5
     }
 }
