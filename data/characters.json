@@ -7,5 +7,10 @@
     "Joe": {
         "name": "Joe",
         "image": "Characters.svg?show=*-human1,*-boy1"
+    },
+
+    "Ghost": {
+        "name": "Ghost",
+        "image": "Ghost.svgshow=*Ebene 1"
     }
 }

@@ -18,9 +18,10 @@
     "player": {
         "x": 1,
         "y": 1,
-        "name": "Joe",
+        "name": "Sean",
         "maximumLifes": 3,
-        "maximumEnergy": 5
+        "maximumEnergy": 5,
+        "$ref": "#characters/Joe"
     }
 }
 

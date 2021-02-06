@@ -25,6 +25,7 @@
         "y": 0,
         "name": "Joe",
         "maximumLifes": 1,
-        "maximumEnergy": 3
+        "maximumEnergy": 3,
+        "$ref": "#characters/Anni"
     }
 }
