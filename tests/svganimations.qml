@@ -1,3 +1,5 @@
+import GameOne 1.0
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
@@ -29,7 +31,7 @@ Window {
     }
 
     function imageUrl(url) {
-        return backend.imageUrl(url, frameCount, currentFrame);
+        return Backend.imageUrl(url, frameCount, currentFrame);
     }
 
     onFrameCountChanged: {

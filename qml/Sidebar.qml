@@ -1,5 +1,4 @@
 import GameOne 1.0
-
 import QtQuick 2.15
 
 //Item {
@@ -32,7 +31,7 @@ Rectangle {
             x: 40
             y: 7.5
 
-            text: "lives: %1".arg(backend && backend.player.lives || 0)
+            text: "lives: %1".arg(Backend && Backend.player.lives || 0)
         }
 
         Text {
@@ -64,7 +63,7 @@ Rectangle {
 
             color: "#afafaf"
             font.pixelSize: 25
-            visible: backend && !backend.player.isAlive
+            visible: Backend && !Backend.player.isAlive
 
             text: "press space to"
         }
@@ -74,7 +73,7 @@ Rectangle {
 
             color: "#afafaf"
             font.pixelSize: 25
-            visible: backend && !backend.player.isAlive
+            visible: Backend && !Backend.player.isAlive
 
             text: "respawn."
         }
@@ -83,7 +82,7 @@ Rectangle {
         Text {
             color: "#afafaf"
             font.pixelSize: 25
-            text: backend.levelFileName
+            text: Backend.levelFileName
             width: parent.width
             wrapMode: Text.Wrap
         }
@@ -91,7 +90,7 @@ Rectangle {
         Text {
             color: "#afafaf"
             font.pixelSize: 25
-            text: backend.levelName
+            text: Backend.levelName
             width: parent.width
             wrapMode: Text.Wrap
         }
@@ -101,7 +100,7 @@ Rectangle {
             text: "Respawn"
             width: parent.width
 
-            onActivated: backend.respawn()
+            onActivated: Backend.respawn()
         }
 
         Button {
@@ -129,7 +128,7 @@ Rectangle {
                 width: parent.width
                 height: parent.height * opacity
 
-                model: backend.player.inventory
+                model: Backend.player.inventory
 
                 opacity: sidebar.currentDetail === Sidebar.Detail.Inventory ? 1 : 0
                 Behavior on opacity { NumberAnimation {} }
@@ -213,7 +212,7 @@ Rectangle {
                 visible: opacity > 0
 
                 delegate: Button {
-                    property bool isCurrentLevel: model.fileName === backend.levelFileName
+                    property bool isCurrentLevel: model.fileName === Backend.levelFileName
 
                     borderColor: "transparent"
                     color: isCurrentLevel ? "white" : "transparent"
@@ -223,7 +222,7 @@ Rectangle {
                     width: parent && parent.width || 0
                     text: model.levelName
 
-                    onActivated: backend.load(model.fileName)
+                    onActivated: Backend.load(model.fileName)
                 }
             }
         }

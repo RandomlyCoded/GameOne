@@ -1,5 +1,4 @@
 import GameOne 1.0
-
 import QtQuick 2.15
 
 Item {
@@ -41,11 +40,11 @@ Item {
         anchors.centerIn: parent
         spacing: 0
 
-        columns: backend && backend.columns || 0
-        rows: backend && backend.rows || 0
+        columns: Backend && Backend.columns || 0
+        rows: Backend && Backend.rows || 0
 
         Repeater {
-            model: backend && backend.map || 0
+            model: Backend && Backend.map || 0
 
             Rectangle {
                 id: cell
@@ -63,7 +62,7 @@ Item {
                     id: tileImage
 
                     anchors.fill: parent
-                    source: backend.imageUrl(model.tileImageSource, model.tileImageCount, backend.ticks)
+                    source: Backend.imageUrl(model.tileImageSource, model.tileImageCount, Backend.ticks)
                     sourceSize: Qt.size(width, height)
                     visible: source.toString()
                 }
@@ -72,7 +71,7 @@ Item {
                     id: itemImage
 
                     anchors.fill: parent
-                    source: backend.imageUrl(model.itemImageSource, model.itemImageCount, backend.ticks)
+                    source: Backend.imageUrl(model.itemImageSource, model.itemImageCount, Backend.ticks)
                     sourceSize: Qt.size(width, height)
                     visible: source.toString()
                 }
@@ -99,7 +98,7 @@ Item {
         anchors.fill: gameGrid
 
         Repeater {
-            model: backend.actors
+            model: Backend.actors
 
             Item {
                 id: actorView
@@ -123,16 +122,16 @@ Item {
 
                     rotation: {
                         if (actorView.actor.rotationSteps > 1) {
-                            let step = backend.ticks % actorView.actor.rotationSteps;
+                            let step = Backend.ticks % actorView.actor.rotationSteps;
                             return 360 * step / actorView.actor.rotationSteps;
                         }
 
                         return 0;
                     }
 
-                    source: backend.imageUrl(actorView.actor.imageSource,
+                    source: Backend.imageUrl(actorView.actor.imageSource,
                                              actorView.actor.imageCount,
-                                             backend.ticks)
+                                             Backend.ticks)
                 }
 
                 Rectangle {
