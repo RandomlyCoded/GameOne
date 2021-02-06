@@ -220,6 +220,7 @@ Rectangle {
 
                     elide: Text.ElideRight
                     width: parent && parent.width || 0
+                    wrapMode: Text.Wrap
                     text: model.levelName
 
                     onActivated: Backend.load(model.fileName)

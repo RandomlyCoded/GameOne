@@ -9,6 +9,7 @@ Item {
     property alias color: background.color
     property alias text: label.text
     property alias textColor: label.color
+    property alias wrapMode: label.wrapMode
 
     signal activated()
 
@@ -30,6 +31,7 @@ Item {
         anchors.centerIn: background
         font.pixelSize: 20
 
+        horizontalAlignment: Text.AlignHCenter
         width: Math.min(button.width - 10, implicitWidth)
     }
 
