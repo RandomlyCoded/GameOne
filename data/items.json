@@ -35,19 +35,23 @@
     },
 
     "Earthhole": {
-        "image": "items/Earthhole.svg"
+        "image": "items/Earthhole.svg",
+        "type": "Earthhole"
     },
 
     "Portal": {
         "image": "items/Portal.svg",
-        "rotationSteps": 36
+        "rotationSteps": 36,
+        "type": "Portal"
     },
 
     "StairsDown": {
-        "image": "items/StairsDown.svg"
+        "image": "items/StairsDown.svg",
+        "type": "Ladder-"
     },
 
     "StairsUp": {
-        "image": "items/StairsUp.svg"
+        "image": "items/StairsUp.svg",
+        "type": "Ladder+"
     }
 }

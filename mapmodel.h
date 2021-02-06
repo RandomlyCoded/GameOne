@@ -21,15 +21,17 @@ class MapModel : public QAbstractListModel
 public:
     enum Role {
         TypeRole = Qt::UserRole + 1,
+        PositionRole,
         ColumnRole,
         RowRole,
-        ItemRole,
+        ItemTypeRole,
         TileColorRole,
         TileImageSourceRole,
         TileImageCountRole,
         ItemColorRole,
         ItemImageSourceRole,
         ItemImageCountRole,
+        IsStartRole,
         WalkableRole,
     };
 
@@ -46,7 +48,8 @@ public:
     explicit MapModel(Backend *backend);
 
     QVariant data(const QModelIndex &index, int role) const override;
-    int rowCount(const QModelIndex &parent) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+    int rowCount(const QModelIndex &parent = {}) const override;
     QHash<int, QByteArray> roleNames() const override;
 
     Backend *backend() const { return m_backend.data(); }
@@ -76,6 +79,7 @@ private:
             QUrl imageSource;
             int imageCount = 0;
             bool walkable = false;
+            bool isStart = false;
 
             bool isValid() const { return !name.isEmpty(); }
         };

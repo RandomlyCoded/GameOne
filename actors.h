@@ -163,7 +163,22 @@ private:
 //    int m_hitEnergy;
 };
 
-class Chest : public Actor
+class Item : public Actor
+{
+    Q_OBJECT
+
+public:
+    explicit Item(QJsonObject spec, Backend *backend);
+
+    QString type() const override { return m_type; }
+    QColor color() const override { return m_color; }
+
+private:
+    QString m_type;
+    QColor m_color;
+};
+
+class Chest : public Item
 {
     Q_OBJECT
     Q_PROPERTY(GameOne::InventoryItem *item READ item NOTIFY itemChanged FINAL)
@@ -171,9 +186,6 @@ class Chest : public Actor
 
 public:
     explicit Chest(QJsonObject spec, Backend *backend);
-
-    QString type() const override { return "chest"; }
-    QColor color() const override { return "#b29764"; }
 
     bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;
@@ -194,16 +206,13 @@ private:
     int m_amount = 0;
 };
 
-class Ladder : public Actor
+class Ladder : public Item
 {
     Q_OBJECT
     Q_PROPERTY(int level READ level CONSTANT FINAL)
 
 public:
     explicit Ladder(QJsonObject spec, Backend *backend);
-
-    QString type() const override { return "ladder"; }
-    QColor color() const override { return "#625507"; }
 
     bool energyVisible() const override { return false; };
     bool canAttack(const Actor *opponent) const override;

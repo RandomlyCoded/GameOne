@@ -234,16 +234,24 @@ int Player::attack(Actor *opponent)
     return 0;
 }
 
+Item::Item(QJsonObject spec, Backend *backend)
+    : Actor(spec, backend)
+    , m_type{spec["type"].toString()}
+    , m_color{spec["color"].toString()}
+{}
+
 Chest::Chest(QJsonObject spec, Backend *backend)
-    : Actor{applyDefaults(spec), backend}
-{
-    const auto itemType = spec["item"].toString();
-    m_item = backend->item(itemType);
-    m_amount = spec["amount"].toInt();
-}
+    : Item{applyDefaults(spec), backend}
+    , m_item{backend->item(spec["item"].toString())}
+    , m_amount{qMax(spec["amount"].toInt(), 1)}
+{}
 
 QJsonObject GameOne::Chest::applyDefaults(QJsonObject json)
 {
+    if (!json.contains("color"))
+        json.insert("color", "#b29764");
+    if (!json.contains("type"))
+        json.insert("type", "Chest");
     if (!json.contains("minimumEnergy"))
         json.insert("minimumEnergy", 1);
     if (!json.contains("maximumEnergy"))
@@ -265,7 +273,7 @@ bool Chest::canAttack(const Actor *) const
     return false;
 }
 
-int Chest::attack(Actor *actor)
+int Chest::attack(Actor *)
 {
     return 0;
 }
@@ -276,14 +284,17 @@ InventoryItem *Chest::item() const
 }
 
 Ladder::Ladder(QJsonObject spec, Backend *backend)
-    : Actor{applyDefaults(spec), backend}
-{
-    m_level = spec["level"].toInt();
-    m_destination = {spec["dx"].toInt(), spec["dy"].toInt()};
-}
+    : Item{applyDefaults(spec), backend}
+    , m_level{spec["level"].toInt()}
+    , m_destination{spec["dx"].toInt(), spec["dy"].toInt()}
+{}
 
 QJsonObject GameOne::Ladder::applyDefaults(QJsonObject json)
 {
+    if (!json.contains("color"))
+        json.insert("color", "#625507");
+    if (!json.contains("type"))
+        json.insert("type", "Ladder");
     if (!json.contains("minimumEnergy"))
         json.insert("minimumEnergy", 1);
     if (!json.contains("maximumEnergy"))
