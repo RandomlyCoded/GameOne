@@ -138,7 +138,7 @@ Item {
                 }
 
                 Behavior on liftToHeaven {
-                    NumberAnimation { duration: 1500 }
+                    NumberAnimation { duration: 2500 }
                 }
 
                 Item {
