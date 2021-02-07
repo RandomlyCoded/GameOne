@@ -45,5 +45,5 @@ add_subdirectory(tests)
 
 add_custom_target(
     Documentation SOURCES
-    TODO.txt
+    README.md
     )
