@@ -1,4 +1,4 @@
-S S S S
+SPS SES
 W W H H
-S S S S
+SpS S SE
 1 2 3 4

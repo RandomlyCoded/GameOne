@@ -61,5 +61,8 @@
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
         <file>assets/Ghost.svg</file>
+        <file>assets/items/FirTree.svg</file>
+        <file>assets/items/PalmTreeWhitCoconuts.svg</file>
+        <file>assets/items/PalmTreeWhitoutCoconuts.svg</file>
     </qresource>
 </RCC>

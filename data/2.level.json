@@ -7,7 +7,7 @@
     "enemies": [
         {"x": 2, "y": 0, "maximumEnergy": 2},
         {"x": 3, "y": 2, "maximumEnergy": 10},
-        {"x": 0, "y": 2, "maximumEnergy": 20}
+        {"x": 1, "y": 2, "maximumEnergy": 20}
     ],
 
     "ladders": [
