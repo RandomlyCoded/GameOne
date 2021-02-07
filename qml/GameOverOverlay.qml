@@ -32,6 +32,6 @@ Rectangle {
     }
 
     visible: opacity > 0
-    opacity: Backend && Backend.player.lives === 0 ? 1 : 0
+    opacity: Backend.player.lives === 0 ? 1 : 0
     Behavior on opacity { NumberAnimation { duration: 750 } }
 }

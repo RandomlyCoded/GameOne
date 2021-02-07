@@ -40,11 +40,11 @@ Item {
         anchors.centerIn: parent
         spacing: 0
 
-        columns: Backend && Backend.columns || 0
-        rows: Backend && Backend.rows || 0
+        columns: Backend.columns
+        rows: Backend.rows
 
         Repeater {
-            model: Backend && Backend.map || 0
+            model: Backend.map
 
             Rectangle {
                 id: cell

@@ -31,7 +31,7 @@ Rectangle {
             x: 40
             y: 7.5
 
-            text: "lives: %1".arg(Backend && Backend.player.lives || 0)
+            text: "lives: %1".arg(Backend.player.lives)
         }
 
         Text {
@@ -63,7 +63,7 @@ Rectangle {
 
             color: "#afafaf"
             font.pixelSize: 25
-            visible: Backend && !Backend.player.isAlive
+            visible: !Backend.player.isAlive
 
             text: "press space to"
         }
@@ -73,7 +73,7 @@ Rectangle {
 
             color: "#afafaf"
             font.pixelSize: 25
-            visible: Backend && !Backend.player.isAlive
+            visible: !Backend.player.isAlive
 
             text: "respawn."
         }
