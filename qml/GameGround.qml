@@ -125,6 +125,8 @@ Item {
                 width: gameGround.cellSize
                 height: gameGround.cellSize
 
+                rotation: isAlive ? 0 : (liftToHeaven * 9 * 22) % 22 - 10
+
                 Behavior on x {
                     enabled: actorView.isAlive
                     NumberAnimation { duration: 100 }
