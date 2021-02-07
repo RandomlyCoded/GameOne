@@ -183,8 +183,11 @@ Item {
                     Rectangle {
                         id: energyIndicator
 
+                        opacity: actorView.isAlive ? 1 : 0
                         border { width: 1; color: "#000000" }
                         color: "#800000000"
+
+                        Behavior on opacity { NumberAnimation { duration: 450 } }
 
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
