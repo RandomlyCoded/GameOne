@@ -1,5 +1,5 @@
-G G S w W w w S G G G
-G S w w W w S G G@G@G
+GPG S w W w w S G G G
+G SEw w W wpS G G@G@G
 G S w w w W w S G G@G
 G S w w w w S G G@G@G
 G S S w w S G G G G G

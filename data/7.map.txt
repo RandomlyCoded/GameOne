@@ -1,5 +1,5 @@
-G G G G S S w w S w G G
-G G G S S w w W w S G G
+GPG G G S S w w S w G G
+G GEG S S w w W w S G G
 G G G S w w W w W S G G
 G G S w w W w w S G@G@G
 G G H H M H S w S G@G G
@@ -9,5 +9,5 @@ H H H H S S w S M H G G
 H M M S w w w S S M G G@
 M H H w w H w w w w S G@
 M M M M w w M M M M M S
-H H H H S w w w S H H H
+H H H H S w w w S H H Hp
 1 2 3 4 5 6 7 8 9 0 1 2

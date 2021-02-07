@@ -13,7 +13,7 @@
         {"x": 2, "y": 2, "maximumEnergy": 10},
         {"x": 0, "y": 2, "maximumEnergy": 10},
         {"x": 1, "y": 2, "maximumEnergy": 10},
-        {"x": 4, "y": 4, "maximumEnergy": 50}
+        {"x": 3, "y": 3, "maximumEnergy": 50}
     ],
 
     "ladders": [
