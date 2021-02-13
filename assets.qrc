@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/GameOne">
         <file>assets/Characters.svg</file>
+        <file>assets/Ghost.svg</file>
         <file>assets/enemies/FireGhost.svg</file>
         <file>assets/enemies/Spider.svg</file>
         <file>assets/enemies/Tentaklon.svg</file>
@@ -38,8 +39,13 @@
         <file>assets/items/FenceRightTop.svg</file>
         <file>assets/items/FenceVertical.svg</file>
         <file>assets/items/Fir.svg</file>
+        <file>assets/items/FirTree.svg</file>
         <file>assets/items/Gate.svg</file>
         <file>assets/items/HouseRoof.svg</file>
+        <file>assets/items/Oaktree.svg</file>
+        <file>assets/items/OaktreewithAcorn.svg</file>
+        <file>assets/items/PalmTreeWhitCoconuts.svg</file>
+        <file>assets/items/PalmTreeWhitoutCoconuts.svg</file>
         <file>assets/items/Portal.svg</file>
         <file>assets/items/StairsDown.svg</file>
         <file>assets/items/StairsUp.svg</file>
@@ -60,9 +66,5 @@
         <file>assets/weapons/SmallSword.svg</file>
         <file>assets/weapons/StarArrow.svg</file>
         <file>assets/weapons/TwohandSword.svg</file>
-        <file>assets/Ghost.svg</file>
-        <file>assets/items/FirTree.svg</file>
-        <file>assets/items/PalmTreeWhitCoconuts.svg</file>
-        <file>assets/items/PalmTreeWhitoutCoconuts.svg</file>
     </qresource>
 </RCC>

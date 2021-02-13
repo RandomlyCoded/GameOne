@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="Palm tree.svg">
+   sodipodi:docname="PalmTreeWhitCoconuts.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="236.42653"
-     inkscape:cy="626.79096"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="217.09129"
+     inkscape:cy="154.88246"
      inkscape:document-units="mm"
      inkscape:current-layer="g22"
      inkscape:document-rotation="0"
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,6 +56,27 @@
       <g
          id="g22"
          transform="matrix(3.5327121,0,0,3.5327396,-79.061045,-358.83584)">
+        <ellipse
+           style="fill:#502d16;fill-rule:evenodd;stroke:#502d16;stroke-width:0.0648315"
+           id="ellipse21"
+           cx="32.554695"
+           cy="108.12164"
+           rx="0.85925043"
+           ry="0.85924357" />
+        <ellipse
+           style="fill:#502d16;fill-rule:evenodd;stroke:#502d16;stroke-width:0.0648315"
+           id="path17"
+           cx="38.274258"
+           cy="109.49856"
+           rx="0.85925043"
+           ry="0.85924357" />
+        <ellipse
+           style="fill:#502d16;fill-rule:evenodd;stroke:#502d16;stroke-width:0.0648315"
+           id="ellipse19"
+           cx="34.831928"
+           cy="109.65743"
+           rx="0.85925043"
+           ry="0.85924357" />
         <g
            id="g89"
            transform="matrix(1.4975617,0,0,1.4975617,-10.969366,-58.534281)">

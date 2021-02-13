@@ -1,11 +1,11 @@
-GpG G G S w w S G G
-G G G S w w S|G G@G
-G G S wEw S G|G@G@G
-G S w w S G G\G@G@G
+GpG GEG S w w S G G
+G GEG S w w S|G G@G
+GEG SEw w S G|G@G@G
+G S w wES G G\G@G@G
 G W W W W G G G_G_G
-G W W W G G GEG G GE
+G W W W G GEG G G GE
 G G G G G G G G G G
 G H H H G G G G G G
 G H M H G G G G G G
-G H H H G G G G G G
+G H H H G GEG G G GE
 1 2 3 4 5 6 7 8 9 0
