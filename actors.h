@@ -140,6 +140,27 @@ public:
     void act();
 };
 
+class Tentaklon : public Enemy // Tentaklon is the "Schleimpilz"(look at "Issues/1/0008" for more info)
+{
+    Q_OBJECT
+
+public:
+    using Enemy::Enemy;
+
+    QString type() const override { return "Tentaklon"; }
+    QColor color() const override { return Qt::red;}
+
+    bool energyVisible() const override { return true; };
+    bool canAttack(const Actor *opponent) const override;
+    int attack(Actor *opponent) override;
+
+    void act();
+
+private:
+    char m_moveCard[];
+    void buildMoveCard();
+};
+
 class Player : public Actor
 {
     Q_OBJECT

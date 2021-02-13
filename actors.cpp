@@ -212,6 +212,45 @@ void Enemy::act()
     }
 }
 
+bool Tentaklon::canAttack(const Actor *opponent) const
+{
+    return Enemy::canAttack(opponent);
+}
+
+int Tentaklon::attack(Actor *opponent)
+{
+    return Enemy::attack(opponent);
+}
+
+void Tentaklon::buildMoveCard()
+{
+    // here it should build a card for moving
+    /* EXAMPLE:
+     *[ beacause it's an Array
+     *'r', Move right
+     *'u', Move up
+     *'l', Move left
+     *'d', Move down
+     *]
+    */
+}
+
+void Tentaklon::act()
+{
+    Enemy::act(); // just until i have a script how the Tentaklon acts...
+    // now reading the card from m_movecCard !it's an array!
+   /*
+   *for(int i = 0; i < std::size_t(m_moveCard)) { Wenn es für Arrays etwas sinnvolleres als "std::size_t()" gibt, bitte korrigieren
+   *    switch(m_moveCard[i] {
+   *        case 'r': moveRight(); break;
+   *        case 'u': moveUp(); break;
+   *        case 'l': moveLeft(); break;
+   *        case 'd': moveDown(); break;
+   *    }
+   *}
+   */
+}
+
 Player::Player(QJsonObject spec, Backend *backend)
     : Actor{std::move(spec), backend}
     , m_inventory{new InventoryModel{this}}

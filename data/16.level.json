@@ -10,9 +10,12 @@
         {"x": 1, "y": 9, "maximumEnergy": 25},
         {"x": 4, "y": 4, "maximumEnergy": 50},
         {"x": 10, "y": 7, "maximumEnergy": 75},
-        {"x": 8, "y": 10, "$ref": "#enemies/FireGhost"},
-        {"x": 16, "y": 5, "$ref": "#enemies/Tentaklon"}
+        {"x": 8, "y": 10, "$ref": "#enemies/FireGhost"}
     ],
+
+    "tentaklons": [
+            {"x": 16, "y": 5, "$ref": "#enemies/Tentaklon"}
+     ],
 
     "chests": [
         {"x": 1, "y": 0, "item": "Bow", "amount": 1, "$ref": "#items/Chest"},
