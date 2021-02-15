@@ -11,7 +11,7 @@
         {"x": 3, "y": 7, "maximumEnergy": 100}
     ],
     "ladders": [
-    {"x":20, "y": 6, "level": 15, "dx": 0, "dy": 0, "$ref": "#items/Portal"}
+    {"x":7, "y": 7, "level": 15, "dx": 20, "dy": 6, "$ref": "#items/Portal"}
     ],
 
     "player": {
