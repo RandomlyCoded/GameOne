@@ -11,7 +11,7 @@
         {"x": 8, "y": 7, "maximumEnergy": 100},
         {"x": 3, "y": 9, "maximumEnergy": 100},
         {"x": 14, "y": 7, "maximumEnergy": 100},
-        {"x": 20, "y": 7, "maximumEnergy": 100},
+        {"x": 19, "y": 7, "maximumEnergy": 100},
         {"x": 14, "y": 3, "maximumEnergy": 100},
         {"x": 14, "y": 8, "maximumEnergy": 100}
     ],
@@ -20,8 +20,8 @@
     ],
 
     "player": {
-        "x": 0,
-        "y": 0,
+        "x": 20,
+        "y": 6,
         "name": "Joe",
         "maximumLives": 2,
         "maximumEnergy": 5

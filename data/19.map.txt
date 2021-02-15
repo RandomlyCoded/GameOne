@@ -1,11 +1,11 @@
 W W W W W W W W W W W W W
-W C C C C C C C C C C C W
-W C S S S S S S S S S C W
-W C S G G G G G@G@G S C W
+WPC C C C C C C C C C C W
+W CES S S S S S S S S C W
+W C SEG G G G G@G@G S C W
 W C S G G G G@G@G G S C W
 W C S S S S S S S S S C W
 W C C C C C C C C C C C W
-W W W W W W C W C-W W W W
+W W W W W W C W CpW W W W
 W C C C C C C C C C C C W
 W C S S S S S S S S S C W
 W C S G G G G G@G@G S C W

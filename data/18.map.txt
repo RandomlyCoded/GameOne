@@ -1,12 +1,12 @@
-G G G w w w S S S S
+GPG G w w w S S S S
 G G w W w S H H H H
-w w W S H M M M M H
+w w WES H M M M M H
 W W S H M H V V V V
 w S H M H V L L L L
 S H M H V L V V V V
 S H M V L V H M H M
 S H M V L V M H H H
-G H M H HeM H S S S
+G H M H HpM H S S S
 G G G M M H S G G G
 VLV V V VLVLV VLV V
 V VLVLV V V V VLV V

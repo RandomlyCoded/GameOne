@@ -1,11 +1,11 @@
-G GvGvG G G GmG G G S w S G G H H H M M M
+GpGvGvG G G GmG G G S w S G G H H H M M M
 G G G G G G GgG G G S w S G G H H H H H M
 G GvGvG G G GmG G G S w S S G G H H H w W
-G G GvG G G G G G G S w w S G G H H w w M
+G G GvG G G G G G G S w w S GEG H H w w M
 G G GvG G G GmG G G S S w S G H H H H w M
 G G GvGvG G GgG G G S S w S G G G G S w M
-G G G G G G GmG G G S S w S G G G G S w H
-GmG GmGmG G GmG G G S w w S S S S S S w M
-G G G G G G G G G S w w w w w w w w w w M
-G G G G G G G G G S S S S M M M M M M M M
+G GEGEG G G GmG G G S S w S G G G G S w HP
+GmG GmGmG G GmG GEG S w w S SES S S S wEM
+G G G G G G G G G S w w w w wEw w w w w M
+G G G GEG G G G G S S S S M M M M M M M M
 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
