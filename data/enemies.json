@@ -18,6 +18,7 @@
     },
 
     "Tentaklon": {
+        "name": "Tentaklon",
         "maximumEnergy": 100,
         "image": "enemies/Tentaklon.svg"
     }
