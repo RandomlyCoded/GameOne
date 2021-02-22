@@ -14,7 +14,7 @@
 
     "player": {
         "x": 0,
-        "y": 9,
+        "y": 0,
         "name": "Joe",
         "maximumLives": 3,
         "maximumEnergy": 5

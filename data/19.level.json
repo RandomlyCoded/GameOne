@@ -7,12 +7,12 @@
     },
 
     "enemies": [
-        {"x": 2, "y": 2, "maximumEnergy": 10},
-        {"x": 3, "y": 3, "maximumEnergy": 15}
+        {"x": 1, "y": 2, "maximumEnergy": 10},
+        {"x": 2, "y": 3, "maximumEnergy": 15}
     ],
 
     "ladders": [
-        {"x": 8, "y": 7, "level": 20, "dx": 0, "dy": 0, "$ref": "#items/Portal"}
+        {"x": 8, "y": 7, "level": 20, "dx": 0, "dy": 1, "$ref": "#items/Portal"}
     ],
 
     "player": {

@@ -9,5 +9,5 @@ w H w H w S S w S G S w
 M M H w S G S w w w w w
 L L M H H G G S w w w W
 H M H H G G G S w w W W
-H H H G G G S w wEW W W
+H H H G G G S w wEWEWpW
 1 2 3 4 5 6 7 8 9 0 1 2
