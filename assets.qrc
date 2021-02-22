@@ -2,8 +2,8 @@
     <qresource prefix="/GameOne">
         <file>assets/Characters.svg</file>
         <file>assets/Ghost.svg</file>
-        <file>assets/Ghost.svg</file>
         <file>assets/enemies/FireGhost.svg</file>
+        <file>assets/enemies/IceGhost.svg</file>
         <file>assets/enemies/Spider.svg</file>
         <file>assets/enemies/Tentaklon.svg</file>
         <file>assets/inventory/BottleLargeEmpty.svg</file>
