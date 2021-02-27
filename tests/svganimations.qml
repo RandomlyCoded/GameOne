@@ -21,6 +21,11 @@ Window {
             "imageSource": "enemies/FireGhost.svg",
             "stages": ["show=max,med_max.flames(t)", "show=med,med_max.flames(t)", "show=min,min.flames(t)"]
         }, {
+            "name": "Ice Ghost",
+            "frameCount": 5,
+            "imageSource": "enemies/IceGhost.svg",
+            "stages": ["show=max,med_max.iceCrystals(t)", "show=med,med_max.iceCrystals(t)", "show=min,min.iceCrystals(t)"]
+        }, {
             "name": "Characters",
             "frameCount": 1,
             "imageSource": "Characters.svg",
