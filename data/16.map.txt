@@ -1,9 +1,9 @@
 GPGcG GmG G H HvH H H HvHcHvH H m m m
 G G G GmG G H HvH H H HvH HvH H m m m
-G G G GgG G H HvH H H HvH HvH H m m m
-G G G GgG G H HvH H H HvH HvH H m m m
+G G G G G G H HvH H H HvH HvH H m m m
+G G G G G G H HvH H H HvH HvH H m m m
 G G G GmGEG H HvH H H HvH HvH H m m m
-G G G GmG G H H H H H HvH-HvH-H GEGpm
+G G G GmG G H H H H H HvH-HvH-H GTGpm
 G G G GmG G H HvHvHvH HvH HvH H G G m
 G G G GmG G H HvHeHvHEHvH HvH H m m m
 G G G GmG G H HvH HvH HvH HvH H m m m
