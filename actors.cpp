@@ -5,6 +5,7 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
+#include <iostream>
 
 namespace GameOne {
 
@@ -224,31 +225,67 @@ int Tentaklon::attack(Actor *opponent)
 
 void Tentaklon::buildMoveCard()
 {
-    // here it should build a card for moving
-    /* EXAMPLE:
-     *[ beacause it's an Array
+    if(!hasMoveCard || moveCardFinished) {
+        moveCardFinished = false;
+        hasMoveCard = true;
+
+        for(int i = 0; i < 4; i++) {
+            if(backend()->canMoveTo(this, buildPosition + QPoint {+1, 0})) {
+                m_moveCard[i] = 'r';
+                buildPosition += QPoint {+1, 0};
+            }
+            else if(backend()->canMoveTo(this, buildPosition + QPoint  {-1, 0})) {
+                m_moveCard[i] = 'l';
+                buildPosition += QPoint {-1, 0};
+            }
+            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, +1})) {
+                m_moveCard[i] = 'u';
+                buildPosition += QPoint {0, +1};
+            }
+            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, -1})) {
+                m_moveCard[i] = 'd';
+                buildPosition += QPoint {0, -1};
+            }
+        }
+    }
+
+    act();
+
+    /* here it should build a card for moving (siehe oben)
      *'r', Move right
      *'u', Move up
      *'l', Move left
      *'d', Move down
-     *]
+     *
+     *leider baut er irgendeine Scheiße.
     */
 }
 
 void Tentaklon::act()
 {
-    Enemy::act(); // just until i have a script how the Tentaklon acts...
-    // now reading the card from m_movecCard !it's an array!
-   /*
-   *for(int i = 0; i < std::size_t(m_moveCard)) { Wenn es für Arrays etwas sinnvolleres als "std::size_t()" gibt, bitte korrigieren
-   *    switch(m_moveCard[i] {
-   *        case 'r': moveRight(); break;
-   *        case 'u': moveUp(); break;
-   *        case 'l': moveLeft(); break;
-   *        case 'd': moveDown(); break;
-   *    }
-   *}
-   */
+    int i = 0;
+    if(hasMoveCard) {
+        std::cout << myMoveCard() << std::endl;
+
+        switch(m_moveCard[i]) {
+            case 'r': moveRight(); break;
+            case 'u': moveUp(); break;
+            case 'l': moveLeft(); break;
+            case 'd': moveDown(); break;
+        }
+
+        if (m_moveCard[i + 1])
+            i++;
+        else {
+            moveCardFinished = true;
+            buildMoveCard();
+        }
+    }
+
+    else {
+        buildMoveCard();
+//        Enemy::act(); // just until i have a script how the Tentaklon acts...
+    }
 }
 
 Player::Player(QJsonObject spec, Backend *backend)

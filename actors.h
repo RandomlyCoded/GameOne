@@ -153,13 +153,53 @@ public:
     bool energyVisible() const override { return true; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
+    char myMoveCard() { for(char tile: m_moveCard) { return tile; } };
 
     void act();
 
 private:
-    char m_moveCard[];
+    bool hasMoveCard = false; // jur vorübergehend, denn wenn wir dann die Karte haben, können wir
+    // die if-Bedingung aus Move rausnehmen und brauchen diese Konstante nicht mehr.
+    char m_moveCard[4] = {'d', 'l', 'u', 'r'};
+    char m_possibilities[4] = {'r', 'l', 'u', 'd'};
+    bool moveCardFinished = false;
     void buildMoveCard();
+    QPoint buildPosition = position();
 };
+
+//class IceGhost : public Enemy
+//{
+//    Q_OBJECT
+
+//public:
+//    using Enemy::Enemy;
+
+//    QString type() const override { return "IceGhost"; }
+//    QColor color() const override { return Qt::red;}
+
+//    bool energyVisible() const override { return true; };
+//    bool canAttack(const Actor *opponent) const override;
+//    int attack(Actor *opponent) override;
+
+//    void act();
+//};
+
+//class FireGhost : public Enemy
+//{
+//    Q_OBJECT
+
+//public:
+//    using Enemy::Enemy;
+
+//    QString type() const override { return "FireGhost"; }
+//    QColor color() const override { return Qt::red;}
+
+//    bool energyVisible() const override { return true; };
+//    bool canAttack(const Actor *opponent) const override;
+//    int attack(Actor *opponent) override;
+
+//    void act();
+//}; Add this both Enemies later
 
 class Player : public Actor
 {

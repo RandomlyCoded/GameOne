@@ -38,3 +38,8 @@ private:
 } // namespace GameOne
 
 #endif // GAMEONE_LEVELMODEL_H
+
+#if 0
+in Zeile 27 einfügen:
+    int playedLevels[std::size(m_levels)]; //DER KOMMT NICHT AN M_LEVELS RAN!!!
+#endif
