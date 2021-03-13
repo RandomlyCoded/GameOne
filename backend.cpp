@@ -119,7 +119,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         for (const auto &value: enemies)
             m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
         for (const auto &value: tentaklons)
-            m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
+            m_enemies += std::make_shared<Tentaklon>(resolve(value.toObject()), this);
 
         const auto playerData = resolve(level["player"].toObject());
         m_player = std::make_unique<Player>(std::move(playerData), this);
