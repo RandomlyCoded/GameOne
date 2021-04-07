@@ -4,6 +4,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 
 Window {
+    id: mainWindow
     color: "black"
     width: 1750 //1750 || 800
     height: 1000 // 1000 || 600
@@ -42,5 +43,9 @@ Window {
         height: parent.height
 
         enabled: currentScreen === game
+    }
+
+    WitchShop {
+        id: witchShop
     }
 }
