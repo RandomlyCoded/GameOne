@@ -289,6 +289,23 @@ private:
     QPoint m_destination;
 };
 
+class WitchShop : public Actor // ist für Sean, er will einen Laden wo man Elexiere kaufen kann
+{
+    Q_OBJECT
+
+public:
+    using Actor::Actor;
+
+    bool energyVisible() const override { return false; };
+    bool canAttack(const Actor *opponent) const override;
+    int attack(Actor *opponent) override;
+//    void giveBonus(Actor *actor, int amount) override;
+
+private:
+    QPoint m_position;
+};
+
+// die Datei wird langsam unübersichtlich sollte man sie aufspalten?
 } // namespace GameOne
 
 #endif // GAMEONE_ACTORS_H

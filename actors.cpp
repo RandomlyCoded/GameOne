@@ -398,6 +398,16 @@ int Ladder::attack(Actor *opponent)
     return 0;
 }
 
+bool WitchShop::canAttack(const Actor *opponent) const
+{
+    return false;
+}
+
+int WitchShop::attack(Actor *opponent)
+{
+    return 0;
+}
+
 } // namespace GameOne
 
 #include "moc_actors.cpp"
