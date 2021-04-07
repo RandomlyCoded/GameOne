@@ -1,0 +1,40 @@
+QML:
+ Images:
+  WitchShop.qml:9:5: Cannot open: qrc:/assets/WitchBackground.svg -> Weil noch nicht vorhanden
+  Failed to get image from Provider: -> ? Provider kaputt/funktioniert nicht?
+   GameGround.qml:149:21: image://assets/items/Earthhole.svg
+   GameGround.qml:149:21: image://assets/items/StairsDown.svg
+   GameGround.qml:149:21: image://assets/items/StairsDown.svg
+   GameGround.qml:149:21: image://assets/items/Portal.svg
+   GameGround.qml:149:21: image://assets/items/Chest.svg
+   GameGround.qml:149:21: image://assets/items/Chest.svg
+   GameGround.qml:149:21: image://assets/items/Chest.svg
+   GameGround.qml:149:21: image://assets/enemies/FireGhost.svg?show=max,med_max.flames2
+   GameGround.qml:149:21: image://assets/enemies/Tentaklon.svg
+   GameGround.qml:149:21: image://assets/Characters.svg?show=*-human1,*-boy1
+
+C++:
+ Backend:
+  Levelfehler:
+   Map enthält; JSON nicht:
+    10.map.txt: start position type Enemy  at (9 ,11)
+    10.map.txt: start position type Portal at (10,11)
+    11.map.txt: start position type Player at (0 ,0 )
+    13.map.txt: start position type Enemy  at (2 ,2 )
+    14.map.txt: start position type Enemy  at (2 ,7 )
+    14.map.txt: start position type Portal at (6 ,7 )
+    15.map.txt: start position type Gate   at (6 ,1 )
+    15.map.txt: start position type Gate   at (6 ,5 )
+
+   JSON enthält; Map nicht:
+    16.level.json: No item at (16,5) of Tentaklon "Tentaklon"
+    10.level.json: No item at (11,1) of Portal
+    11.level.json: No item at (12,12) of Enemy
+    11.level.json: No item at (0,4) of Player "Joe"
+    12.level.json: No item at (0,0) of Portal
+    13.level.json: No item at (0,0) of Portal
+    13.level.json: No item at (3,2) of Enemy
+    13.level.json: No item at (0,0) of Player "Joe"
+    14.level.json: No item at (7,7) of Portal
+    14.level.json: No item at (2,6) of Enemy
+    16.level.json: No item at (16,5) of Tentaklon "Tentaklon"

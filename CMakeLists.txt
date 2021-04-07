@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+﻿cmake_minimum_required(VERSION 3.14)
 project(GameOne LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -45,5 +45,6 @@ add_subdirectory(tests)
 
 add_custom_target(
     Documentation SOURCES
-    README.md
+#    README.md
+    Errors.txt
     )
