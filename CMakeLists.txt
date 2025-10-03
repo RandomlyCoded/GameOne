@@ -24,7 +24,7 @@ if (CLANG_TIDY_EXECUTABLE)
         bugprone-*
         -modernize-*
         performance-*
-        -readability-*
+        readability-*
 
         llvm-header-guard
         llvm-include-order
@@ -35,7 +35,10 @@ if (CLANG_TIDY_EXECUTABLE)
     )
 
     message(STATUS "Using ${CLANG_TIDY_EXECUTABLE}")
-    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE} --checks=${CLANG_TIDY_CHECKS})
+
+    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE}
+        --config-file=${CMAKE_SOURCE_DIR}/.clang-tidy
+        --checks=${CLANG_TIDY_CHECKS})
 else()
     message(STATUS "Not using clang-tidy code checker")
 endif()
@@ -64,7 +67,12 @@ target_link_libraries(GameOne PRIVATE GameOneCore)
 add_subdirectory(tests)
 
 add_custom_target(
+    CMakeFiles SOURCES
+    .clang-tidy
+)
+
+add_custom_target(
     Documentation SOURCES
-#    README.md
+    # README.md
     Errors.txt
-    )
+)

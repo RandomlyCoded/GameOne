@@ -79,7 +79,8 @@ signals:
 private:
     QJsonDocument cachedDocument(const QUrl &url) const;
 
-    void loadItems();
+    void loadItemTypes();
+    void loadItems(const QJsonObject &level, const std::optional<QPoint> &playerPosition);
     void validateActors(const QString &levelFileName, const QString &mapFileName) const;
 
     void onActionTimeout();

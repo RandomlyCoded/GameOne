@@ -69,10 +69,10 @@ void LevelModel::refresh()
     m_levels.clear();
 
     for (const auto levelList = Backend::dataDir().entryInfoList({"*.level.json"});
-         const auto &fi : levelList) {
-        if (const auto index = toInt(fi.baseName())) {
-            if (levelReader.load(fi.fileName()))
-                m_levels += {*index, levelReader.levelName(), fi.filePath()};
+         const auto &fileInfo : levelList) {
+        if (const auto index = toInt(fileInfo.baseName())) {
+            if (levelReader.load(fileInfo.fileName()))
+                m_levels += {*index, levelReader.levelName(), fileInfo.filePath()};
         }
     }
 

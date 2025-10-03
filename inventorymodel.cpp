@@ -21,7 +21,7 @@ QVariant InventoryModel::data(const QModelIndex &index, int role) const
 
         switch (static_cast<Role>(role)) {
         case ItemNameRole:
-            if (slot.item)
+            if (slot.item != nullptr)
                 return slot.item->name();
 
             break;
@@ -30,7 +30,7 @@ QVariant InventoryModel::data(const QModelIndex &index, int role) const
             return QVariant::fromValue(slot.item.data());
 
         case ImageSourceRole:
-            if (slot.item)
+            if (slot.item != nullptr)
                 return slot.item->imageSource();
 
             break;

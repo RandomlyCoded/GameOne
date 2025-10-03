@@ -1,0 +1,5 @@
+CheckOptions:
+  readability-braces-around-statements.ShortStatementLines: 4 # also allow trivial if/else
+  readability-identifier-length.IgnoredLoopCounterNames: '^([ijk_]|it)$'
+  readability-identifier-length.IgnoredParameterNames: '^([n]|id)$'
+  readability-identifier-length.IgnoredVariableNames: '^([cds][xyz]|it)$'

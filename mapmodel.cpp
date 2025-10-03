@@ -125,7 +125,7 @@ QHash<int, QByteArray> MapModel::roleNames() const
 void MapModel::setBackend(Backend *backend)
 {
     if (std::exchange(m_backend, backend) != m_backend) {
-        if (m_backend)
+        if (m_backend != nullptr)
             m_tileInfo = backend->resolve(QUrl{"tiles.json"});
         else
             m_tileInfo = {};
