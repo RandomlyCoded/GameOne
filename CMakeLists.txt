@@ -14,7 +14,7 @@ add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
 add_library(GameOneCore STATIC)
 target_include_directories(GameOneCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(GameOneCore PUBLIC Qt6::Quick Qt6::Svg)
+target_link_libraries(GameOneCore PUBLIC Qt::Quick Qt::Svg)
 
 target_sources(
     GameOneCore PRIVATE
