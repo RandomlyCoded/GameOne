@@ -72,7 +72,7 @@ signals:
 
     void actorsChanged();
     void enemiesChanged();
-    void playerChanged(Player *player);
+    void playerChanged(GameOne::Player *player);
 
     void ticksChanged(qint64 ticks);
 

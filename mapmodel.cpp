@@ -145,7 +145,7 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
     for (auto it = m_tileInfo.begin(); it != m_tileInfo.end(); ++it) {
         const auto tile = it->toObject();
 
-        for (const auto key: tile["keys"].toString()) {
+        for (const auto &spec = tile["keys"].toString(); const auto key : spec) {
             const QColor color{tile["color"].toString()};
             const QUrl imageSource = Backend::imageUrl(tile["image"].toString());
             const auto imageCount = tile["imageCount"].toInt(1);
@@ -182,12 +182,12 @@ bool MapModel::load(QString fileName, Format format)
     QList<Tile> tiles;
 
     if (format == CurrentFormat) {
-        for (const auto &row: rows) {
+        for (const auto &row : std::as_const(rows)) {
             for (int i = 0; i < row.length(); i+= 2)
                 tiles += Tile{types, row.mid(i, 2)};
         }
     } else if (format == LegacyFormat) {
-        for (const auto &row: rows) {
+        for (const auto &row: std::as_const(rows)) {
             for (int i = 0; i < row.length(); ++i)
                 tiles += Tile{types, row.mid(i, 1)};
         }

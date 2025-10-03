@@ -179,7 +179,7 @@ bool Backend::canMoveTo(Actor *actor, QPoint destination) const
     if (!m_map->dataByPoint(destination, MapModel::WalkableRole).toBool())
         return false;
 
-    for (auto opponent: actors()) {
+    for (const auto &opponentList = actors(); const auto &opponent : opponentList) {
         if (opponent == actor)
             continue;
         if (!opponent->isAlive())
