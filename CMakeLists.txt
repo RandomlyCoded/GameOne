@@ -15,6 +15,7 @@ option(DEVELOPER_BUILD "Enable stricter build options to aid active contributors
 if (DEVELOPER_BUILD)
     add_compile_options(-Wall -Wextra -Werror)
     find_program(CLANG_TIDY_EXECUTABLE clang-tidy)
+    find_program(CLTCACHE_EXECUTABLE cltcache PATHS $ENV{HOME}/.local/python/bin)
 endif()
 
 if (CLANG_TIDY_EXECUTABLE)
@@ -39,6 +40,11 @@ if (CLANG_TIDY_EXECUTABLE)
     set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE}
         --config-file=${CMAKE_SOURCE_DIR}/.clang-tidy
         --checks=${CLANG_TIDY_CHECKS})
+
+    if (CLTCACHE_EXECUTABLE)
+        message(STATUS "Using ${CLTCACHE_EXECUTABLE}")
+        list(PREPEND CMAKE_CXX_CLANG_TIDY ${CLTCACHE_EXECUTABLE})
+    endif()
 else()
     message(STATUS "Not using clang-tidy code checker")
 endif()
