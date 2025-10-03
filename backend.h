@@ -44,7 +44,7 @@ public:
     Player *player() const { return m_player.get(); }
     MapModel *map() const { return m_map; }
 
-    InventoryItem *item(QString id) const;
+    InventoryItem *item(const QString &id) const;
 
     Q_INVOKABLE bool load(QString fileName, std::optional<QPoint> playerPosition = {});
     Q_INVOKABLE void respawn();
@@ -52,10 +52,10 @@ public:
     bool canMoveTo(Actor *actor, QPoint destination) const;
 
     static QDir dataDir();
-    static QString dataFileName(QString fileName);
+    static QString dataFileName(const QString &fileName);
 
-    static QUrl imageUrl(QString fileName);
-    static QUrl imageUrl(QUrl imageUrl);
+    static QUrl imageUrl(const QString &fileName);
+    static QUrl imageUrl(const QUrl &imageUrl);
 
     Q_INVOKABLE static QUrl imageUrl(QUrl imageUrl, int imageCount, qint64 tick);
 
@@ -77,10 +77,10 @@ signals:
     void ticksChanged(qint64 ticks);
 
 private:
-    QJsonDocument cachedDocument(QUrl url) const;
+    QJsonDocument cachedDocument(const QUrl &url) const;
 
     void loadItems();
-    void validateActors(QString levelFileName, QString mapFileName) const;
+    void validateActors(const QString &levelFileName, const QString &mapFileName) const;
 
     void onActionTimeout();
     void onTicksTimeout();

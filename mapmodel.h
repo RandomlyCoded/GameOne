@@ -56,7 +56,7 @@ public:
     int columns() const { return m_columns; }
     int rows() const { return m_rows; }
 
-    Q_INVOKABLE bool load(QString fileName, Format format);
+    Q_INVOKABLE bool load(const QString &fileName, Format format);
 
     QModelIndex indexByPoint(QPoint point) const;
     QVariant dataByPoint(QPoint point, Role role) const;

@@ -49,7 +49,7 @@ public:
     auto y() const { return m_position.y(); }
     auto position() const { return m_position; }
 
-    void setName(QString name);
+    void setName(const QString &name);
     auto name() const { return m_name; }
 
     virtual QColor color() const = 0;
@@ -106,7 +106,7 @@ private:
 
     void setEnergy(int energy);
 
-    static QList<EnergyLevel> makeEnergyLevels(QJsonArray array);
+    static QList<EnergyLevel> makeEnergyLevels(const QJsonArray &array);
     QList<EnergyLevel>::ConstIterator currentEnergyLevel() const;
 
     QString m_name;

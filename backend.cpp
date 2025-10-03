@@ -65,7 +65,7 @@ QList<Enemy *> Backend::enemies() const
     return enemies;
 }
 
-InventoryItem *Backend::item(QString id) const
+InventoryItem *Backend::item(const QString &id) const
 {
     return m_items.value(id);
 }
@@ -76,7 +76,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 
     m_actionTimer->stop();
 
-    fileName = dataFileName(std::move(fileName));
+    fileName = dataFileName(fileName);
     if (fileName.endsWith(".json")) {
         QFile file{fileName};
 
@@ -124,7 +124,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
             m_enemies += std::make_shared<Tentaklon>(resolve(value.toObject()), this);
 
         const auto playerData = resolve(level["player"].toObject());
-        m_player = std::make_unique<Player>(std::move(playerData), this);
+        m_player = std::make_unique<Player>(playerData, this);
 
         if (playerPosition.has_value())
             m_player->moveTo(*playerPosition);
@@ -204,22 +204,22 @@ QDir Backend::dataDir()
     return {":/GameOne/data"};
 }
 
-QString Backend::dataFileName(QString fileName)
+QString Backend::dataFileName(const QString &fileName)
 {
     return dataDir().filePath(fileName);
 }
 
-QUrl Backend::imageUrl(QString fileName)
+QUrl Backend::imageUrl(const QString &fileName)
 {
-    return imageUrl(QUrl{std::move(fileName)});
+    return imageUrl(QUrl{fileName});
 }
 
-QUrl Backend::imageUrl(QUrl imageUrl)
+QUrl Backend::imageUrl(const QUrl &imageUrl)
 {
     if (imageUrl.isEmpty())
         return {};
 
-    return QUrl{"image://assets/"}.resolved(std::move(imageUrl));
+    return QUrl{"image://assets/"}.resolved(imageUrl);
 }
 
 QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
@@ -274,7 +274,7 @@ void Backend::loadItems()
     m_items[""] = new InventoryItem{{}, QUrl{}, this};
 }
 
-void Backend::validateActors(QString levelFileName, QString mapFileName) const
+void Backend::validateActors(const QString &levelFileName, const QString &mapFileName) const
 {
     QHash<int, QString> actorTypes;
 
@@ -332,7 +332,7 @@ void Backend::onTicksTimeout()
     emit ticksChanged(ticks());
 }
 
-QJsonDocument Backend::cachedDocument(QUrl url) const
+QJsonDocument Backend::cachedDocument(const QUrl &url) const
 {
     if (const auto it = m_jsonCache.find(url); it != m_jsonCache.end())
         return *it;

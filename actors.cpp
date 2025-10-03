@@ -26,7 +26,7 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     respawn();
 }
 
-void Actor::setName(QString name)
+void Actor::setName(const QString &name)
 {
     if (std::exchange(m_name, name) != name)
         emit nameChanged(m_name);
@@ -77,7 +77,7 @@ void Actor::setEnergy(int energy)
     }
 }
 
-QList<Actor::EnergyLevel> Actor::makeEnergyLevels(QJsonArray array)
+QList<Actor::EnergyLevel> Actor::makeEnergyLevels(const QJsonArray &array)
 {
     QList<Actor::EnergyLevel> levels;
 
@@ -116,7 +116,7 @@ void Actor::moveTo(QPoint destination)
 void Actor::tryMoveTo(QPoint destination)
 {
     if (backend()->canMoveTo(this, destination))
-        moveTo(std::move(destination));
+        moveTo(destination);
 }
 
 void Actor::moveLeft()

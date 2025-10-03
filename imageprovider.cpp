@@ -47,7 +47,7 @@ auto resolveLayers(const QByteArray &data)
     return layers;
 }
 
-auto makeRegularExpression(QStringList wildcards)
+auto makeRegularExpression(const QStringList &wildcards)
 {
     QStringList expressions;
 

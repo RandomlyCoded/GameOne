@@ -19,7 +19,7 @@ static void initResources()
 
 namespace GameOne {
 
-int Application::run(QUrl qmlRoot)
+int Application::run(const QUrl &qmlRoot)
 {
     if (qmlRoot.isEmpty())
         return run(QUrl{"qrc:/GameOne/qml/main.qml"});

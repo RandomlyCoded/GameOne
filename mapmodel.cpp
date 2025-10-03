@@ -159,14 +159,16 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
     return types;
 }
 
-bool MapModel::load(QString fileName, Format format)
+bool MapModel::load(const QString &fileName, Format format)
 {
-    fileName = Backend::dataFileName(std::move(fileName));
-
-    QFile file{fileName};
+    auto filePath = Backend::dataFileName(fileName);
+    auto file = QFile{filePath};
 
     if (!file.open(QFile::ReadOnly)) {
-        qCWarning(lcMap, "Could not open %ls: %ls", qUtf16Printable(fileName), qUtf16Printable(file.errorString()));
+        qCWarning(lcMap, "Could not open %ls: %ls",
+                  qUtf16Printable(filePath),
+                  qUtf16Printable(file.errorString()));
+
         return false;
     }
 

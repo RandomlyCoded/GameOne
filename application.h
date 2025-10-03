@@ -13,7 +13,7 @@ class Application : public QGuiApplication
 public:
     using QGuiApplication::QGuiApplication;
 
-    int run(QUrl qmlRoot = {});
+    int run(const QUrl &qmlRoot = {});
 };
 
 } // namespace GameOne

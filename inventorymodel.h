@@ -15,7 +15,7 @@ class InventoryItem : public QObject
 
 public:
     explicit InventoryItem(QString name, QObject *parent = {});
-    explicit InventoryItem(QString name, QUrl imageSource, QObject *parent = {});
+    explicit InventoryItem(QString name, const QUrl &imageSource, QObject *parent = {});
 
     auto name() const { return m_name; }
     auto imageSource() const { return m_imageSource; }

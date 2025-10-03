@@ -8,7 +8,7 @@ InventoryItem::InventoryItem(QString name, QObject *parent)
     : InventoryItem{std::move(name), {}, parent}
 {}
 
-InventoryItem::InventoryItem(QString name, QUrl imageSource, QObject *parent)
+InventoryItem::InventoryItem(QString name, const QUrl &imageSource, QObject *parent)
     : QObject{parent}
     , m_name{std::move(name)}
     , m_imageSource{Backend::imageUrl(imageSource)}

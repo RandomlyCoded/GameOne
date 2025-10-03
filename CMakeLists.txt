@@ -23,7 +23,7 @@ if (CLANG_TIDY_EXECUTABLE)
 
         bugprone-*
         -modernize-*
-        -performance-*
+        performance-*
         -readability-*
 
         llvm-header-guard
