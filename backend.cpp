@@ -2,9 +2,9 @@
 #include "inventorymodel.h"
 #include "mapmodel.h"
 
+#include <QDir>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QDir>
 #include <QLoggingCategory>
 #include <QTimer>
 

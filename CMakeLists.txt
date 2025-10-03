@@ -14,6 +14,29 @@ option(DEVELOPER_BUILD "Enable stricter build options to aid active contributors
 
 if (DEVELOPER_BUILD)
     add_compile_options(-Wall -Wextra -Werror)
+    find_program(CLANG_TIDY_EXECUTABLE clang-tidy)
+endif()
+
+if (CLANG_TIDY_EXECUTABLE)
+    string(
+        JOIN "," CLANG_TIDY_CHECKS
+        -bugprone-*
+        -modernize-*
+        -performance-*
+        -readability-*
+
+        llvm-header-guard
+        llvm-include-order
+        llvm-namespace-comment
+
+        -clang-analyzer-cplusplus.NewDelete             # well intended check, that's unfortunatly very broken and slow
+    )
+
+    message(STATUS "Using ${CLANG_TIDY_EXECUTABLE}")
+    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE} --checks=${CLANG_TIDY_CHECKS})
+else()
+    message(STATUS "Not using clang-tidy code checker")
+endif()
 
 add_library(GameOneCore STATIC)
 target_include_directories(GameOneCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

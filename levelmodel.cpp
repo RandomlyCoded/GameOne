@@ -23,7 +23,7 @@ std::optional<int> toInt(const T &str)
     return {};
 }
 
-}
+} // namespace
 
 LevelModel::LevelModel(QObject *parent)
     : QAbstractListModel{parent}

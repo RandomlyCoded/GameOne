@@ -3,8 +3,8 @@
 #include "backend.h"
 
 #include <QFile>
-#include <QPoint>
 #include <QLoggingCategory>
+#include <QPoint>
 
 namespace GameOne {
 

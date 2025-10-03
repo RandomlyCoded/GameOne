@@ -4,8 +4,8 @@
 #include <QImage>
 #include <QLoggingCategory>
 #include <QPainter>
-#include <QStringLiteral>
 #include <QRegularExpression>
+#include <QStringLiteral>
 #include <QSvgRenderer>
 #include <QUrlQuery>
 
