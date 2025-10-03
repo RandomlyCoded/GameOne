@@ -7,22 +7,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.0 QUIET COMPONENTS Quick Svg)
 
-if (Qt6_FOUND)
-    add_library(Qt::Quick ALIAS Qt6::Quick)
-    add_library(Qt::SVG ALIAS Qt6::Svg)
-else()
-    find_package(Qt5 5.15 REQUIRED COMPONENTS Quick Svg)
-    add_library(Qt::Quick ALIAS Qt5::Quick)
-    add_library(Qt::Svg ALIAS Qt5::Svg)
-endif()
+find_package(Qt6 COMPONENTS Quick Svg)
 
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
 add_library(GameOneCore STATIC)
 target_include_directories(GameOneCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(GameOneCore PUBLIC Qt::Quick Qt::Svg)
+target_link_libraries(GameOneCore PUBLIC Qt6::Quick Qt6::Svg)
 
 target_sources(
     GameOneCore PRIVATE
