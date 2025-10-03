@@ -7,9 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-
-find_package(Qt6 COMPONENTS Quick Svg)
-
+find_package(Qt6 6.8 REQUIRED COMPONENTS Quick Svg)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
 add_library(GameOneCore STATIC)
