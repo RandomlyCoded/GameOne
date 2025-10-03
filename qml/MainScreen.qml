@@ -68,7 +68,7 @@ GameScreen {
                      )
     }
 
-    Keys.onPressed: {
+    Keys.onPressed: (event) => {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9) {
             var level = (event.key - Qt.Key_0 + 9) % 10;
 

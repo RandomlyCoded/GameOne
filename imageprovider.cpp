@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QLoggingCategory>
 #include <QPainter>
+#include <QStringLiteral>
 #include <QRegularExpression>
 #include <QSvgRenderer>
 #include <QUrlQuery>
@@ -29,16 +30,16 @@ auto resolveLayers(const QByteArray &data)
         if (!svg.readNextStartElement())
             continue;
 
-        if (svg.name() == L"g") {
+        if (svg.name() == QStringLiteral("g")) {
             const auto attrs = svg.attributes();
-            if (attrs.value("inkscape:groupmode") != L"layer")
+            if (attrs.value("inkscape:groupmode") != QStringLiteral("layer"))
                 continue;
 
             layers += {
                 attrs.value("inkscape:label").toString(),
                 attrs.value("id").toString()
             };
-        } else if (svg.name() != L"svg") {
+        } else if (svg.name() != QStringLiteral("svg")) {
             svg.skipCurrentElement();
         }
     }
