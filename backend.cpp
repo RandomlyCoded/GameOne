@@ -323,7 +323,7 @@ void Backend::validateActors(QString levelFileName, QString mapFileName) const
 
 void Backend::onActionTimeout()
 {
-    for (auto enemy: std::as_const(m_enemies))
+    for (const auto &enemy : std::as_const(m_enemies))
         enemy->act();
 }
 

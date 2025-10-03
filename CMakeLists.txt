@@ -10,6 +10,11 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt6 6.8 REQUIRED COMPONENTS Quick Svg)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
+option(DEVELOPER_BUILD "Enable stricter build options to aid active contributors" OFF)
+
+if (DEVELOPER_BUILD)
+    add_compile_options(-Wall -Wextra -Werror)
+
 add_library(GameOneCore STATIC)
 target_include_directories(GameOneCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(GameOneCore PUBLIC Qt::Quick Qt::Svg)

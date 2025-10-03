@@ -265,7 +265,7 @@ void Tentaklon::act()
 {
     int i = 0;
     if(hasMoveCard) {
-        std::cout << myMoveCard() << std::endl;
+        std::cout << m_moveCard[i] << std::endl;
 
         switch(m_moveCard[i]) {
             case 'r': moveRight(); break;
@@ -388,22 +388,22 @@ void Ladder::giveBonus(Actor *, int)
     }
 }
 
-bool Ladder::canAttack(const Actor *actor) const
+bool Ladder::canAttack(const Actor *) const
 {
     return false;
 }
 
-int Ladder::attack(Actor *opponent)
+int Ladder::attack(Actor *)
 {
     return 0;
 }
 
-bool WitchShop::canAttack(const Actor *opponent) const
+bool WitchShop::canAttack(const Actor *) const
 {
     return false;
 }
 
-int WitchShop::attack(Actor *opponent)
+int WitchShop::attack(Actor *)
 {
     return 0;
 }

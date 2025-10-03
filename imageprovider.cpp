@@ -114,7 +114,7 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &
         const auto layers = resolveLayers(data);
 
         if (debug)
-            qCInfo(lcImages, "- #layers=%d", layers.count());
+            qCInfo(lcImages, "- #layers=%d", static_cast<int>(layers.count()));
 
         const auto hidePattern = makeRegularExpression(hide);
         const auto showPattern = makeRegularExpression(show);

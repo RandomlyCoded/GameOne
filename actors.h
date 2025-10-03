@@ -153,14 +153,13 @@ public:
     bool energyVisible() const override { return true; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
-    char myMoveCard() { for(char tile: m_moveCard) { return tile; } };
 
     void act();
 
 private:
     bool hasMoveCard = false; // jur vorübergehend, denn wenn wir dann die Karte haben, können wir
     // die if-Bedingung aus Move rausnehmen und brauchen diese Konstante nicht mehr.
-    char m_moveCard[4] = {'d', 'l', 'u', 'r'};
+    char m_moveCard[5] = {'d', 'l', 'u', 'r', '\0'};
     char m_possibilities[4] = {'r', 'l', 'u', 'd'};
     bool moveCardFinished = false;
     void buildMoveCard();

@@ -86,7 +86,7 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
 bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (hasIndex(index.row(), index.column(), index.parent())) {
-        if (role == IsStartRole && value.canConvert(QVariant::Bool)) {
+        if (role == IsStartRole && value.canConvert<bool>()) {
             m_tiles[index.row()].item.isStart = value.toBool();
             return true;
         }
