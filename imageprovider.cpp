@@ -30,16 +30,16 @@ auto resolveLayers(const QByteArray &data)
         if (!svg.readNextStartElement())
             continue;
 
-        if (svg.name() == QStringLiteral("g")) {
+       if (svg.name() == u"g") {
             const auto attrs = svg.attributes();
-            if (attrs.value("inkscape:groupmode") != QStringLiteral("layer"))
+            if (attrs.value("inkscape:groupmode") != u"layer")
                 continue;
 
             layers += {
                 attrs.value("inkscape:label").toString(),
                 attrs.value("id").toString()
             };
-        } else if (svg.name() != QStringLiteral("svg")) {
+        } else if (svg.name() != u"svg") {
             svg.skipCurrentElement();
         }
     }
