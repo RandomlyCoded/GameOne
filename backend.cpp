@@ -72,6 +72,8 @@ InventoryItem *Backend::item(QString id) const
 
 bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 {
+    qInfo() << "loading" << fileName;
+
     m_actionTimer->stop();
 
     fileName = dataFileName(std::move(fileName));
