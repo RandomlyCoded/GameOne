@@ -228,7 +228,7 @@ QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
         static const auto pattern = QRegularExpression{R"(\(t([+-]\d+)?\))"};
         const auto inputQueryString = imageUrl.query();
 
-        int start = 0;
+        auto start = qsizetype{0};
         QString outputQueryString;
 
         for (auto it = pattern.globalMatch(inputQueryString); it.hasNext(); ) {

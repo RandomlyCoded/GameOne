@@ -20,7 +20,8 @@ endif()
 if (CLANG_TIDY_EXECUTABLE)
     string(
         JOIN "," CLANG_TIDY_CHECKS
-        -bugprone-*
+
+        bugprone-*
         -modernize-*
         -performance-*
         -readability-*
@@ -29,6 +30,7 @@ if (CLANG_TIDY_EXECUTABLE)
         llvm-include-order
         llvm-namespace-comment
 
+        -bugprone-suspicious-include                    # it complains about "moc_filename.cpp"
         -clang-analyzer-cplusplus.NewDelete             # well intended check, that's unfortunatly very broken and slow
     )
 

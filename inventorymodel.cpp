@@ -48,7 +48,7 @@ int InventoryModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_slots.count();
+    return static_cast<int>(m_slots.count());
 }
 
 QHash<int, QByteArray> InventoryModel::roleNames() const
@@ -68,10 +68,14 @@ void InventoryModel::updateItem(InventoryItem *item, int amount)
 
     if (it != m_slots.end()) {
         it->amount += amount;
-        const auto slotIndex = index(it - m_slots.begin());
+
+        const auto row = static_cast<int>(it - m_slots.begin());
+        const auto slotIndex = index(row);
+
         emit dataChanged(slotIndex, slotIndex, {AmountRole});
     } else {
-        beginInsertRows({}, m_slots.count(), m_slots.count());
+        const auto row = static_cast<int>(m_slots.count());
+        beginInsertRows({}, row, row);
         m_slots.append({item, amount});
         endInsertRows();
     }

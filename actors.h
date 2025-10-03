@@ -38,6 +38,9 @@ class Actor : public QObject
     Q_PROPERTY(int rotationSteps READ rotationSteps CONSTANT FINAL)
 
 public:
+    enum class Direction { None = -1, Up, Left, Right, Down };
+    Q_ENUM(Direction)
+
     explicit Actor(QJsonObject spec, Backend *backend);
 
     virtual QString type() const = 0;
@@ -157,13 +160,12 @@ public:
     void act();
 
 private:
-    bool hasMoveCard = false; // jur vorübergehend, denn wenn wir dann die Karte haben, können wir
-    // die if-Bedingung aus Move rausnehmen und brauchen diese Konstante nicht mehr.
-    char m_moveCard[5] = {'d', 'l', 'u', 'r', '\0'};
-    char m_possibilities[4] = {'r', 'l', 'u', 'd'};
-    bool moveCardFinished = false;
     void buildMoveCard();
-    QPoint buildPosition = position();
+    bool hasMoveCard() const { return m_currentMove < m_moveCard.size(); }
+
+    std::array<Direction, 4> m_moveCard      = {Direction::Down, Direction::Left, Direction::Up, Direction::Right};
+    unsigned                 m_currentMove   = m_moveCard.size();
+    QPoint                   m_builtPosition = position();
 };
 
 //class IceGhost : public Enemy

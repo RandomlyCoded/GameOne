@@ -50,7 +50,7 @@ int LevelModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_levels.count();
+    return static_cast<int>(m_levels.count());
 }
 
 QHash<int, QByteArray> LevelModel::roleNames() const

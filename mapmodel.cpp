@@ -195,8 +195,8 @@ bool MapModel::load(QString fileName, Format format)
 
     beginResetModel();
     m_tiles = std::move(tiles);
-    m_rows = rows.count();
-    m_columns = m_tiles.size() / m_rows;
+    m_rows = static_cast<int>(rows.count());
+    m_columns = static_cast<int>(m_tiles.size() / m_rows);
     endResetModel();
 
     emit columnsChanged(m_columns);

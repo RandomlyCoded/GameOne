@@ -186,29 +186,35 @@ int Enemy::attack(Actor *opponent)
 
 void Enemy::act()
 {
-    switch (std::rand() % 4) { // FIXME: use proper generator from std::random
-    case 0:
+    // FIXME: use proper generator from std::random
+    const auto direction = Direction{std::rand() % 4};
+
+    switch (direction) {
+    case Direction::Left:
         if (backend()->player()->x() < x())
             moveLeft();
 
         break;
 
-    case 1:
+    case Direction::Up:
         if (backend()->player()->y() < y())
             moveUp();
 
         break;
 
-    case 2:
+    case Direction::Right:
         if (backend()->player()->x() > x())
             moveRight();
 
         break;
 
-    case 3:
+    case Direction::Down:
         if (backend()->player()->y() > y())
             moveDown();
 
+        break;
+
+    case Direction::None:
         break;
     }
 }
@@ -225,25 +231,28 @@ int Tentaklon::attack(Actor *opponent)
 
 void Tentaklon::buildMoveCard()
 {
-    if (!hasMoveCard || moveCardFinished) {
-        moveCardFinished = false;
-        hasMoveCard = true;
-
-        for (auto i = 0; i < 4; ++i) {
-            if (backend()->canMoveTo(this, buildPosition + QPoint {+1, 0})) {
-                m_moveCard[i] = 'r';
-                buildPosition += QPoint {+1, 0};
-            } else if (backend()->canMoveTo(this, buildPosition + QPoint  {-1, 0})) {
-                m_moveCard[i] = 'l';
-                buildPosition += QPoint {-1, 0};
-            } else if (backend()->canMoveTo(this, buildPosition + QPoint {0, +1})) {
-                m_moveCard[i] = 'u';
-                buildPosition += QPoint {0, +1};
-            } else if (backend()->canMoveTo(this, buildPosition + QPoint {0, -1})) {
-                m_moveCard[i] = 'd';
-                buildPosition += QPoint {0, -1};
+    if (!hasMoveCard()) {
+        for (auto i = 0u; i < m_moveCard.size(); ++i) {
+            if (const auto right = m_builtPosition + QPoint{+1, 0};
+                backend()->canMoveTo(this, right)) {
+                m_moveCard[i]   = Direction::Right;
+                m_builtPosition = right;
+            } else if (const auto left = m_builtPosition + QPoint{-1, 0};
+                       backend()->canMoveTo(this, left)) {
+                m_moveCard[i] = Direction::Left;
+                m_builtPosition = left;
+            } else if (const auto up = m_builtPosition + QPoint{0, +1};
+                       backend()->canMoveTo(this, up)) {
+                m_moveCard[i] = Direction::Up;
+                m_builtPosition = up;
+            } else if (const auto down = m_builtPosition + QPoint{0, -1};
+                       backend()->canMoveTo(this, down)) {
+                m_moveCard[i] = Direction::Down;
+                m_builtPosition = down;
             }
         }
+
+        m_currentMove = 0;
     }
 
     act();
@@ -260,27 +269,27 @@ void Tentaklon::buildMoveCard()
 
 void Tentaklon::act()
 {
-    int i = 0;
+    if (hasMoveCard()) {
+        switch(m_moveCard[m_currentMove++]) {
+        case Direction::Right:
+            moveRight();
+            break;
+        case Direction::Up:
+            moveUp();
+            break;
+        case Direction::Left:
+            moveLeft();
+            break;
+        case Direction::Down:
+            moveDown();
+            break;
 
-    if (hasMoveCard) {
-        std::cout << m_moveCard[i] << std::endl;
-
-        switch(m_moveCard[i]) {
-            case 'r': moveRight(); break;
-            case 'u': moveUp(); break;
-            case 'l': moveLeft(); break;
-            case 'd': moveDown(); break;
-        }
-
-        if (m_moveCard[i + 1])
-            i++;
-        else {
-            moveCardFinished = true;
+        case Direction::None:
+            m_currentMove = m_moveCard.size();
             buildMoveCard();
+            return;
         }
-    }
-
-    else {
+    } else {
         buildMoveCard();
 //        Enemy::act(); // just until i have a script how the Tentaklon acts...
     }
