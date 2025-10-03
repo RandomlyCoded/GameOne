@@ -54,7 +54,7 @@ void Actor::giveBonus(Actor *actor, int amount)
 
 Backend *Actor::backend() const
 {
-    return static_cast<Backend *>(parent());
+    return dynamic_cast<Backend *>(parent());
 }
 
 void Actor::setEnergy(int energy)

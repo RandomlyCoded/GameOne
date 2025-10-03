@@ -116,7 +116,7 @@ private:
     QList<EnergyLevel> m_energyLevels;
     int m_minimumEnergy;
     int m_maximumEnergy;
-    int m_energy;
+    int m_energy = 0;
 
     int m_maximumLives;
     int m_lives;

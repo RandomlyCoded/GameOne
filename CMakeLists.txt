@@ -23,6 +23,7 @@ if (CLANG_TIDY_EXECUTABLE)
         JOIN "," CLANG_TIDY_CHECKS
 
         bugprone-*
+        cppcoreguidelines-*
         modernize-*
         performance-*
         readability-*
@@ -31,9 +32,11 @@ if (CLANG_TIDY_EXECUTABLE)
         llvm-include-order
         llvm-namespace-comment
 
-        -bugprone-suspicious-include                    # it complains about "moc_filename.cpp"
-        -clang-analyzer-cplusplus.NewDelete             # well intended check, that's unfortunatly very broken and slow
-        -modernize-use-trailing-return-type             # nope
+        -bugprone-suspicious-include                        # it complains about "moc_filename.cpp"
+        -clang-analyzer-cplusplus.NewDelete                 # well intended check, that's unfortunatly very broken and slow
+        -cppcoreguidelines-owning-memory                    # FIXME requires Guidelines Support Library
+        -cppcoreguidelines-pro-bounds-constant-array-index  # this rule results in more complex code
+        -modernize-use-trailing-return-type                 # nope
     )
 
     message(STATUS "Using ${CLANG_TIDY_EXECUTABLE}")
