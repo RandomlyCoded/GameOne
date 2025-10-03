@@ -28,7 +28,7 @@ target_sources(
     levelmodel.cpp levelmodel.h
     mapmodel.cpp mapmodel.h
     qml.qrc
-    )
+)
 
 add_executable(GameOne WIN32 main.cpp)
 target_link_libraries(GameOne PRIVATE GameOneCore)

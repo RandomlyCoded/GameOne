@@ -9,7 +9,7 @@
         {"x": 3, "y": 3, "maximumEnergy": 2}
     ],
     "ladders": [
-    {"x": 11, "y": 1, "level": 11, "dx": 0, "dy": 0, "$ref": "#items/Portal"}
+        {"x": 11, "y": 1, "level": 11, "dx": 0, "dy": 0, "$ref": "#items/Portal"}
     ],
 
     "player": {
