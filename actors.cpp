@@ -231,22 +231,22 @@ int Tentaklon::attack(Actor *opponent)
 void Tentaklon::buildMoveCard()
 {
     if (!hasMoveCard()) {
-        for (auto i = 0U; i < m_moveCard.size(); ++i) {
+        for (auto &moveCard : m_moveCard) {
             if (const auto right = m_builtPosition + QPoint{+1, 0};
                 backend()->canMoveTo(this, right)) {
-                m_moveCard[i]   = Direction::Right;
+                moveCard        = Direction::Right;
                 m_builtPosition = right;
             } else if (const auto left = m_builtPosition + QPoint{-1, 0};
                        backend()->canMoveTo(this, left)) {
-                m_moveCard[i] = Direction::Left;
+                moveCard        = Direction::Left;
                 m_builtPosition = left;
             } else if (const auto upwards = m_builtPosition + QPoint{0, +1};
                        backend()->canMoveTo(this, upwards)) {
-                m_moveCard[i] = Direction::Up;
+                moveCard        = Direction::Up;
                 m_builtPosition = upwards;
             } else if (const auto downwards = m_builtPosition + QPoint{0, -1};
                        backend()->canMoveTo(this, downwards)) {
-                m_moveCard[i] = Direction::Down;
+                moveCard        = Direction::Down;
                 m_builtPosition = downwards;
             }
         }
