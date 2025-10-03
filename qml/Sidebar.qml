@@ -188,7 +188,7 @@ Rectangle {
                         anchors.fill: parent
 
                         function returning() {
-                            if(model.amount > 1)
+                            if (model.amount > 1)
                                 return 1
 
                             else

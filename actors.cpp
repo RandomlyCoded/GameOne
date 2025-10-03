@@ -225,24 +225,21 @@ int Tentaklon::attack(Actor *opponent)
 
 void Tentaklon::buildMoveCard()
 {
-    if(!hasMoveCard || moveCardFinished) {
+    if (!hasMoveCard || moveCardFinished) {
         moveCardFinished = false;
         hasMoveCard = true;
 
-        for(int i = 0; i < 4; i++) {
-            if(backend()->canMoveTo(this, buildPosition + QPoint {+1, 0})) {
+        for (auto i = 0; i < 4; ++i) {
+            if (backend()->canMoveTo(this, buildPosition + QPoint {+1, 0})) {
                 m_moveCard[i] = 'r';
                 buildPosition += QPoint {+1, 0};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint  {-1, 0})) {
+            } else if (backend()->canMoveTo(this, buildPosition + QPoint  {-1, 0})) {
                 m_moveCard[i] = 'l';
                 buildPosition += QPoint {-1, 0};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, +1})) {
+            } else if (backend()->canMoveTo(this, buildPosition + QPoint {0, +1})) {
                 m_moveCard[i] = 'u';
                 buildPosition += QPoint {0, +1};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, -1})) {
+            } else if (backend()->canMoveTo(this, buildPosition + QPoint {0, -1})) {
                 m_moveCard[i] = 'd';
                 buildPosition += QPoint {0, -1};
             }
@@ -264,7 +261,8 @@ void Tentaklon::buildMoveCard()
 void Tentaklon::act()
 {
     int i = 0;
-    if(hasMoveCard) {
+
+    if (hasMoveCard) {
         std::cout << m_moveCard[i] << std::endl;
 
         switch(m_moveCard[i]) {
