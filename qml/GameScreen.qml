@@ -1,6 +1,8 @@
 import QtQuick 2.15
 
 Rectangle {
+    width: parent.width
+    height: parent.height
     opacity: enabled ? 1 : 0
     visible: opacity > 0
 

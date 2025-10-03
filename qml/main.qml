@@ -12,7 +12,7 @@ Window {
     visibility: Window.Maximized
     title: "GameOne - %1".arg(Backend.levelName)
     // Bei Nurnutzung der GameScreens "welcome"("start") durch "game" ersetzen
-    property Item currentScreen: game // welcome
+    property Item currentScreen: welcome // welcome
 
     WelcomeScreen {
         id: welcome

@@ -10,7 +10,7 @@ GameScreen {
         color: "#ff0000"
         anchors.centerIn: parent
         font { pixelSize: 50; bold: true }
-        text: "Press to continue"
+        text: "Click to continue"
     }
 
     MouseArea {
