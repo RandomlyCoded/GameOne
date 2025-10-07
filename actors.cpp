@@ -5,7 +5,6 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
-#include <iostream>
 
 namespace GameOne {
 
@@ -26,7 +25,7 @@ Actor::Actor(QJsonObject spec, Backend *backend)
     respawn();
 }
 
-void Actor::setName(QString name)
+void Actor::setName(const QString &name)
 {
     if (std::exchange(m_name, name) != name)
         emit nameChanged(m_name);
@@ -55,7 +54,7 @@ void Actor::giveBonus(Actor *actor, int amount)
 
 Backend *Actor::backend() const
 {
-    return static_cast<Backend *>(parent());
+    return dynamic_cast<Backend *>(parent());
 }
 
 void Actor::setEnergy(int energy)
@@ -77,7 +76,7 @@ void Actor::setEnergy(int energy)
     }
 }
 
-QList<Actor::EnergyLevel> Actor::makeEnergyLevels(QJsonArray array)
+QList<Actor::EnergyLevel> Actor::makeEnergyLevels(const QJsonArray &array)
 {
     QList<Actor::EnergyLevel> levels;
 
@@ -116,7 +115,7 @@ void Actor::moveTo(QPoint destination)
 void Actor::tryMoveTo(QPoint destination)
 {
     if (backend()->canMoveTo(this, destination))
-        moveTo(std::move(destination));
+        moveTo(destination);
 }
 
 void Actor::moveLeft()
@@ -146,7 +145,7 @@ void Actor::respawn()
     emit positionChanged(m_position);
 }
 
-int Actor::attack(Actor *)
+int Actor::attack(Actor */*opponent*/)
 {
     return 0;
 }
@@ -171,7 +170,7 @@ void Actor::die()
 
 bool Enemy::canAttack(const Actor *opponent) const
 {
-    return dynamic_cast<const Player *>(opponent);
+    return dynamic_cast<const Player *>(opponent) != nullptr;
 }
 
 int Enemy::attack(Actor *opponent)
@@ -186,29 +185,35 @@ int Enemy::attack(Actor *opponent)
 
 void Enemy::act()
 {
-    switch (std::rand() % 4) { // FIXME: use proper generator from std::random
-    case 0:
+    // FIXME: use proper generator from std::random
+    const auto direction = Direction{std::rand() % 4};
+
+    switch (direction) {
+    case Direction::Left:
         if (backend()->player()->x() < x())
             moveLeft();
 
         break;
 
-    case 1:
+    case Direction::Up:
         if (backend()->player()->y() < y())
             moveUp();
 
         break;
 
-    case 2:
+    case Direction::Right:
         if (backend()->player()->x() > x())
             moveRight();
 
         break;
 
-    case 3:
+    case Direction::Down:
         if (backend()->player()->y() > y())
             moveDown();
 
+        break;
+
+    case Direction::None:
         break;
     }
 }
@@ -225,28 +230,28 @@ int Tentaklon::attack(Actor *opponent)
 
 void Tentaklon::buildMoveCard()
 {
-    if(!hasMoveCard || moveCardFinished) {
-        moveCardFinished = false;
-        hasMoveCard = true;
-
-        for(int i = 0; i < 4; i++) {
-            if(backend()->canMoveTo(this, buildPosition + QPoint {+1, 0})) {
-                m_moveCard[i] = 'r';
-                buildPosition += QPoint {+1, 0};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint  {-1, 0})) {
-                m_moveCard[i] = 'l';
-                buildPosition += QPoint {-1, 0};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, +1})) {
-                m_moveCard[i] = 'u';
-                buildPosition += QPoint {0, +1};
-            }
-            else if(backend()->canMoveTo(this, buildPosition + QPoint {0, -1})) {
-                m_moveCard[i] = 'd';
-                buildPosition += QPoint {0, -1};
+    if (!hasMoveCard()) {
+        for (auto &moveCard : m_moveCard) {
+            if (const auto right = m_builtPosition + QPoint{+1, 0};
+                backend()->canMoveTo(this, right)) {
+                moveCard        = Direction::Right;
+                m_builtPosition = right;
+            } else if (const auto left = m_builtPosition + QPoint{-1, 0};
+                       backend()->canMoveTo(this, left)) {
+                moveCard        = Direction::Left;
+                m_builtPosition = left;
+            } else if (const auto upwards = m_builtPosition + QPoint{0, +1};
+                       backend()->canMoveTo(this, upwards)) {
+                moveCard        = Direction::Up;
+                m_builtPosition = upwards;
+            } else if (const auto downwards = m_builtPosition + QPoint{0, -1};
+                       backend()->canMoveTo(this, downwards)) {
+                moveCard        = Direction::Down;
+                m_builtPosition = downwards;
             }
         }
+
+        m_currentMove = 0;
     }
 
     act();
@@ -263,26 +268,27 @@ void Tentaklon::buildMoveCard()
 
 void Tentaklon::act()
 {
-    int i = 0;
-    if(hasMoveCard) {
-        std::cout << myMoveCard() << std::endl;
+    if (hasMoveCard()) {
+        switch(m_moveCard[m_currentMove++]) {
+        case Direction::Right:
+            moveRight();
+            break;
+        case Direction::Up:
+            moveUp();
+            break;
+        case Direction::Left:
+            moveLeft();
+            break;
+        case Direction::Down:
+            moveDown();
+            break;
 
-        switch(m_moveCard[i]) {
-            case 'r': moveRight(); break;
-            case 'u': moveUp(); break;
-            case 'l': moveLeft(); break;
-            case 'd': moveDown(); break;
-        }
-
-        if (m_moveCard[i + 1])
-            i++;
-        else {
-            moveCardFinished = true;
+        case Direction::None:
+            m_currentMove = m_moveCard.size();
             buildMoveCard();
+            return;
         }
-    }
-
-    else {
+    } else {
         buildMoveCard();
 //        Enemy::act(); // just until i have a script how the Tentaklon acts...
     }
@@ -296,7 +302,8 @@ Player::Player(QJsonObject spec, Backend *backend)
 
 bool Player::canAttack(const Actor *opponent) const
 {
-    return !dynamic_cast<const Player *>(opponent)/* && m_hitEnergy > 0*/;
+    return dynamic_cast<const Player *>(opponent) == nullptr;
+        // && m_hitEnergy > 0
 }
 
 int Player::attack(Actor *opponent)
@@ -336,20 +343,20 @@ QJsonObject GameOne::Chest::applyDefaults(QJsonObject json)
     return json;
 }
 
-void Chest::giveBonus(Actor *actor, int)
+void Chest::giveBonus(Actor *actor, int /*amount*/)
 {
-    if (const auto player = backend()->player(); player == actor) {
+    if (auto *const player = backend()->player(); player == actor) {
         player->inventory()->updateItem(m_item, std::exchange(m_amount, 0));
         emit countChanged(m_amount);
     }
 }
 
-bool Chest::canAttack(const Actor *) const
+bool Chest::canAttack(const Actor */*opponent*/) const
 {
     return false;
 }
 
-int Chest::attack(Actor *)
+int Chest::attack(Actor */*actor*/)
 {
     return 0;
 }
@@ -379,7 +386,7 @@ QJsonObject GameOne::Ladder::applyDefaults(QJsonObject json)
     return json;
 }
 
-void Ladder::giveBonus(Actor *, int)
+void Ladder::giveBonus(Actor */*actor*/, int /*amount*/)
 {
     if (m_level > 0) {
         backend()->load(Backend::levelFileName(m_level), m_destination);
@@ -388,22 +395,22 @@ void Ladder::giveBonus(Actor *, int)
     }
 }
 
-bool Ladder::canAttack(const Actor *actor) const
+bool Ladder::canAttack(const Actor */*opponent*/) const
 {
     return false;
 }
 
-int Ladder::attack(Actor *opponent)
+int Ladder::attack(Actor */*opponent*/)
 {
     return 0;
 }
 
-bool WitchShop::canAttack(const Actor *opponent) const
+bool WitchShop::canAttack(const Actor */*opponent*/) const
 {
     return false;
 }
 
-int WitchShop::attack(Actor *opponent)
+int WitchShop::attack(Actor */*opponent*/)
 {
     return 0;
 }

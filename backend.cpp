@@ -2,9 +2,9 @@
 #include "inventorymodel.h"
 #include "mapmodel.h"
 
+#include <QDir>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QDir>
 #include <QLoggingCategory>
 #include <QTimer>
 
@@ -13,7 +13,35 @@ using namespace std::chrono_literals;
 namespace GameOne {
 
 namespace {
+
 Q_LOGGING_CATEGORY(lcBackend, "GameOne.backend");
+
+QJsonDocument readJson(const QString &fileName)
+{
+    auto file = QFile{fileName};
+
+    if (!file.open(QFile::ReadOnly)) {
+        qCWarning(lcBackend, "Could not open %ls: %ls",
+                  qUtf16Printable(fileName),
+                  qUtf16Printable(file.errorString()));
+
+        return {};
+    }
+
+    auto status = QJsonParseError{};
+    auto document = QJsonDocument::fromJson(file.readAll(), &status);
+
+    if (status.error != QJsonParseError::NoError) {
+        qCWarning(lcBackend, "Could not read %ls: %ls",
+                  qUtf16Printable(fileName),
+                  qUtf16Printable(status.errorString()));
+
+        return {};
+    }
+
+    return document;
+}
+
 } // namespace
 
 Backend::Backend(QObject *parent)
@@ -31,7 +59,7 @@ Backend::Backend(QObject *parent)
     connect(m_map, &MapModel::columnsChanged, this, &Backend::columnsChanged);
     connect(m_map, &MapModel::rowsChanged, this, &Backend::rowsChanged);
 
-    loadItems();
+    loadItemTypes();
 }
 
 int Backend::columns() const
@@ -65,7 +93,7 @@ QList<Enemy *> Backend::enemies() const
     return enemies;
 }
 
-InventoryItem *Backend::item(QString id) const
+InventoryItem *Backend::item(const QString &id) const
 {
     return m_items.value(id);
 }
@@ -76,25 +104,17 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
 
     m_actionTimer->stop();
 
-    fileName = dataFileName(std::move(fileName));
+    fileName = dataFileName(fileName);
+
     if (fileName.endsWith(".json")) {
-        QFile file{fileName};
+        const auto &level = readJson(fileName);
 
-        if (!file.open(QFile::ReadOnly)) {
-            qCWarning(lcBackend, "Could not open %ls: %ls", qUtf16Printable(fileName), qUtf16Printable(file.errorString()));
+        if (!level.isObject())
             return false;
-        }
-
-        QJsonParseError status;
-        const auto level = QJsonDocument::fromJson(file.readAll(), &status).object();
-
-        if (status.error != QJsonParseError::NoError) {
-            qCWarning(lcBackend, "Could not read %ls: %ls", qUtf16Printable(fileName), qUtf16Printable(status.errorString()));
-            return false;
-        }
 
         const auto mapData = level["map"].toObject();
         const auto mapFileName = mapData["filename"].toString();
+
         if (!m_map->load(mapFileName, static_cast<MapModel::Format>(mapData["format"].toInt())))
             return false;
 
@@ -102,39 +122,9 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         m_levelName = level["levelName"].toString();
 
         if (m_levelName.isEmpty())
-            m_levelName = QFileInfo{file.fileName()}.baseName();
+            m_levelName = QFileInfo{fileName}.baseName();
 
-        m_actors.clear();
-        m_chests.clear();
-        m_ladders.clear();
-        m_enemies.clear();
-
-        const auto chests = level["chests"].toArray();
-        const auto ladders = level["ladders"].toArray();
-        const auto enemies = level["enemies"].toArray();
-        const auto tentaklons = level["tentaklons"].toArray();
-
-        for (const auto &value: chests)
-            m_chests += std::make_shared<Chest>(resolve(value.toObject()), this);
-        for (const auto &value: ladders)
-            m_ladders += std::make_shared<Ladder>(resolve(value.toObject()), this);
-        for (const auto &value: enemies)
-            m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
-        for (const auto &value: tentaklons)
-            m_enemies += std::make_shared<Tentaklon>(resolve(value.toObject()), this);
-
-        const auto playerData = resolve(level["player"].toObject());
-        m_player = std::make_unique<Player>(std::move(playerData), this);
-
-        if (playerPosition.has_value())
-            m_player->moveTo(*playerPosition);
-
-        const auto toRawPointer = [](auto ptr) { return ptr.get(); };
-        std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
-        std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
-        std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
-        m_actors += m_player.get();
-
+        loadItems(level.object(), playerPosition);
         validateActors(fileName, mapFileName);
 
         connect(m_player.get(), &Player::positionChanged, this, [this] { m_actionTimer->start(); });
@@ -149,12 +139,47 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         emit rowsChanged(rows());
 
         return true;
-    } else if (fileName.endsWith(".txt")) {
-        return load(levelFileName(1)) && m_map->load(fileName, MapModel::LegacyFormat);
-    } else {
-        qCWarning(lcBackend, "Unsupported filename: %ls", qUtf16Printable(fileName));
-        return false;
     }
+
+    if (fileName.endsWith(".txt"))
+        return load(levelFileName(1)) && m_map->load(fileName, MapModel::LegacyFormat);
+
+    qCWarning(lcBackend, "Unsupported filename: %ls", qUtf16Printable(fileName));
+    return false;
+}
+
+void Backend::loadItems(const QJsonObject &level, const std::optional<QPoint> &playerPosition)
+{
+    m_actors.clear();
+    m_chests.clear();
+    m_ladders.clear();
+    m_enemies.clear();
+
+    const auto chests = level["chests"].toArray();
+    const auto ladders = level["ladders"].toArray();
+    const auto enemies = level["enemies"].toArray();
+    const auto tentaklons = level["tentaklons"].toArray();
+
+    for (const auto &value: chests)
+        m_chests += std::make_shared<Chest>(resolve(value.toObject()), this);
+    for (const auto &value: ladders)
+        m_ladders += std::make_shared<Ladder>(resolve(value.toObject()), this);
+    for (const auto &value: enemies)
+        m_enemies += std::make_shared<Enemy>(resolve(value.toObject()), this);
+    for (const auto &value: tentaklons)
+        m_enemies += std::make_shared<Tentaklon>(resolve(value.toObject()), this);
+
+    const auto playerData = resolve(level["player"].toObject());
+    m_player = std::make_unique<Player>(playerData, this);
+
+    if (playerPosition)
+        m_player->moveTo(*playerPosition);
+
+    const auto toRawPointer = [](auto ptr) { return ptr.get(); };
+    std::transform(m_ladders.begin(), m_ladders.end(), std::back_inserter(m_actors), toRawPointer);
+    std::transform(m_chests.begin(), m_chests.end(), std::back_inserter(m_actors), toRawPointer);
+    std::transform(m_enemies.begin(), m_enemies.end(), std::back_inserter(m_actors), toRawPointer);
+    m_actors += m_player.get();
 }
 
 void Backend::respawn()
@@ -179,7 +204,7 @@ bool Backend::canMoveTo(Actor *actor, QPoint destination) const
     if (!m_map->dataByPoint(destination, MapModel::WalkableRole).toBool())
         return false;
 
-    for (auto opponent: actors()) {
+    for (const auto &opponentList = actors(); const auto &opponent : opponentList) {
         if (opponent == actor)
             continue;
         if (!opponent->isAlive())
@@ -204,22 +229,22 @@ QDir Backend::dataDir()
     return {":/GameOne/data"};
 }
 
-QString Backend::dataFileName(QString fileName)
+QString Backend::dataFileName(const QString &fileName)
 {
     return dataDir().filePath(fileName);
 }
 
-QUrl Backend::imageUrl(QString fileName)
+QUrl Backend::imageUrl(const QString &fileName)
 {
-    return imageUrl(QUrl{std::move(fileName)});
+    return imageUrl(QUrl{fileName});
 }
 
-QUrl Backend::imageUrl(QUrl imageUrl)
+QUrl Backend::imageUrl(const QUrl &imageUrl)
 {
     if (imageUrl.isEmpty())
         return {};
 
-    return QUrl{"image://assets/"}.resolved(std::move(imageUrl));
+    return QUrl{"image://assets/"}.resolved(imageUrl);
 }
 
 QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
@@ -228,7 +253,7 @@ QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
         static const auto pattern = QRegularExpression{R"(\(t([+-]\d+)?\))"};
         const auto inputQueryString = imageUrl.query();
 
-        int start = 0;
+        auto start = qsizetype{0};
         QString outputQueryString;
 
         for (auto it = pattern.globalMatch(inputQueryString); it.hasNext(); ) {
@@ -251,7 +276,7 @@ QString Backend::levelFileName(int index)
     return QString::number(index) + ".level.json";
 }
 
-void Backend::loadItems()
+void Backend::loadItemTypes()
 {
     // TODO: Load from JSON
     m_items["Arrow"] = new InventoryItem{"Arrow", QUrl{"weapons/Arrow.svg"}, this};
@@ -274,12 +299,12 @@ void Backend::loadItems()
     m_items[""] = new InventoryItem{{}, QUrl{}, this};
 }
 
-void Backend::validateActors(QString levelFileName, QString mapFileName) const
+void Backend::validateActors(const QString &levelFileName, const QString &mapFileName) const
 {
     QHash<int, QString> actorTypes;
 
     // verify that actors are declared in the map
-    for (const auto actor: m_actors) {
+    for (auto *const actor : m_actors) {
         const auto mapIndex = m_map->indexByPoint(actor->position());
         const auto itemType = mapIndex.data(MapModel::ItemTypeRole).toString();
 
@@ -299,8 +324,8 @@ void Backend::validateActors(QString levelFileName, QString mapFileName) const
     }
 
     // verify that actors declared in the map also are declared in the JSON
-    for (int i = 0, c = m_map->rowCount(); i < c; ++i) {
-        const auto mapIndex =  m_map->index(i);
+    for (auto row = 0, rowCount = m_map->rowCount(); row < rowCount; ++row) {
+        const auto mapIndex =  m_map->index(row);
         const auto isStart = mapIndex.data(MapModel::IsStartRole).toBool();
 
         if (!isStart)
@@ -323,7 +348,7 @@ void Backend::validateActors(QString levelFileName, QString mapFileName) const
 
 void Backend::onActionTimeout()
 {
-    for (auto enemy: std::as_const(m_enemies))
+    for (const auto &enemy : std::as_const(m_enemies))
         enemy->act();
 }
 
@@ -332,7 +357,7 @@ void Backend::onTicksTimeout()
     emit ticksChanged(ticks());
 }
 
-QJsonDocument Backend::cachedDocument(QUrl url) const
+QJsonDocument Backend::cachedDocument(const QUrl &url) const
 {
     if (const auto it = m_jsonCache.find(url); it != m_jsonCache.end())
         return *it;
@@ -392,8 +417,8 @@ QJsonObject Backend::resolve(QUrl ref) const
     const auto path = ref.fragment().split('/', Qt::SkipEmptyParts);
     auto object = cachedDocument(ref).object();
 
-    for (const auto &id: path)
-        object = resolve(object[id].toObject());
+    for (const auto &component : path)
+        object = resolve(object[component].toObject());
 
     return object;
 }

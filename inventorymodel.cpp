@@ -8,7 +8,7 @@ InventoryItem::InventoryItem(QString name, QObject *parent)
     : InventoryItem{std::move(name), {}, parent}
 {}
 
-InventoryItem::InventoryItem(QString name, QUrl imageSource, QObject *parent)
+InventoryItem::InventoryItem(QString name, const QUrl &imageSource, QObject *parent)
     : QObject{parent}
     , m_name{std::move(name)}
     , m_imageSource{Backend::imageUrl(imageSource)}
@@ -21,7 +21,7 @@ QVariant InventoryModel::data(const QModelIndex &index, int role) const
 
         switch (static_cast<Role>(role)) {
         case ItemNameRole:
-            if (slot.item)
+            if (slot.item != nullptr)
                 return slot.item->name();
 
             break;
@@ -30,7 +30,7 @@ QVariant InventoryModel::data(const QModelIndex &index, int role) const
             return QVariant::fromValue(slot.item.data());
 
         case ImageSourceRole:
-            if (slot.item)
+            if (slot.item != nullptr)
                 return slot.item->imageSource();
 
             break;
@@ -48,7 +48,7 @@ int InventoryModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_slots.count();
+    return static_cast<int>(m_slots.count());
 }
 
 QHash<int, QByteArray> InventoryModel::roleNames() const
@@ -68,10 +68,14 @@ void InventoryModel::updateItem(InventoryItem *item, int amount)
 
     if (it != m_slots.end()) {
         it->amount += amount;
-        const auto slotIndex = index(it - m_slots.begin());
+
+        const auto row = static_cast<int>(it - m_slots.begin());
+        const auto slotIndex = index(row);
+
         emit dataChanged(slotIndex, slotIndex, {AmountRole});
     } else {
-        beginInsertRows({}, m_slots.count(), m_slots.count());
+        const auto row = static_cast<int>(m_slots.count());
+        beginInsertRows({}, row, row);
         m_slots.append({item, amount});
         endInsertRows();
     }

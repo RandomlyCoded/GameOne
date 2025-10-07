@@ -23,7 +23,7 @@ std::optional<int> toInt(const T &str)
     return {};
 }
 
-}
+} // namespace
 
 LevelModel::LevelModel(QObject *parent)
     : QAbstractListModel{parent}
@@ -50,7 +50,7 @@ int LevelModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_levels.count();
+    return static_cast<int>(m_levels.count());
 }
 
 QHash<int, QByteArray> LevelModel::roleNames() const
@@ -68,10 +68,11 @@ void LevelModel::refresh()
     beginResetModel();
     m_levels.clear();
 
-    for (const auto &fi: Backend::dataDir().entryInfoList({"*.level.json"})) {
-        if (const auto index = toInt(fi.baseName())) {
-            if (levelReader.load(fi.fileName()))
-                m_levels += {*index, levelReader.levelName(), fi.filePath()};
+    for (const auto levelList = Backend::dataDir().entryInfoList({"*.level.json"});
+         const auto &fileInfo : levelList) {
+        if (const auto index = toInt(fileInfo.baseName())) {
+            if (levelReader.load(fileInfo.fileName()))
+                m_levels += {*index, levelReader.levelName(), fileInfo.filePath()};
         }
     }
 

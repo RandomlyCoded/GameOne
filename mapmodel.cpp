@@ -3,8 +3,8 @@
 #include "backend.h"
 
 #include <QFile>
-#include <QPoint>
 #include <QLoggingCategory>
+#include <QPoint>
 
 namespace GameOne {
 
@@ -86,7 +86,7 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
 bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (hasIndex(index.row(), index.column(), index.parent())) {
-        if (role == IsStartRole && value.canConvert(QVariant::Bool)) {
+        if (role == IsStartRole && value.canConvert<bool>()) {
             m_tiles[index.row()].item.isStart = value.toBool();
             return true;
         }
@@ -125,7 +125,7 @@ QHash<int, QByteArray> MapModel::roleNames() const
 void MapModel::setBackend(Backend *backend)
 {
     if (std::exchange(m_backend, backend) != m_backend) {
-        if (m_backend)
+        if (m_backend != nullptr)
             m_tileInfo = backend->resolve(QUrl{"tiles.json"});
         else
             m_tileInfo = {};
@@ -145,7 +145,7 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
     for (auto it = m_tileInfo.begin(); it != m_tileInfo.end(); ++it) {
         const auto tile = it->toObject();
 
-        for (const auto key: tile["keys"].toString()) {
+        for (const auto &spec = tile["keys"].toString(); const auto key : spec) {
             const QColor color{tile["color"].toString()};
             const QUrl imageSource = Backend::imageUrl(tile["image"].toString());
             const auto imageCount = tile["imageCount"].toInt(1);
@@ -159,14 +159,16 @@ QHash<char, MapModel::Tile::Type> MapModel::makeTypes() const
     return types;
 }
 
-bool MapModel::load(QString fileName, Format format)
+bool MapModel::load(const QString &fileName, Format format)
 {
-    fileName = Backend::dataFileName(std::move(fileName));
-
-    QFile file{fileName};
+    auto filePath = Backend::dataFileName(fileName);
+    auto file = QFile{filePath};
 
     if (!file.open(QFile::ReadOnly)) {
-        qCWarning(lcMap, "Could not open %ls: %ls", qUtf16Printable(fileName), qUtf16Printable(file.errorString()));
+        qCWarning(lcMap, "Could not open %ls: %ls",
+                  qUtf16Printable(filePath),
+                  qUtf16Printable(file.errorString()));
+
         return false;
     }
 
@@ -182,12 +184,12 @@ bool MapModel::load(QString fileName, Format format)
     QList<Tile> tiles;
 
     if (format == CurrentFormat) {
-        for (const auto &row: rows) {
+        for (const auto &row : std::as_const(rows)) {
             for (int i = 0; i < row.length(); i+= 2)
                 tiles += Tile{types, row.mid(i, 2)};
         }
     } else if (format == LegacyFormat) {
-        for (const auto &row: rows) {
+        for (const auto &row: std::as_const(rows)) {
             for (int i = 0; i < row.length(); ++i)
                 tiles += Tile{types, row.mid(i, 1)};
         }
@@ -195,8 +197,8 @@ bool MapModel::load(QString fileName, Format format)
 
     beginResetModel();
     m_tiles = std::move(tiles);
-    m_rows = rows.count();
-    m_columns = m_tiles.size() / m_rows;
+    m_rows = static_cast<int>(rows.count());
+    m_columns = static_cast<int>(m_tiles.size() / m_rows);
     endResetModel();
 
     emit columnsChanged(m_columns);

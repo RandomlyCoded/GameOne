@@ -19,7 +19,7 @@ static void initResources()
 
 namespace GameOne {
 
-int Application::run(QUrl qmlRoot)
+int Application::run(const QUrl &qmlRoot)
 {
     if (qmlRoot.isEmpty())
         return run(QUrl{"qrc:/GameOne/qml/main.qml"});
@@ -36,7 +36,7 @@ int Application::run(QUrl qmlRoot)
     qmlRegisterType<LevelModel>("GameOne", 1, 0, "LevelModel");
     qmlRegisterType<MapModel>("GameOne", 1, 0, "MapModel");
 
-    const auto backend = new Backend{this};
+    auto *const backend = new Backend{this};
     qmlRegisterSingletonInstance<Backend>("GameOne", 1, 0, "Backend", backend);
     backend->load(arguments().count() > 1 ? arguments().at(1) : Backend::levelFileName(1));
 

@@ -38,6 +38,9 @@ class Actor : public QObject
     Q_PROPERTY(int rotationSteps READ rotationSteps CONSTANT FINAL)
 
 public:
+    enum class Direction { None = -1, Up, Left, Right, Down };
+    Q_ENUM(Direction)
+
     explicit Actor(QJsonObject spec, Backend *backend);
 
     virtual QString type() const = 0;
@@ -46,7 +49,7 @@ public:
     auto y() const { return m_position.y(); }
     auto position() const { return m_position; }
 
-    void setName(QString name);
+    void setName(const QString &name);
     auto name() const { return m_name; }
 
     virtual QColor color() const = 0;
@@ -103,7 +106,7 @@ private:
 
     void setEnergy(int energy);
 
-    static QList<EnergyLevel> makeEnergyLevels(QJsonArray array);
+    static QList<EnergyLevel> makeEnergyLevels(const QJsonArray &array);
     QList<EnergyLevel>::ConstIterator currentEnergyLevel() const;
 
     QString m_name;
@@ -113,7 +116,7 @@ private:
     QList<EnergyLevel> m_energyLevels;
     int m_minimumEnergy;
     int m_maximumEnergy;
-    int m_energy;
+    int m_energy = 0;
 
     int m_maximumLives;
     int m_lives;
@@ -153,18 +156,16 @@ public:
     bool energyVisible() const override { return true; };
     bool canAttack(const Actor *opponent) const override;
     int attack(Actor *opponent) override;
-    char myMoveCard() { for(char tile: m_moveCard) { return tile; } };
 
     void act();
 
 private:
-    bool hasMoveCard = false; // jur vorübergehend, denn wenn wir dann die Karte haben, können wir
-    // die if-Bedingung aus Move rausnehmen und brauchen diese Konstante nicht mehr.
-    char m_moveCard[4] = {'d', 'l', 'u', 'r'};
-    char m_possibilities[4] = {'r', 'l', 'u', 'd'};
-    bool moveCardFinished = false;
     void buildMoveCard();
-    QPoint buildPosition = position();
+    bool hasMoveCard() const { return m_currentMove < m_moveCard.size(); }
+
+    std::array<Direction, 4> m_moveCard      = {Direction::Down, Direction::Left, Direction::Up, Direction::Right};
+    unsigned                 m_currentMove   = m_moveCard.size();
+    QPoint                   m_builtPosition = position();
 };
 
 //class IceGhost : public Enemy
