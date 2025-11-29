@@ -283,10 +283,12 @@ public:
 
     auto level() const { return m_level; }
 
+    static constexpr int LIMBO_LEVEL = -1;
+
 private:
     static QJsonObject applyDefaults(QJsonObject json);
 
-    int m_level = 0;
+    int m_level = LIMBO_LEVEL;
     QPoint m_destination;
 };
 
