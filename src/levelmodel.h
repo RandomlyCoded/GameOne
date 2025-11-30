@@ -27,6 +27,8 @@ public:
 
     Q_INVOKABLE void refresh();
 
+    static QString levelFileName [[nodiscard]](int index);
+
 private:
     struct Level {
         int index;

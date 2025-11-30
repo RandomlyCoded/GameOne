@@ -7,6 +7,8 @@
 
 #include <QDebug>
 
+using namespace Qt::StringLiterals;
+
 namespace GameOne {
 
 namespace {
@@ -83,6 +85,11 @@ void LevelModel::refresh()
     std::sort(m_levels.begin(), m_levels.end(), lessByIndexAndName);
 
     endResetModel();
+}
+
+QString LevelModel::levelFileName(int index)
+{
+    return QString::number(index) + ".level.json";
 }
 
 } // namespace GameOne

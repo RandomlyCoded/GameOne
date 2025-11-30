@@ -59,8 +59,6 @@ public:
 
     Q_INVOKABLE static QUrl imageUrl(QUrl imageUrl, int imageCount, qint64 tick);
 
-    static QString levelFileName(int index);
-
     QJsonObject resolve(QJsonObject object) const;
     QJsonObject resolve(QUrl ref) const;
 
