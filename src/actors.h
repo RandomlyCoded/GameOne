@@ -7,6 +7,8 @@
 #include <QPointer>
 #include <QUrl>
 
+#include "levelmodel.h"
+
 namespace GameOne {
 
 class Backend;
@@ -283,12 +285,10 @@ public:
 
     auto level() const { return m_level; }
 
-    static constexpr int LIMBO_LEVEL = -1;
-
 private:
     static QJsonObject applyDefaults(QJsonObject json);
 
-    int m_level = LIMBO_LEVEL;
+    int m_level = LevelModel::LIMBO_LEVEL;
     QPoint m_destination;
 };
 

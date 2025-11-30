@@ -388,7 +388,7 @@ QJsonObject GameOne::Ladder::applyDefaults(QJsonObject json)
 
 void Ladder::giveBonus(Actor */*actor*/, int /*amount*/)
 {
-    if (m_level >= LIMBO_LEVEL) {
+    if (m_level >= LevelModel::LIMBO_LEVEL) {
         backend()->load(Backend::levelFileName(m_level), m_destination);
     } else {
         backend()->player()->tryMoveTo(m_destination);
