@@ -59,15 +59,16 @@ target_link_libraries(GameOneCore PUBLIC Qt::Quick Qt::Svg)
 
 target_sources(
     GameOneCore PRIVATE
-    actors.cpp actors.h
-    application.cpp application.h
+    src/actors.cpp src/actors.h
+    src/application.cpp src/application.h
+    src/backend.cpp src/backend.h
+    src/imageprovider.cpp src/imageprovider.h
+    src/inventorymodel.cpp src/inventorymodel.h
+    src/levelmodel.cpp src/levelmodel.h
+    src/mapmodel.cpp src/mapmodel.h
+
     assets.qrc
-    backend.cpp backend.h
     data.qrc
-    imageprovider.cpp imageprovider.h
-    inventorymodel.cpp inventorymodel.h
-    levelmodel.cpp levelmodel.h
-    mapmodel.cpp mapmodel.h
     qml.qrc
 )
 
