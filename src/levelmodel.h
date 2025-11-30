@@ -11,6 +11,7 @@ class LevelModel : public QAbstractListModel
 
 public:
     static constexpr int LIMBO_LEVEL = -1;
+    static constexpr int DEFAULT_LEVEL = 1;
 
     enum Role {
         LevelNameRole = Qt::DisplayRole,

@@ -38,7 +38,12 @@ int Application::run(const QUrl &qmlRoot)
 
     auto *const backend = new Backend{this};
     qmlRegisterSingletonInstance<Backend>("GameOne", 1, 0, "Backend", backend);
-    backend->load(arguments().count() > 1 ? arguments().at(1) : LevelModel::levelFileName(1));
+
+    const auto levelFileName = arguments().count() > 1
+                                   ? arguments().at(1)
+                                   : LevelModel::levelFileName(LevelModel::DEFAULT_LEVEL);
+
+    backend->load(levelFileName);
 
     auto qml = QQmlApplicationEngine{};
     qml.addImageProvider("assets", new ImageProvider);

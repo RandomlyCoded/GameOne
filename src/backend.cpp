@@ -142,7 +142,7 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
     }
 
     if (fileName.endsWith(".txt")) {
-        return load(LevelModel::levelFileName(1))
+        return load(LevelModel::levelFileName(LevelModel::DEFAULT_LEVEL))
                && m_map->load(fileName, MapModel::LegacyFormat);
     }
 
