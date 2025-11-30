@@ -40,7 +40,7 @@ int Application::run(const QUrl &qmlRoot)
     qmlRegisterSingletonInstance<Backend>("GameOne", 1, 0, "Backend", backend);
     backend->load(arguments().count() > 1 ? arguments().at(1) : Backend::levelFileName(1));
 
-    QQmlApplicationEngine qml;
+    auto qml = QQmlApplicationEngine{};
     qml.addImageProvider("assets", new ImageProvider);
     qml.load(qmlRoot);
 

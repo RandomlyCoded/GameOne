@@ -14,7 +14,7 @@ namespace {
 template<class T>
 std::optional<int> toInt(const T &str)
 {
-    bool isNumber = false;
+    auto isNumber = false;
     const auto number = str.toInt(&isNumber);
 
     if (isNumber)
