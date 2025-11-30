@@ -89,7 +89,12 @@ void LevelModel::refresh()
 
 QString LevelModel::levelFileName(int index)
 {
-    return QString::number(index) + ".level.json";
+    constexpr auto suffix = ".level.json"_L1;
+
+    if (index == LevelModel::LIMBO_LEVEL)
+        return u"limbo"_s + suffix;
+
+    return QString::number(index) + suffix;
 }
 
 } // namespace GameOne
