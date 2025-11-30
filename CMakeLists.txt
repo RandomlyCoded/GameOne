@@ -10,6 +10,8 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt6 6.8 REQUIRED COMPONENTS Quick Svg)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII=1)
 
+include_directories(src)
+
 option(DEVELOPER_BUILD "Enable stricter build options to aid active contributors" OFF)
 
 if (DEVELOPER_BUILD)
@@ -72,7 +74,7 @@ target_sources(
     qml.qrc
 )
 
-add_executable(GameOne WIN32 main.cpp)
+add_executable(GameOne WIN32 src/main.cpp)
 target_link_libraries(GameOne PRIVATE GameOneCore)
 
 add_subdirectory(tests)
