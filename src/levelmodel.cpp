@@ -25,6 +25,18 @@ std::optional<int> toInt(const T &str)
     return {};
 }
 
+std::optional<int> levelIndex(const QFileInfo &fileInfo)
+{
+    constexpr auto specials = std::array{LevelModel::LIMBO_LEVEL};
+    const auto &fileName = fileInfo.fileName();
+
+    for (const auto level : specials)
+        if (fileName == LevelModel::levelFileName(level))
+            return level;
+
+    return toInt(fileInfo.baseName());
+}
+
 } // namespace
 
 LevelModel::LevelModel(QObject *parent)
@@ -72,7 +84,7 @@ void LevelModel::refresh()
 
     for (const auto levelList = Backend::dataDir().entryInfoList({"*.level.json"});
          const auto &fileInfo : levelList) {
-        if (const auto index = toInt(fileInfo.baseName())) {
+        if (const auto index = levelIndex(fileInfo)) {
             if (levelReader.load(fileInfo.fileName()))
                 m_levels += {*index, levelReader.levelName(), fileInfo.filePath()};
         }
