@@ -45,7 +45,7 @@
         <file>data/items.json</file>
         <file>data/tiles.json</file>
         <file>data/characters.json</file>
-        <file>data/-1.level.json</file>
-        <file>data/-1.map.txt</file>
+        <file>data/limbo.level.json</file>
+        <file>data/limbo.map.txt</file>
     </qresource>
 </RCC>

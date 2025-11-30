@@ -7,6 +7,8 @@
 
 #include <QDebug>
 
+using namespace Qt::StringLiterals;
+
 namespace GameOne {
 
 namespace {
@@ -14,13 +16,25 @@ namespace {
 template<class T>
 std::optional<int> toInt(const T &str)
 {
-    bool isNumber = false;
+    auto isNumber = false;
     const auto number = str.toInt(&isNumber);
 
     if (isNumber)
         return {number};
 
     return {};
+}
+
+std::optional<int> levelIndex(const QFileInfo &fileInfo)
+{
+    constexpr auto specials = std::array{LevelModel::LIMBO_LEVEL};
+    const auto &fileName = fileInfo.fileName();
+
+    for (const auto level : specials)
+        if (fileName == LevelModel::levelFileName(level))
+            return level;
+
+    return toInt(fileInfo.baseName());
 }
 
 } // namespace
@@ -70,7 +84,7 @@ void LevelModel::refresh()
 
     for (const auto levelList = Backend::dataDir().entryInfoList({"*.level.json"});
          const auto &fileInfo : levelList) {
-        if (const auto index = toInt(fileInfo.baseName())) {
+        if (const auto index = levelIndex(fileInfo)) {
             if (levelReader.load(fileInfo.fileName()))
                 m_levels += {*index, levelReader.levelName(), fileInfo.filePath()};
         }
@@ -83,6 +97,16 @@ void LevelModel::refresh()
     std::sort(m_levels.begin(), m_levels.end(), lessByIndexAndName);
 
     endResetModel();
+}
+
+QString LevelModel::levelFileName(int index)
+{
+    constexpr auto suffix = ".level.json"_L1;
+
+    if (index == LevelModel::LIMBO_LEVEL)
+        return u"limbo"_s + suffix;
+
+    return QString::number(index) + suffix;
 }
 
 } // namespace GameOne

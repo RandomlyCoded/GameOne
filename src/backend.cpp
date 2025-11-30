@@ -141,8 +141,10 @@ bool Backend::load(QString fileName, std::optional<QPoint> playerPosition)
         return true;
     }
 
-    if (fileName.endsWith(".txt"))
-        return load(levelFileName(1)) && m_map->load(fileName, MapModel::LegacyFormat);
+    if (fileName.endsWith(".txt")) {
+        return load(LevelModel::levelFileName(LevelModel::DEFAULT_LEVEL))
+               && m_map->load(fileName, MapModel::LegacyFormat);
+    }
 
     qCWarning(lcBackend, "Unsupported filename: %ls", qUtf16Printable(fileName));
     return false;
@@ -269,11 +271,6 @@ QUrl Backend::imageUrl(QUrl imageUrl, int imageCount, qint64 tick)
     }
 
     return imageUrl;
-}
-
-QString Backend::levelFileName(int index)
-{
-    return QString::number(index) + ".level.json";
 }
 
 void Backend::loadItemTypes()

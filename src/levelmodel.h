@@ -10,6 +10,9 @@ class LevelModel : public QAbstractListModel
     Q_OBJECT
 
 public:
+    static constexpr int LIMBO_LEVEL = -1;
+    static constexpr int DEFAULT_LEVEL = 1;
+
     enum Role {
         LevelNameRole = Qt::DisplayRole,
         FileNameRole = Qt::UserRole + 1,
@@ -24,6 +27,8 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void refresh();
+
+    static QString levelFileName [[nodiscard]](int index);
 
 private:
     struct Level {

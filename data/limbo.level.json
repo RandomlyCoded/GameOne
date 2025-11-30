@@ -3,7 +3,7 @@
 
     "map": {
         "format": 2,
-        "filename": "-1.map.txt"
+        "filename": "limbo.map.txt"
     },
 
     "enemies": [],
